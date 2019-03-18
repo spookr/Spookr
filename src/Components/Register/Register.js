@@ -33,6 +33,15 @@ class Register extends Component {
   }
 
   submitRegister = (username, password, ghost) => {
+
+    const submitInfo = {
+      username,
+      password,
+      ghost
+    }
+
+    console.log(submitInfo)
+
     axios.post('/register', {username, password, ghost}).then(res => {
       console.log(res.data)
     })
