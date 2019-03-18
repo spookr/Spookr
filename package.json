@@ -13,9 +13,14 @@
     "express": "^4.16.4",
     "express-session": "^1.15.6",
     "massive": "^5.7.7",
+    "node-sass": "^4.11.0",
     "react": "^16.8.4",
+    "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.4",
-    "react-scripts": "2.1.8"
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
