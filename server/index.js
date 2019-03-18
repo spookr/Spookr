@@ -32,8 +32,6 @@ massive(CONNECTION_STRING).then(db => {
 // Auth
 app.post('/register', auth.user_register)
 
-
-
 // EndPoints
 
 app.listen(SERVER_PORT, ()=> {
