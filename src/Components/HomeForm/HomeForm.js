@@ -3,11 +3,11 @@ import './HouseForm.scss'
 
 class HouseForm extends Component {
   render () {
-    return {
+    return (
       <div className="HouseForm">
         HouseForm
       </div>
-    }
+    )
   }
 }
 

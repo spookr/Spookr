@@ -3,11 +3,11 @@ import './GhostForm.scss'
 
 class GhostForm extends Component {
   render () {
-    return {
+    return (
       <div className="GhostForm">
         GhostForm
       </div>
-    }
+    )
   }
 }
 

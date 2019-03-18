@@ -3,11 +3,11 @@ import './Discovery.scss'
 
 class Discovery extends Component {
   render () {
-    return {
+    return (
       <div className="Discovery">
         Discovery
       </div>
-    }
+    )
   }
 }
 
