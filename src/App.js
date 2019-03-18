@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import dabbing_ghost from './Pictures/dabbing_ghost.png'
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
