@@ -4,6 +4,8 @@ import './Register.scss'
 // Packages
 import axios from 'axios'
 import {connect} from 'react-redux'
+import {Link} from 'react-router-dom'
+import {logIn} from '../../redux/reducer'
 
 class Register extends Component {
   constructor () {
@@ -47,10 +49,10 @@ class Register extends Component {
       ghost
     }
 
-    console.log(submitInfo)
+    // console.log('User submits register', submitInfo)
 
-    axios.post('/register', {username, password, ghost}).then(res => {
-      console.log(res.data)
+    axios.post('/register', submitInfo).then(res => {
+      this.props.logIn(res.data)
     })
   }
 
@@ -65,7 +67,7 @@ class Register extends Component {
         <h2>Password:</h2><input name="password" type="text" onChange={(e) => this.handleInput(e)}/>
         <h2>Are you a ghost or home owner?</h2>
         <button onClick={this.toggleGhost}>Ghost</button><button onClick={this.toggleHome}>Home Owner</button><br/>
-        <button onClick={() => this.submitRegister(username, password, ghost)}>Submit</button>
+        <Link to='/questionnaire'><button onClick={() => this.submitRegister(username, password, ghost)}>Submit</button></Link>
       </div>
     )
   }
@@ -77,4 +79,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Register)
+const mapDispatchToProps = {
+  logIn
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Register)

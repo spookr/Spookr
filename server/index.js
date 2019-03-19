@@ -35,9 +35,10 @@ app.post('/ghost', auth.ghostDetails)
 app.post('/logout', auth.logout)
 app.post('/login', auth.userLogin)
 app.get('/api/user', auth.getUser)
+app.post('/logout', auth.logout)
 
 // EndPoints
 
 app.listen(SERVER_PORT, ()=> {
-  console.log(`Spooking on Port ${SERVER_PORT} 👻 `)
+  console.log(`Spooking on Port ${SERVER_PORT} �� `)
 })

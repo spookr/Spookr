@@ -30,7 +30,7 @@ class Login extends Component {
     }
 
     axios.post('/login', userInfo).then(res => {
-      this.props.logIn(res.data)
+      this.props.logIn(res.data[0])
       this.props.history.push('/profile')
     })
   }
