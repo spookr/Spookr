@@ -32,6 +32,7 @@ module.exports = {
         const {username, password} = req.body
         const {session} = req
         const db = req.app.get('db')
+        console.log(username, password)
 
         let user = await db.auth.user_login(username)
         user = user[0]

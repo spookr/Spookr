@@ -10,7 +10,7 @@ import {withRouter} from 'react-router-dom'
 
 class Navigation extends Component {
   render () {
-
+    
     const displayLogin = this.props.user ? <button>Logout</button> : <Link to='/login'><button>Login</button></Link>
 
     return (
