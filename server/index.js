@@ -33,6 +33,7 @@ massive(CONNECTION_STRING).then(db => {
 app.post('/register', auth.userRegister)
 app.post('/login', auth.userLogin)
 app.get('/api/user', auth.getUser)
+app.post('/logout', auth.logout)
 
 // EndPoints
 
