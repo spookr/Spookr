@@ -3,9 +3,7 @@ import './Homepage.scss'
 
 // Packages
 import {Link} from 'react-router-dom'
-import axios from 'axios'
 import {connect} from 'react-redux'
-import {logIn} from '../../redux/reducer'
 
 // Images
 import Ghost from './assets/ghost.svg'

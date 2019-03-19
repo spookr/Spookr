@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import './HouseForm.scss'
+import './HomeForm.scss'
 
 class HouseForm extends Component {
   render () {
