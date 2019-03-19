@@ -3,6 +3,7 @@ import './Register.scss'
 
 // Packages
 import axios from 'axios'
+import {connect} from 'react-redux'
 
 class Register extends Component {
   constructor () {
@@ -11,6 +12,13 @@ class Register extends Component {
       username: '',
       password: '',
       ghost: null
+    }
+  }
+
+  componentDidMount () {
+    console.log(this.props)
+    if (this.props.user) {
+      this.props.history.push('/profile')
     }
   }
 
@@ -64,4 +72,10 @@ class Register extends Component {
   }
 }
 
-export default Register
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default connect(mapStateToProps)(Register)

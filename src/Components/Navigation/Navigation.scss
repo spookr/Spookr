@@ -1,1 +1,35 @@
 @import '../../index';
+
+nav {
+  min-width: 100%;
+  padding: 1rem .75rem .75rem .75rem;
+
+  .NavigationSecondary {
+    min-height: 8vh;
+    max-width: 85%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h1 {
+      font-family: $secondary-font;
+      font-size: 2rem;
+      color: $accent-three;
+    }
+
+    button {
+      min-width: 4.5rem;
+      min-height: 2rem;
+      background: none;
+      border: 2px solid $accent-three;
+      color: white;
+      border-radius: 20px;
+      cursor: pointer;
+      font-family: $primary-font;
+    }
+    button:hover {
+      font-weight: bolder;
+    }
+  }
+}

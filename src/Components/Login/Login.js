@@ -1,6 +1,12 @@
 import React, {Component} from 'react'
 import './Login.scss'
 
+// Packages
+import axios from 'axios'
+import {connect} from 'react-redux'
+import {logIn} from '../../redux/reducer'
+// import {withRouter} from 'react-router-dom'
+
 class Login extends Component {
   constructor () {
     super()
@@ -10,6 +16,17 @@ class Login extends Component {
     }
   }
 
+  componentDidMount () {
+    this.getUser()
+  }
+
+  getUser = () => {
+    const {user} = this.props
+    if (user) {
+      this.props.history.push('/profile')
+    } 
+  }
+
   handleInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -17,7 +34,16 @@ class Login extends Component {
   }
 
   submitLogin = (username, password) => {
-    console.log(username, password)
+
+    const userInfo = {
+      username,
+      password
+    }
+
+    axios.post('/login', userInfo).then(res => {
+      this.props.logIn(res.data)
+      this.props.history.push('/profile')
+    })
   }
 
   render () {
@@ -35,4 +61,14 @@ class Login extends Component {
   }
 }
 
-export default Login
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = {
+  logIn
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
