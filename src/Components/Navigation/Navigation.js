@@ -9,6 +9,13 @@ import {Link} from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
 
 class Navigation extends Component {
+
+  componentDidMount () {
+    axios.get('/api/user').then(res => {
+      this.props.logIn(res.data)
+    })
+  }
+
   render () {
     
     const displayLogin = this.props.user ? <button>Logout</button> : <Link to='/login'><button>Login</button></Link>
@@ -30,4 +37,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(Navigation)
+const mapDispatchToProps = {
+  logIn
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation)

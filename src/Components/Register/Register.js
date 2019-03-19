@@ -16,7 +16,6 @@ class Register extends Component {
   }
 
   componentDidMount () {
-    console.log(this.props)
     if (this.props.user) {
       this.props.history.push('/profile')
     }
