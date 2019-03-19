@@ -16,17 +16,6 @@ class Login extends Component {
     }
   }
 
-  componentDidMount () {
-    this.getUser()
-  }
-
-  getUser = () => {
-    const {user} = this.props
-    if (user) {
-      this.props.history.push('/profile')
-    } 
-  }
-
   handleInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value
