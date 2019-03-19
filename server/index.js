@@ -31,14 +31,13 @@ massive(CONNECTION_STRING).then(db => {
 
 // Auth
 app.post('/register', auth.userRegister)
-app.post('/ghost', auth.ghostDetails)
+app.post('api/ghost', auth.ghostDetails)
 app.post('/logout', auth.logout)
 app.post('/login', auth.userLogin)
-app.get('/api/user', auth.getUser)
-app.post('/logout', auth.logout)
+
 
 // EndPoints
 
 app.listen(SERVER_PORT, ()=> {
-  console.log(`Spooking on Port ${SERVER_PORT} �� `)
+  console.log(`Spooking on Port ${SERVER_PORT} 👻`)
 })

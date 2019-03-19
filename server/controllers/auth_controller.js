@@ -40,13 +40,13 @@ module.exports = {
         const authedUser = bcrypt.compareSync(password, user.password)
 
         if (authedUser) {
-          if(user.ghost){
+          if (user.ghost) {
             let maybeGhost = await db.auth.check_for_ghost(username)
             maybeGhost = maybeGhost[0]
             if(!maybeGhost){
               return res.status(406).send('fill out ghost form')
             }
-          }else{
+          } else {
             let maybeOwner = await db.auth.check_for_owner(username)
             maybeOwner = maybeOwner[0]
             if(!maybeOwner){
@@ -54,13 +54,13 @@ module.exports = {
             }
           }
 
-          if(user.ghost){
+          if (user.ghost) {
             let ghost = await db.auth.check_for_ghost(username)
             ghost = ghost[0]
             delete ghost.password
             session.user = ghost
             return res.status(200).send(session.user)
-          }else{
+          } else {
             let owner = await db.auth.check_for_owner(username)
             owner = owner[0]
             delete owner.password
