@@ -40,5 +40,5 @@ app.post('/logout', auth.logout)
 // EndPoints
 
 app.listen(SERVER_PORT, ()=> {
-  console.log(`Spooking on Port ${SERVER_PORT} 👻 `)
+  console.log(`Spooking on Port ${SERVER_PORT} �� `)
 })

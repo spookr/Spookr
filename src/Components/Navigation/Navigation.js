@@ -6,8 +6,9 @@ import {connect} from 'react-redux'
 import {logIn, logOut} from '../../redux/reducer'
 import {Link} from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
+
 class Navigation extends Component {
-  componentDidMount () {
+  componentDidMount() {
     axios.get('/api/user').then(res => {
       this.props.logIn(res.data)
     })

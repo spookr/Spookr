@@ -8,7 +8,7 @@ module.exports = {
         const hash = bcrypt.hashSync(password, salt)
         const findExisting = await db.auth.check_if_exists([username])
         if(findExisting[0]){
-          
+
             return res.status(400).send('username exists already')
         }
         if (username && password) {
@@ -87,25 +87,26 @@ module.exports = {
       res.sendStatus(401)
     }
   },
- 
+
+  logout: (req, res) => {
+    req.session.destroy();
+    res.sendStatus(200);
+  },
+
   ghostDetails : async (req,res) => {
     const {name, bio, gender, ghost_type, user_id, location} = req.body;
     const db = req.app.get('db');
 
-    if(!name || !bio || !gender || !ghost_type || !user_id || !location){
+    if (!name || !bio || !gender || !ghost_type || !user_id || !location) {
       return res.status(400).send('need all info')
     }
 
-    try{
+    try {
       let newGhost = await db.auth.new_ghost([name, bio, gender, ghost_type, user_id, location])
       newGhost = newGhost[0]
       return res.status(200).send(newGhost)
-    }catch(err){
+    } catch (err) {
       return res.status(500).send('Could not create account')
     }
-  },
-  logout: (req, res) => {
-    req.session.destroy(); 
-    res.sendStatus(200);
   }
 }
