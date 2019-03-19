@@ -5,7 +5,7 @@ import './Login.scss'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {logIn} from '../../redux/reducer'
-// import {withRouter} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 class Login extends Component {
   constructor () {
@@ -14,17 +14,6 @@ class Login extends Component {
       username: '',
       password: ''
     }
-  }
-
-  componentDidMount () {
-    this.getUser()
-  }
-
-  getUser = () => {
-    const {user} = this.props
-    if (user) {
-      this.props.history.push('/profile')
-    } 
   }
 
   handleInput = (event) => {
@@ -71,4 +60,4 @@ const mapDispatchToProps = {
   logIn
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))
