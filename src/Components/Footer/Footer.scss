@@ -1,1 +1,44 @@
 @import '../../index';
+
+footer {
+  background: $primary-color;
+  min-height: 10vh;
+  color: $accent-three;
+
+  .FooterContainer {
+    max-width: 70%;
+    height: 100%;
+    padding: 1rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    border-bottom: 1px solid $secondary-color;
+    border-top: 1px solid $secondary-color;
+
+    ul {
+
+     li {
+       list-style: none;
+       font-weight: 300;
+       font-size: .85rem;
+       text-align: center;
+       cursor: pointer;
+     }
+
+     li:hover {
+       font-weight: 500;
+     }
+   }
+
+  }
+}
+
+#Header {
+  font-weight: bolder;
+  margin-bottom: .5rem;
+  text-transform: uppercase;
+}
+
+#Header:hover {
+  font-weight: bolder;
+}
