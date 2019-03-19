@@ -5,6 +5,7 @@ import './Reset.scss';
 import Navigation from './Components/Navigation/Navigation'
 import Footer from './Components/Footer/Footer'
 import routes from './routes'
+import './App.css';
 
 class App extends Component {
 
