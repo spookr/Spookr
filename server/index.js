@@ -36,6 +36,7 @@ app.post('/login', auth.userLogin)
 app.get('/api/user', auth.getUser)
 app.post('/ghost', auth.ghostDetails)
 app.post('/owner', auth.ownerDetails)
+// app.post('/house', auth.houseDetails)
 // app.post('/logout', auth.logout)
 app.post('/logout', auth.logout)
 
