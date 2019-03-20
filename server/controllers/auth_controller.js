@@ -105,8 +105,7 @@ module.exports = {
       return res.status(500).send('Could not create account')
     }
   },
-
-
+  
   logout: (req, res) => {
     req.session.destroy();
     res.sendStatus(200);
