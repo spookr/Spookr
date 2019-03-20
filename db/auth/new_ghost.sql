@@ -13,4 +13,4 @@ insert into ghosts(
     $5,
     $6
 )
-returning name,bio,gender,type,user_id,location
+returning *

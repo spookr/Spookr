@@ -68,7 +68,6 @@ module.exports = {
           return res.status(200).send(session.user)
         }
 
-
       } else {
         res.status(401).send('Incorrect password')
       }
@@ -106,6 +105,23 @@ module.exports = {
     }
   },
 
+  ownerDetails: async (req, res) => {
+    const { first_name, last_name, user_id } = req.body;
+    const db = req.app.get('db');
+
+    if (!first_name || !last_name || !user_id) {
+      return res.status(400).send('Need all info, you Human')
+    }
+
+    try {
+      let newOwner = await db.auth.new_owner([first_name, last_name, user_id])
+      console.log('Hello My Peeps', newOwner)
+      newOwner = newOwner[0]
+      return res.status(200).send(newOwner)
+    } catch (err) {
+      return res.status(500).send('Could Not Create Account')
+    }
+  },
 
   logout: (req, res) => {
     req.session.destroy();
