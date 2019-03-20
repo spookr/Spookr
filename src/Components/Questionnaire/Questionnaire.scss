@@ -4,9 +4,11 @@
   width: 100vw;
 
   .QuestionnaireSecondary {
-    background: red;
     height: 80vh;
     max-width: 85vw;
     margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 }

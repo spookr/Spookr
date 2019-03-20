@@ -65,7 +65,6 @@ create table house (
     rooms int not null,
     location text not null,
     remodeled boolean not null,
-    year int references year_built(id),
     amenities int references amenities(id),
     owner int references homeowner(id),
     previously_haunted boolean not null,
