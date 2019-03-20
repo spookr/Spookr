@@ -7,19 +7,23 @@ import {logIn, logOut} from '../../redux/reducer'
 import {Link} from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
 class Navigation extends Component {
+
   componentDidMount() {
     this.getUser()
   }
+
   componentDidUpdate (prevState, prevProps) {
     if (prevState.user !== this.props.user) {
       this.getUser()
     }
   }
+
   getUser = () => {
     axios.get('/api/user').then(res => {
       this.props.logIn(res.data)
     })
   }
+
   logout = () => {
     axios.post("/logout").then(res => {
       this.props.logOut();
@@ -28,6 +32,7 @@ class Navigation extends Component {
         console.log(err);
       });
     };
+
   render() {
     const displayLogin = this.props.user ? <button onClick={this.logout}>Logout</button> : <Link to='/login'><button>Login</button></Link>
     const displayLogo = this.props.user ? <Link to='/profile' style={{ textDecoration: 'none' }}><h1>Spookr</h1></Link> :
