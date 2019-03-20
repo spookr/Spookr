@@ -51,6 +51,15 @@ module.exports = {
           maybeOwner = maybeOwner[0]
           if (!maybeOwner) {
             return res.status(417).send('fill out homeowner form')
+          } else {
+            let maybeHouse = await db.auth.check_for_house(maybeOwner.username)
+            maybeHouse = maybeHouse[0]
+            if (!maybeHouse) {
+              return res.status(406).send('No House Found')
+            } else {
+              delete maybeHouse.password
+              res.status(200).send(maybeHouse)
+            }
           }
         }
 
@@ -67,7 +76,6 @@ module.exports = {
           session.user = owner
           return res.status(200).send(session.user)
         }
-
 
       } else {
         res.status(401).send('Incorrect password')
@@ -105,7 +113,45 @@ module.exports = {
       return res.status(500).send('Could not create account')
     }
   },
-  
+
+  ownerDetails: async (req, res) => {
+    const { first_name, last_name, user_id } = req.body;
+    const db = req.app.get('db');
+
+    if (!first_name || !last_name || !user_id) {
+      return res.status(400).send('Need all info, you Human')
+    }
+
+    try {
+      let newOwner = await db.auth.new_owner([first_name, last_name, user_id])
+      console.log('Hello My Peeps', newOwner)
+      newOwner = newOwner[0]
+      return res.status(200).send(newOwner)
+    } catch (err) {
+      return res.status(500).send('Could Not Create Account')
+    }
+  },
+
+  houseDetails: async (req, res) => {
+    const { header, body, rooms, location, remodeled, amenities, owner, previously_haunted, living_occupants } = req.body
+    const db = req.app.get('db')
+
+    if (!header || !body || !rooms || !location || !remodeled || !amenities || !owner || !previously_haunted || !living_occupants) {
+      return res.status(400).send('Need All House Info Filled Out')
+    }
+
+    try {
+      let newHouse = await db.auth.new_house([header, body, rooms, location, remodeled, amenities, owner, previously_haunted, living_occupants])
+      console.log('Hello Home Owner', newHouse)
+      newHouse = newHouse[0]
+      return res.status(200).send(newHouse)
+    } catch (err) {
+      return res.status(500).send('Could Not Create House')
+    }
+  },
+
+
+
   logout: (req, res) => {
     req.session.destroy();
     res.sendStatus(200);
