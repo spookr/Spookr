@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import axios from 'axios';
 import './GhostForm.scss'
 
 // Packages
@@ -15,7 +16,9 @@ class GhostForm extends Component {
       toggle1: true,
       toggle2: false,
       toggle3: false,
-      profilePhoto: null
+      isUploading: false,
+      profilePhoto: [],
+      files: []
     }
   }
 
@@ -78,6 +81,51 @@ class GhostForm extends Component {
     console.log('submt ghost')
   }
 
+
+  //AWS
+  getSignedRequest = (e, isFront) => {
+    let file = e.target.files[0];
+    axios.get('/sign-s3', {
+        params: {
+            'file-name': file.name,
+            'file-type': file.type
+        }
+    }).then((response) => {
+        const { signedRequest, url } = response.data
+        this.uploadFile(file, signedRequest, url)
+    }).catch(err => {
+        console.log(err)
+    })
+}
+
+onDrop(files) {
+    this.setState({
+        files
+    });
+}
+
+uploadFile = (file, signedRequest, url) => {
+
+    var options = {
+        headers: {
+            'Content-Type': file.type
+        }
+    };
+
+    axios.put(signedRequest, file, options)
+        .then(response => {
+            this.setState({url})
+        })
+        .catch(err => {
+
+            if (err.response.status === 403) {
+                alert('Your request for a signed URL failed with a status 403. Double check the CORS configuration and bucket policy in the README. You also will want to double check your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your .env and ensure that they are the same as the ones that you created in the IAM dashboard. You may need to generate new keys\n' + err.stack)
+            } else {
+                alert(`ERROR: ${err.status}\n ${err.stack}`)
+            }
+        })
+}
+
   render () {
 
     const {name, bio, type, location, toggle1, toggle2, toggle3} = this.state
@@ -96,6 +144,7 @@ class GhostForm extends Component {
     const displayToggle1 = toggle1 &&
         <div className="QuestionnaireMain">
         <h1>Let's set up your profile!</h1>
+        <input type="file" onChange={(e) => this.getSignedRequest(e, false)}/>
         <button id="PhotoButton">Upload Profile Photo</button>
         <button id="NextButton" onClick={handleToggle1}>Next</button>
         </div>
