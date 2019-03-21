@@ -6,6 +6,7 @@ import axios from 'axios'
 import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logIn} from '../../redux/reducer'
+import {InputGroup, FormControl} from 'react-bootstrap'
 
 class Register extends Component {
   constructor () {
@@ -61,13 +62,21 @@ class Register extends Component {
     const {username, password, ghost} = this.state
 
     return (
-      <div className="Register">
-        <h1>Register</h1>
-        <h2>Username:</h2><input name="username" type="text" onChange={(e) => this.handleInput(e)}/>
-        <h2>Password:</h2><input name="password" type="text" onChange={(e) => this.handleInput(e)}/>
-        <h2>Are you a ghost or home owner?</h2>
-        <button onClick={this.toggleGhost}>Ghost</button><button onClick={this.toggleHome}>Home Owner</button><br/>
-        <Link to='/questionnaire'><button onClick={() => this.submitRegister(username, password, ghost)}>Submit</button></Link>
+      <div className="Questionnaire">
+        <div className="QuestionnaireSecondary">
+          <div className="QuestionnaireMain">
+            <h1>Create an account</h1>
+            <h2>Username</h2><input name="username" type="text" onChange={(e) => this.handleInput(e)}/>
+            <h2>Password</h2><input name="password" type="text" onChange={(e) => this.handleInput(e)}/>
+            <h2 style={{paddingBottom: '1rem'}}>Are you a ghost or home owner?</h2>
+            <div className="QuestionnaireSelection">
+
+              <button onClick={this.toggleGhost}>Ghost</button>
+              <button onClick={this.toggleHome}>Home Owner</button>
+            </div>
+            <Link id="SubmitButton" to='/questionnaire'><button onClick={() => this.submitRegister(username, password, ghost)}>Submit</button></Link>
+          </div>
+        </div>
       </div>
     )
   }
