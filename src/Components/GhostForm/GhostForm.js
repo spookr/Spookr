@@ -10,15 +10,12 @@ class GhostForm extends Component {
     this.state = {
       name: '',
       bio: '',
-      gender: {
-        male: false,
-        gender: false
-      },
       type: null,
       location: '',
       toggle1: true,
       toggle2: false,
-      toggle3: false
+      toggle3: false,
+      profilePhoto: null
     }
   }
 
@@ -69,35 +66,46 @@ class GhostForm extends Component {
     })
   }
 
+  handleToggle3 = () => {
+    this.setState({
+      toggle1: true,
+      toggle2: false,
+      toggle3: false
+    })
+  }
+
   submitGhost = () => {
     console.log('submt ghost')
   }
 
   render () {
 
-    const {name, bio, gender, type, location, toggle1, toggle2, toggle3} = this.state
-    const {handleInput, handleDropdown, handleToggleMale, handleToggleFemale, handleToggle1, handleToggle2, submitGhost} = this
+    const {name, bio, type, location, toggle1, toggle2, toggle3} = this.state
+    const {handleInput,
+      handleDropdown,
+      handleToggleMale,
+      handleToggleFemale,
+      handleToggle1,
+      handleToggle2,
+      handleToggle3,
+      submitGhost} = this
 
     // console.log('type', type)
     // console.log('gender', gender)
 
     const displayToggle1 = toggle1 &&
-      <div className="UserForm">
-        <h2>Don't be shy!</h2>
-        <button>Upload Profile Photo</button>
-        <button onClick={handleToggle1}>Next</button>
-      </div>
+        <div className="QuestionnaireMain">
+        <h1>Let's set up your profile!</h1>
+        <button id="PhotoButton">Upload Profile Photo</button>
+        <button id="NextButton" onClick={handleToggle1}>Next</button>
+        </div>
 
     const displayToggle2 = toggle2 &&
-      <div className="UserForm">
+      <div className="QuestionnaireMain">
         <h1>Now let's get some information.</h1>
         <h2>Name</h2><input name="name" type="text" value={name} onChange={(e) => handleInput(e)}/>
         <h2>Bio</h2><input name="bio" type="text" value={bio} onChange={(e) => handleInput(e)}/>
-        <h2>Gender</h2>
-          <DropdownButton id="dropdown-basic-button" title={gender.male ? "Male" : gender.female ? "Female" : "Gender"}>
-            <Dropdown.Item name="gender" type="true" onClick={handleToggleMale}>Male</Dropdown.Item>
-            <Dropdown.Item name="gender" type="false" onClick={handleToggleFemale}>Female</Dropdown.Item>
-          </DropdownButton>
+        <h2>Type</h2>
           <DropdownButton id="dropdown-basic-button" title={type === "1" ? "Poltergeist" :
                                                             type === "2" ? "Demon" :
                                                             type === "3" ? "Ectoplasm" :
@@ -115,23 +123,30 @@ class GhostForm extends Component {
             <Dropdown.Item name="type" type="7" onClick={(e) => handleDropdown(e)}>Specter</Dropdown.Item>
             <Dropdown.Item name="type" type="8" onClick={(e) => handleDropdown(e)}>Other</Dropdown.Item>
           </DropdownButton>
-        <button onClick={handleToggle2}>Next</button>
+          <div className="ToggleNavigation">
+            <button id="NextButton" onClick={handleToggle3}>Previous</button>
+            <button id="NextButton" onClick={handleToggle2}>Next</button>
+          </div>
       </div>
 
     const displayToggle3 = toggle3 &&
-      <div className="UserForm">
-        <h2>Almost finished.</h2>
+      <div className="QuestionnaireMain">
+        <h1>Almost finished.</h1>
         <h2>Location:</h2>
         <input name="location" type="text" value={location} onChange={(e) => handleInput(e)}/>
-        <button>Submit</button>
+          <div className="ToggleNavigation">
+            <button id="NextButton" onClick={handleToggle1}>Previous</button>
+            <button id="SubmitButton">Submit</button>
+          </div>
       </div>
 
-
     return (
-      <div className="GhostForm">
-        {displayToggle1}
-        {displayToggle2}
-        {displayToggle3}
+      <div className="Questionnaire">
+        <div className="QuestionnaireSecondary">
+            {displayToggle1}
+            {displayToggle2}
+            {displayToggle3}
+        </div>
       </div>
     )
   }
