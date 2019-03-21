@@ -39,7 +39,6 @@ create table ghosts (
     id serial primary key,
     name text not null,
     bio text not null,
-    gender boolean not null,
     type int references ghost_type(id),
     user_id int references users(id),
     location text not null
