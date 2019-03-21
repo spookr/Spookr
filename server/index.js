@@ -43,5 +43,6 @@ app.post('/logout', auth.logout)
 app.get('/sign-s3', amazon.awsS3)
 
 // EndPoints
-app.listen(SERVER_PORT, ()=> {
+app.listen(SERVER_PORT, () => {
   console.log(`Spooking on Port ${SERVER_PORT} 👻`)
+})
