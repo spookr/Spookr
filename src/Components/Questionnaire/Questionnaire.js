@@ -3,7 +3,7 @@ import './Questionnaire.scss'
 
 // Components
 import GhostForm from '../../Components/GhostForm/GhostForm'
-import HomeForm from '../../Components/HomeForm/HomeForm'
+import OwnerForm from '../../Components/OwnerForm/OwnerForm'
 
 // Packages
 import {connect} from 'react-redux'
@@ -15,7 +15,7 @@ class Questionnaire extends Component {
     const {user} = this.props
 
     const displayGhost = user && user.ghost ? <GhostForm /> :
-      user && !user.ghost ? <HomeForm /> : null
+      user && !user.ghost ? <OwnerForm /> : null
 
     return (
       <div className="Questionnaire">
