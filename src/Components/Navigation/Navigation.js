@@ -9,22 +9,22 @@ import {Link} from 'react-router-dom'
 import {withRouter} from 'react-router-dom'
 
 class Navigation extends Component {
-  //
-  // componentDidMount() {
-  //   this.getUser()
-  // }
-  //
-  // componentDidUpdate (prevState, prevProps) {
-  //   if (!this.props.user.id) {
-  //     this.getUser()
-  //   }
-  // }
-  //
-  // getUser = () => {
-  //   axios.get(`/api/user/${this.props.user.id}`).then(res => {
-  //     this.props.logIn(res.data)
-  //   })
-  // }
+
+  componentDidMount() {
+    this.getUser()
+  }
+
+  componentDidUpdate (prevState, prevProps) {
+    if (!this.props.user.id) {
+      this.getUser()
+    }
+  }
+
+  getUser = () => {
+    axios.get('/api/user/').then(res => {
+      this.props.logIn(res.data)
+    })
+  }
 
   logout = () => {
     axios.post("/logout").then(res => {
@@ -42,7 +42,7 @@ class Navigation extends Component {
     return (
       <nav>
         <div className="NavigationSecondary">
-            <Link to='/'><h1>Spookr</h1></Link>
+            <Link to='/' style={{textDecoration: 'none'}}><h1>Spookr</h1></Link>
            {displayLogin}
 
         </div>
