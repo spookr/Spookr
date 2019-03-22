@@ -3,12 +3,14 @@ insert into ghosts(
     bio,
     type,
     user_id,
-    location
+    location,
+    profile_pic
 )values(
     $1,
     $2,
     $3,
     $4,
     $5,
+    $6
 )
 returning *

@@ -41,7 +41,8 @@ create table ghosts (
     bio text not null,
     type int references ghost_type(id),
     user_id int references users(id),
-    location text not null
+    location text not null,
+    profile_pic TEXT NOT NULL
 )
 
 create table ghost_type (
@@ -106,3 +107,18 @@ create table messages (
     date text not null,
     body text not null
 )
+
+
+
+
+
+
+
+-- DATA ON LOCATIONS
+select Round(point(house.latitude, house.longitude)<@>point(ghosts.latitude, ghosts.longitude)) as distance
+FROM house, ghosts
+WHERE house.id = id AND ghosts.id = id
+
+
+-- ONE OF THESE IS MORE ACCURATE THAN THE OTHER. STILL WORKING IT OUT
+select earth_distance(ll_to_earth(34.0522, 118.2437), ll_to_earth(40.7608,111.8910))

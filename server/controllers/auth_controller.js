@@ -97,15 +97,15 @@ module.exports = {
   },
 
   ghostDetails: async (req, res) => {
-    const { name, bio, type, user_id, location } = req.body;
+    const { name, bio, type, user_id, location, profile_pic } = req.body;
     const db = req.app.get('db');
 
-    if (!name || !bio || !type || !user_id || !location) {
+    if (!name || !bio || !type || !user_id || !location || !profile_pic) {
       return res.status(400).send('need all info')
     }
 
     try {
-      let newGhost = await db.auth.new_ghost([name, bio, type, user_id, location])
+      let newGhost = await db.auth.new_ghost([name, bio, type, user_id, location, profile_pic])
       console.log('Hello my dudes', newGhost)
       newGhost = newGhost[0]
       return res.status(200).send(newGhost)
@@ -151,9 +151,10 @@ module.exports = {
   },
 
 
-
   logout: (req, res) => {
+    console.log(req.session.user)
     req.session.destroy();
+    // console.log(req.session.user)
     res.sendStatus(200);
   }
 }
