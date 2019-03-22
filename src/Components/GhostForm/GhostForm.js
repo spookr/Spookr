@@ -121,6 +121,7 @@ class GhostForm extends Component {
   }
 
   render() {
+    console.log(this.state)
 
     const { name, bio, type, location, toggle1, toggle2, toggle3, profilePhoto } = this.state
     const { handleInput,

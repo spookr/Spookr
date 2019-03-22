@@ -13,7 +13,9 @@ class Navigation extends Component {
   }
 
   componentDidUpdate (prevState, prevProps) {
-    if (prevState.user !== this.props.user) {
+    console.log(this.props.user)
+    if (!this.props.user.id) {
+      console.log("getting called")
       this.getUser()
     }
   }

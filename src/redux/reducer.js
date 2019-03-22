@@ -1,6 +1,6 @@
 const initialState = {
-  user: null,
-  profile: null
+  user: {},
+  profile: {}
 }
 
 const LOGGED_IN = 'LOGGED_IN',
@@ -12,7 +12,7 @@ export default function (state = initialState, action) {
     case LOGGED_IN:
       return {...state, user: action.payload}
     case LOGGED_OUT:
-      return {...state, user: null}
+      return {...state, user: {}}
     case GET_PROFILE:
       return {...state, profile: action.payload}
     default:

@@ -11,8 +11,9 @@ import {connect} from 'react-redux'
 class Questionnaire extends Component {
 
   render () {
-
-    const {user} = this.props
+    console.log("this is question")
+    // const {user} = this.props
+    const user = {ghost: 'something'}
 
     const displayGhost = user && user.ghost ? <GhostForm /> :
       user && !user.ghost ? <OwnerForm /> : null
@@ -29,7 +30,7 @@ class Questionnaire extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user
+    // user: state.user
   }
 }
 

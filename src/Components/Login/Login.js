@@ -37,7 +37,7 @@ class Login extends Component {
   }
 
   render () {
-
+    console.log(this.state)
     const {username, password} = this.state
 
     return (
