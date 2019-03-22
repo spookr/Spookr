@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './OwnerForm.scss'
+import axios from 'axios'
 
 // Components
 import HouseForm from '../../Components/HouseForm/HouseForm'
@@ -15,7 +16,10 @@ class OwnerForm extends Component {
       toggle2: false,
       toggleHouse: false,
       toggleOwner: true,
-      profilePhoto: null
+      profilePhoto: '',
+      isUploading: false,
+      profilePhoto: 'http://www.panostaja.fi/wp-content/uploads/2016/02/placeholder-person-960x960.png',
+      files: []
     }
   }
 
@@ -46,15 +50,55 @@ class OwnerForm extends Component {
     })
   }
 
+  //AWS
+  getSignedRequest = (e) => {
+    let file = e.target.files[0];
+    axios.get('/sign-s3', {
+      params: {
+        'file-name': file.name,
+        'file-type': file.type
+      }
+    }).then((response) => {
+      const { signedRequest, url } = response.data
+      this.uploadFile(file, signedRequest, url)
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  uploadFile = (file, signedRequest, url) => {
+
+    var options = {
+      headers: {
+        'Content-Type': file.type
+      }
+    };
+
+    axios.put(signedRequest, file, options)
+      .then(response => {
+        this.setState({ profilePhoto: url })
+      })
+      .catch(err => {
+
+        if (err.response.status === 403) {
+          alert('Your request for a signed URL failed with a status 403. Double check the CORS configuration and bucket policy in the README. You also will want to double check your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your .env and ensure that they are the same as the ones that you created in the IAM dashboard. You may need to generate new keys\n' + err.stack)
+        } else {
+          alert(`ERROR: ${err.status}\n ${err.stack}`)
+        }
+      })
+  }
+
   render () {
 
-    const {firstName, lastName, bio, toggle1, toggle2, toggleHouse, toggleOwner} = this.state
+    const {firstName, lastName, bio, toggle1, toggle2, toggleHouse, toggleOwner, profilePhoto} = this.state
     const {handleInput, handleToggle1, handleToggle2, submitOwner} = this
+    // console.log(this.state)
 
     const displayToggle1 = toggle1 &&
       <div className="QuestionnaireMain">
         <h1>Let's set up your profile!</h1>
-        <button id="PhotoButton">Upload Profile Photo</button>
+          {profilePhoto && <img id="ProfilePhoto" src={profilePhoto} />}
+          <input type="file" onChange={(e) => this.getSignedRequest(e, false)} />
         <button id="NextButton" onClick={handleToggle1}>Next</button>
       </div>
 

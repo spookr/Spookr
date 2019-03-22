@@ -1,4 +1,5 @@
-@import './index';
+@import '~antd/dist/antd.css';
+
 
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
@@ -20,15 +21,15 @@ time, mark, audio, video {
 	vertical-align: baseline;
   box-sizing: border-box;
 	line-height: 1.25;
-	font-family: $primary-font;
-	color: $accent-three;
+	// font-family: $primary-font;
+	color: white;
 }
 
 .App {
 	min-height: 100vh;
-	background: $primary-color;
+	background: #18191c;
 }
 
 button {
-	font-family: $primary-font;
+	// font-family: $primary-font;
 }

@@ -42,7 +42,8 @@ create table ghosts (
     gender boolean not null,
     type int references ghost_type(id),
     user_id int references users(id),
-    location text not null
+    location text not null,
+    profile_photo int references
 )
 
 create table ghost_type (
