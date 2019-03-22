@@ -18,12 +18,6 @@ class Register extends Component {
     }
   }
 
-  componentDidMount () {
-    if (this.props.user) {
-      this.props.history.push('/profile')
-    }
-  }
-
   handleInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value
@@ -53,7 +47,9 @@ class Register extends Component {
     // console.log('User submits register', submitInfo)
 
     axios.post('/register', submitInfo).then(res => {
+      console.log(res.data)
       this.props.logIn(res.data)
+      this.props.history.push(`/questionnaire/${res.data.id}`)
     })
   }
 
@@ -70,11 +66,10 @@ class Register extends Component {
             <h2>Password</h2><input name="password" type="text" onChange={(e) => this.handleInput(e)}/>
             <h2 style={{paddingBottom: '1rem'}}>Are you a ghost or home owner?</h2>
             <div className="QuestionnaireSelection">
-
               <button onClick={this.toggleGhost}>Ghost</button>
               <button onClick={this.toggleHome}>Home Owner</button>
             </div>
-            <Link id="SubmitButton" to='/questionnaire'><button onClick={() => this.submitRegister(username, password, ghost)}>Submit</button></Link>
+          <button id="SubmitButton" onClick={() => this.submitRegister(username, password, ghost)}>Submit</button>
           </div>
         </div>
       </div>

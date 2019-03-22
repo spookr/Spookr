@@ -81,7 +81,6 @@ class GhostForm extends Component {
     console.log('submt ghost')
   }
 
-
   //AWS
   getSignedRequest = (e) => {
     let file = e.target.files[0];
@@ -123,6 +122,8 @@ class GhostForm extends Component {
   render() {
     console.log(this.state)
 
+    console.log(this.state)
+
     const { name, bio, type, location, toggle1, toggle2, toggle3, profilePhoto } = this.state
     const { handleInput,
       handleDropdown,
@@ -136,12 +137,12 @@ class GhostForm extends Component {
     // console.log('type', type)
     // console.log('gender', gender)
 
+
     const displayToggle1 = toggle1 &&
       <div className="QuestionnaireMain">
         <h1>Let's set up your profile!</h1>
-        <input type="file" onChange={(e) => this.getSignedRequest(e, false)} />
-        <button id="PhotoButton">Upload Profile Photo</button>
         {profilePhoto && <img id="ProfilePhoto" src={profilePhoto} />}
+        <input type="file" onChange={(e) => this.getSignedRequest(e, false)} />
         <button id="NextButton" onClick={handleToggle1}>Next</button>
       </div>
 
