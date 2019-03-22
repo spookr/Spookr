@@ -32,3 +32,8 @@ time, mark, audio, video {
 button {
 	font-family: $primary-font;
 }
+
+@font-face {
+  font-family: 'This Is The Future';
+  src: url('./fonts/This Is The Future.ttf') format('truetype');
+}
