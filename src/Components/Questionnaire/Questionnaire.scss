@@ -24,6 +24,14 @@
       justify-content: space-evenly;
       box-shadow: 0 2px 10px 0 rgba(0,0,0,.2);
 
+      #ProfilePhoto {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+        align-self: center;
+      }
+
+
       #PhotoButton {
         width: 12rem;
         align-self: center;
@@ -37,6 +45,7 @@
       h1 {
         font-size: 1.6rem;
         align-self: center;
+        padding-bottom: .5rem;
       }
 
       h2 {
