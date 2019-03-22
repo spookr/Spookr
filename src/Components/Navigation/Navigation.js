@@ -36,7 +36,7 @@ class Navigation extends Component {
     };
 
   render() {
-
+    console.log('testing, take me out soon')
     const displayLogin = this.props.user.id ? <button to='/' onClick={this.logout}>Logout</button> : <Link to='/login'><button>Login</button></Link>
 
     return (
