@@ -12,8 +12,7 @@ class Homepage extends Component {
 
   render () {
 
-
-    const displayRegister = !this.props.user &&
+    const displayRegister = !this.props.user.id &&
       <div className="HomepageRegister">
         <Link to={{
             pathname: '/register'
