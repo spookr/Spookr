@@ -43,7 +43,11 @@ create table ghosts (
     type int references ghost_type(id),
     user_id int references users(id),
     location text not null,
+<<<<<<< HEAD
+    profile_photo text not null
+=======
     profile_photo int references
+>>>>>>> master
 )
 
 create table ghost_type (
@@ -56,7 +60,8 @@ create table homeowner (
     first_name text not null,
     last_name text not null,
     bio text not null,
-    user_id int references users(id)
+    user_id int references users(id),
+    profile_photo text not null
 )
 
 create table house (
@@ -66,11 +71,8 @@ create table house (
     rooms int not null,
     location text not null,
     remodeled boolean not null,
-    amenities int references amenities(id),
-    owner int references homeowner(id),
-    previously_haunted boolean not null,
-    living_occupants int not null,
-    pets boolean not null
+    amenities_id int references amenities(id),
+    owner_id int references homeowner(id),
 )
 
 create table house_photos (
@@ -92,6 +94,7 @@ create table amenities (
     grandfather_clock boolean not null,
     dolls boolean not null,
     electricity boolean not null,
+    pets boolean not null
 )
 
 create table swiped (

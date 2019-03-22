@@ -81,7 +81,6 @@ class GhostForm extends Component {
     console.log('submt ghost')
   }
 
-
   //AWS
   getSignedRequest = (e) => {
     let file = e.target.files[0];
