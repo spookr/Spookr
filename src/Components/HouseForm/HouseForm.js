@@ -40,8 +40,19 @@ class HouseForm extends Component {
      })
    }
 
+   amenitiesChange = (event) => {
+     event.persist();
+     // console.log(event.target)
+     this.setState(prevState => ({
+       amenities: {
+         ...prevState.amenities,
+         [event.target.name]: !this.state.amenities[event.target.name]
+       }
+     }))
+   }
+
   render () {
-    console.log(this.state)
+
     const {header, description, location, amenities, livingOccupants, toggle1, toggle2, rooms, toggleAmenities} = this.state
     const {handleToggle1, handleToggle2, handleToggle3, handleInput, submitHouse, inputQuantity} = this
 
@@ -55,14 +66,56 @@ class HouseForm extends Component {
             <h2>Rooms <NumericInput min={1} value={rooms} onChange={inputQuantity}/></h2>
             <h2>Location</h2><input name="location" type="text" value={location} onChange={(e) => handleInput(e)} />
             <h2>Amenities</h2>
-              <form className="toggleAmenities">
+              <form className="ToggleAmenities">
                 <h2><Checkbox
                       checked={amenities.spiderwebs}
                       onClick={(e) => this.amenitiesChange(e)}
-                      label="Normal"
+                      name="spiderwebs"
                       value={amenities.spiderwebs}
                       type="amenities">
                   </Checkbox>Spiderwebs</h2>
+                <h2><Checkbox
+                      checked={amenities.basement}
+                      onClick={(e) => this.amenitiesChange(e)}
+                      name="basement"
+                      value={amenities.basement}
+                      type="amenities">
+                    </Checkbox>Basement</h2>
+                <h2><Checkbox
+                      checked={amenities.children}
+                      onClick={(e) => this.amenitiesChange(e)}
+                      name="children"
+                      value={amenities.children}
+                      type="amenities">
+                    </Checkbox>Children</h2>
+                <h2><Checkbox
+                      checked={amenities.grandfatherClock}
+                      onClick={(e) => this.amenitiesChange(e)}
+                      name="grandfatherClock"
+                      value={amenities.grandfatherClock}
+                      type="amenities">
+                </Checkbox>Grandfather Clock</h2>
+                <h2><Checkbox
+                      checked={amenities.dolls}
+                      onClick={(e) => this.amenitiesChange(e)}
+                      name="dolls"
+                      value={amenities.dolls}
+                      type="amenities">
+                    </Checkbox>Dolls</h2>
+                <h2><Checkbox
+                      checked={amenities.electricity}
+                      onClick={(e) => this.amenitiesChange(e)}
+                      name="electricity"
+                      value={amenities.electricity}
+                      type="electricity">
+                    </Checkbox>Electricity</h2>
+                <h2><Checkbox
+                      checked={amenities.pets}
+                      onClick={(e) => this.amenitiesChange(e)}
+                      name="pets"
+                      value={amenities.pets}
+                      type="amenities">
+                </Checkbox>Pets</h2>
               </form>
           </div>
         </div>

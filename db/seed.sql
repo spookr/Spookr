@@ -43,11 +43,7 @@ create table ghosts (
     type int references ghost_type(id),
     user_id int references users(id),
     location text not null,
-<<<<<<< HEAD
-    profile_photo text not null
-=======
-    profile_photo int references
->>>>>>> master
+    profile_photo int references user_photos(id)
 )
 
 create table ghost_type (
