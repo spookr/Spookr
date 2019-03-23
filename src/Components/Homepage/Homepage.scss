@@ -66,8 +66,8 @@ main {
             width: 20rem;
             height: 20rem;
             position: absolute;
-            right: 17%;
-            bottom: 2rem;
+            right: 19%;
+            bottom: 1.5rem;
           }
 
           #Graveyard {
@@ -78,8 +78,8 @@ main {
           }
 
           #Rip {
-            width: 14rem;
-            height: 14rem;
+            width: 16rem;
+            height: 16rem;
             position: absolute;
             left: 0;
             bottom: 2rem;
@@ -96,8 +96,8 @@ main {
           }
 
           #Star4 {
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 3rem;
+            height: 3rem;
             position: absolute;
             top: 3rem;
             right: 15rem;
@@ -105,8 +105,8 @@ main {
           }
 
           #Star5 {
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 1.75rem;
+            height: 1.75rem;
             position: absolute;
             top: 3rem;
             right: 30rem;
@@ -114,11 +114,11 @@ main {
           }
 
           #Star6 {
-            width: 2.5rem;
-            height: 2.5rem;
+            width: 2rem;
+            height: 2rem;
             position: absolute;
             bottom: 18rem;
-            right: 6.25rem;
+            right: 6.5rem;
             transform: rotate(-10deg);
           }
 
@@ -126,16 +126,16 @@ main {
             position: absolute;
             width: 9rem;
             height: 9rem;
-            left: 9rem;
+            left: 10rem;
             bottom: 6rem;
-            transform: rotate(18deg);
+            transform: rotate(25deg);
             z-index: 9;
           }
 
           #Responsive {
             width: 30rem;
             height: 30rem;
-            bottom: 2rem;
+            top: 0;
             z-index: 8;
             left: 0;
             position: absolute;

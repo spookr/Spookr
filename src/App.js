@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Reset.scss';
 import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
 
 // Components
 import Navigation from './Components/Navigation/Navigation'
@@ -12,16 +13,16 @@ class App extends Component {
 
   render() {
 
-    // console.log(this.props)
+    console.log(this.props)
 
     const displayNavigation = this.props.location.pathname === '/register' ||
       this.props.location.pathname === '/login' ||
-      this.props.location.pathname === '/questionnaire' ?
+      this.props.location.pathname === `/questionnaire/${this.props.user.id}` ?
       <Header /> : <Navigation />
 
     const displayFooter = this.props.location.pathname === '/register' ||
       this.props.location.pathname === '/login' ||
-      this.props.location.pathname === '/questionnaire' ?
+      this.props.location.pathname === `/questionnaire/${this.props.user.id}` ?
       null : <Footer />
 
     return (
@@ -34,6 +35,12 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
 
 
-export default withRouter(App)
+
+export default withRouter(connect(mapStateToProps)(App))

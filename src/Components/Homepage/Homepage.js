@@ -44,8 +44,6 @@ class Homepage extends Component {
                 <img id="CityScape" src={CityScape} />
                 <img id="Responsive" src={Responsive} />
                 <img id="Rip" src={Rip} />
-
-              
                 <img id="Star3" src={Star} />
                 <img id="Star4" src={Star} />
                 <img id="Star5" src={Star} />

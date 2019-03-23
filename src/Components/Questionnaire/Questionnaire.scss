@@ -2,12 +2,14 @@
 
 .Questionnaire {
   width: 100vw;
-  padding-top: 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
 
   .QuestionnaireSecondary {
-    max-height: 100vh;
+    height: 100%;
     max-width: 85vw;
-    margin: auto;
     display: flex;
     justify-content: flex-start;
     flex-direction: column;
@@ -25,6 +27,12 @@
       justify-content: space-evenly;
       box-shadow: 0 2px 10px 0 rgba(0,0,0,.2);
       position: relative;
+
+      .btn-primary {
+        background: $primary-color;
+        border: 1px solid $accent-three;
+        width: 8rem;
+      }
 
       .ToggleAmenities {
         width: 20rem;
@@ -64,13 +72,13 @@
       h2 {
         font-weight: bolder;
         text-transform: uppercase;
-        margin-bottom: -.5rem;
       }
 
       .QuestionnaireSelection {
         width: 100%;
         display: flex;
         justify-content: space-evenly;
+        margin-bottom: 1.5rem;
 
         img {
           width: 3rem;
@@ -92,15 +100,6 @@
         margin-bottom: -1rem;
       }
 
-      button {
-        width: 8rem;
-        background: $accent-one;
-        border: none;
-        color: white;
-        border-radius: 3px;
-        padding: .5rem;
-      }
-
       input {
         background: rgba(0, 0, 0, .1);
         border: 1px solid rgba(0, 0, 0, .3);
@@ -119,6 +118,7 @@
 
       #SubmitButton {
         align-self: center;
+
 
         button {
           width: 15rem;

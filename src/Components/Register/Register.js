@@ -68,8 +68,6 @@ class Register extends Component {
 
   render () {
 
-    console.log(this.state)
-
     const {username, password, ghost} = this.state
 
     return (
