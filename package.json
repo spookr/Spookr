@@ -15,6 +15,7 @@
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "express-session": "^1.15.6",
+    "geodist": "^0.2.1",
     "geolib": "^2.0.24",
     "massive": "^5.7.7",
     "node-sass": "^4.11.0",

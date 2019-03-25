@@ -1,26 +1,28 @@
-const geolib = require('geolib')
-
+var geodist = require('geodist')
 module.exports = {
     filteredSwipes: async (req, res) => {
         const { session } = req;
+        const db = req.app.get('db')
         // const { radius } = search_prefs;
-        let { latitude, longitude } = session.user;
-        console.log(latitude, longitude)
+        // const { latitude, longitude } = session.user;
         const userType = session.user.ghost;
         const userID = session.user.id;
+
+        // let LA = { lat: 34.0522, lon: 118.2437 }
+        let SLC = { lat: 40.76078, lon: 111.89105 }
+        // console.log(geodist(LA, SLC, { exact: true, unit: 'miles', limit: 600 }))
+
+
         if (userType) {
-            console.log(latitude, longitude)
+            // const meters = radius * 1609.344;
+            const userHouses = await db.auth.filtered_houses()
+            const location_filtered = userHouses.filter((user, i) => {
+                console.log(typeof user.latitude, typeof user.longitude)
+                return geodist({ lat: 34.0522, lon: 118.2437 }, { lat: parseInt(user.latitude), lon: parseInt(user.latitude) }, { exact: true, unit: 'miles', limit: 600 })
 
-            // geolib.getDistance({ latitude: 51.5103, longitude: 7.49347 })
-            // // const meters = radius * 1609.344;
-            // navigator.geolocation.getCurrentPosition(function (position) {
-            //     console.log(('You Are' + geolib.getDistance(position.coords, {
-            //         latitude: 51.525,
-            //         longitude: 7.4575
-            //     }) + 'meters away from 51.525, 7.4575'))
-            // })
-            // const userHouses = db.filtered_houses()
-
+            })
+            // console.log(geodist({ lat: 34.0522, lon: 118.2437 }, { lat: 40.76078, lon: 111.89105 }, { exact: true, unit: 'miles' }))
+            console.log(location_filtered, 'Filtered Location')
         }
 
     }
