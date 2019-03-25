@@ -10,21 +10,21 @@ import {withRouter} from 'react-router-dom'
 
 class Navigation extends Component {
 
-  componentDidMount() {
-    this.getUser()
-  }
-
-  componentDidUpdate (prevState, prevProps) {
-    if (!this.props.user.id) {
-      this.getUser()
-    }
-  }
-
-  getUser = () => {
-    axios.get('/api/user/').then(res => {
-      this.props.logIn(res.data)
-    })
-  }
+  // componentDidMount() {
+  //   this.getUser()
+  // }
+  //
+  // componentDidUpdate (prevState, prevProps) {
+  //   if (!this.props.user.id) {
+  //     this.getUser()
+  //   }
+  // }
+  //
+  // getUser = () => {
+  //   axios.get('/api/user').then(res => {
+  //     this.props.logIn(res.data)
+  //   })
+  // }
 
   logout = () => {
     axios.post("/logout").then(res => {

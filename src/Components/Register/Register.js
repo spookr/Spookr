@@ -7,6 +7,13 @@ import {connect} from 'react-redux'
 import {Link} from 'react-router-dom'
 import {logIn} from '../../redux/reducer'
 import {InputGroup, FormControl} from 'react-bootstrap'
+import { Radio } from 'antd';
+
+// Images
+import Ghost from './assets/ghost.svg'
+import House from './assets/house.svg'
+
+const RadioGroup = Radio.Group;
 
 class Register extends Component {
   constructor () {
@@ -35,6 +42,12 @@ class Register extends Component {
       ghost: false
     })
   }
+
+  onChange = (e) => {
+   this.setState({
+     ghost: e.target.value,
+   });
+ }
 
   submitRegister = (username, password, ghost) => {
 
@@ -66,8 +79,10 @@ class Register extends Component {
             <h2>Password</h2><input name="password" type="text" onChange={(e) => this.handleInput(e)}/>
             <h2 style={{paddingBottom: '1rem'}}>Are you a ghost or home owner?</h2>
             <div className="QuestionnaireSelection">
-              <button onClick={this.toggleGhost}>Ghost</button>
-              <button onClick={this.toggleHome}>Home Owner</button>
+              <RadioGroup onChange={this.onChange} value={this.state.ghost}>
+                <Radio value={true}><img id="GhostIcon" src={Ghost} /></Radio>
+                <Radio value={false}><img src={House} /></Radio>
+              </RadioGroup>
             </div>
           <button id="SubmitButton" onClick={() => this.submitRegister(username, password, ghost)}>Submit</button>
           </div>
