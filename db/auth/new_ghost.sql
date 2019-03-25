@@ -1,10 +1,10 @@
 insert into ghosts(
     name,
     bio,
-    gender,
     type,
     user_id,
-    location
+    location,
+    profile_pic
 )values(
     $1,
     $2,
