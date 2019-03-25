@@ -6,61 +6,197 @@ main {
 
   .HomepageSecondary {
     display: grid;
-    grid-template-columns: 1fr 1fr;
     padding-top: 1rem;
     min-height: 80vh;
     max-width: 85%;
     padding: .75rem;
     margin: 0 auto;
 
-    .HomepageBody {
+    .HomepageHeader {
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      height: 70%;
-      max-width: 35rem;
+      height: 43rem;
 
-      h1 {
-        color: $accent-three;
-        font-size: 2.5rem;
-        padding-bottom: .5rem;
-        font-weight: bolder;
-      }
-
-      p {
-        font-size: .95rem;
-        width: 90%;
-      }
-
-      .HomepageRegister {
+      .HeaderText {
         display: flex;
-        padding-top: 1rem;
+        flex-direction: column;
+        align-items: center;
 
-        button {
-          background: $accent-one;
-          border: none;
-          border-radius: 3px;
-          color: white;
-          font-size: .9rem;
-          padding: .75rem 6rem;
-          text-decoration: none;
-          margin-left: 7rem;
-
+        h1 {
+          font-weight: bolder;
+          font-size: 3.5rem;
         }
 
-        button:hover {
+        p {
+          max-width: 30rem;
+          text-align: center;
+        }
+      }
 
+      .HeaderBody {
+        max-width: 100%;
+        height:  100%;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+
+        .HeaderContainer {
+          width: 62rem;
+          height: 34rem;
+          position: relative;
+          display: flex;
+          justify-content: flex-end;
+          align-items: flex-end;
+
+          #Moon {
+            width: 12rem;
+            height: 12rem;
+            position: absolute;
+            top: 0;
+            right: 0;
+          }
+
+          #CityScape {
+            width: 25rem;
+            height: 25rem;
+            z-index: 2;
+          }
+
+          #Building {
+            width: 20rem;
+            height: 20rem;
+            position: absolute;
+            right: 19%;
+            bottom: 1.5rem;
+          }
+
+          #Graveyard {
+            width: 15rem;
+            height: 15rem;
+            position: absolute;
+            left: 12%;
+          }
+
+          #Rip {
+            width: 16rem;
+            height: 16rem;
+            position: absolute;
+            left: 0;
+            bottom: 2rem;
+            z-index:9;
+          }
+
+          #Star3 {
+            width: 2.5rem;
+            height: 2.5rem;
+            position: absolute;
+            top: 7rem;
+            right: 23rem;
+            transform: rotate(-2deg);
+          }
+
+          #Star4 {
+            width: 3rem;
+            height: 3rem;
+            position: absolute;
+            top: 3rem;
+            right: 15rem;
+            transform: rotate(-10deg);
+          }
+
+          #Star5 {
+            width: 1.75rem;
+            height: 1.75rem;
+            position: absolute;
+            top: 3rem;
+            right: 30rem;
+            transform: rotate(-10deg);
+          }
+
+          #Star6 {
+            width: 2rem;
+            height: 2rem;
+            position: absolute;
+            bottom: 18rem;
+            right: 6.5rem;
+            transform: rotate(-10deg);
+          }
+
+          #Spooker {
+            position: absolute;
+            width: 9rem;
+            height: 9rem;
+            left: 10rem;
+            bottom: 6rem;
+            transform: rotate(25deg);
+            z-index: 9;
+          }
+
+          #Responsive {
+            width: 30rem;
+            height: 30rem;
+            top: 0;
+            z-index: 8;
+            left: 0;
+            position: absolute;
+          }
         }
       }
     }
+
+    .HomepageBody {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      height: 100%;
+      padding: 5rem 0 2rem 0;
+
+      .HomepageSubBody {
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        display: flex;
+
+        h2 {
+          font-size: 2.5rem;
+          padding-bottom: 1rem;
+          font-weight: bolder;
+          align-self: center;
+        }
+
+        p {
+          font-size: .95rem;
+          max-width: 30rem;
+          padding-bottom: .75rem;
+        }
+
+        .HomepageRegister {
+          display: flex;
+          padding-top: 1rem;
+
+          button {
+            border: 1px solid $accent-three;
+            border-radius: 3px;
+            color: white;
+            font-size: 1.15rem;
+            padding: .75rem 6rem;
+            text-decoration: none;
+            cursor: pointer;
+          }
+
+          button:hover {
+            background: #1C2367;
+          }
+        }
+      }
+    }
+
     .HomepageGraphic {
       display: flex;
-      justify-content: center;
       align-items: center;
 
       img {
-        width: 30rem;
-        height: 30rem;
+        width: 23rem;
+        height: 23rem;
       }
     }
   }
