@@ -41,16 +41,9 @@ create table ghosts (
     bio text not null,
     type int references ghost_type(id),
     user_id int references users(id),
-    location text not null,
-<<<<<<< HEAD
-    profile_pic TEXT NOT NULL
-=======
-<<<<<<< HEAD
-    profile_photo text not null
-=======
-    profile_photo int references
->>>>>>> master
->>>>>>> master
+    profile_pic TEXT NOT NULL,
+    latitude numeric,
+    longitude numeric
 )
 
 create table ghost_type (
@@ -63,8 +56,8 @@ create table homeowner (
     first_name text not null,
     last_name text not null,
     bio text not null,
-    user_id int references users(id),
-    profile_photo text not null
+    user_id int references users(id)
+    profile_pic text not null
 )
 
 create table house (
@@ -72,10 +65,11 @@ create table house (
     header text not null,
     body text not null,
     rooms int not null,
-    location text not null,
     remodeled boolean not null,
-    amenities_id int references amenities(id),
-    owner_id int references homeowner(id),
+    amenities int references amenities(id),
+    owner int references homeowner(id),
+    latitude numeric,
+    longitude numeric
 )
 
 create table house_photos (
@@ -97,7 +91,6 @@ create table amenities (
     grandfather_clock boolean not null,
     dolls boolean not null,
     electricity boolean not null,
-    pets boolean not null
 )
 
 create table swiped (
@@ -115,6 +108,12 @@ create table messages (
     body text not null
 )
 
+
+create table matches (
+    id serial primary key,
+    swipping_user int references users(id),
+    matched_user int references users(id)
+)
 
 
 
