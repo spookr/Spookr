@@ -39,11 +39,11 @@ create table ghosts (
     id serial primary key,
     name text not null,
     bio text not null,
-    gender boolean not null,
     type int references ghost_type(id),
     user_id int references users(id),
-    location text not null,
-    profile_photo int references
+    profile_pic TEXT NOT NULL,
+    latitude numeric,
+    longitude numeric
 )
 
 create table ghost_type (
@@ -56,8 +56,8 @@ create table homeowner (
     first_name text not null,
     last_name text not null,
     bio text not null,
-    user_id int references users(id),
-    profile_photo text not null
+    user_id int references users(id)
+    profile_pic text not null
 )
 
 create table house (
@@ -65,10 +65,11 @@ create table house (
     header text not null,
     body text not null,
     rooms int not null,
-    location text not null,
     remodeled boolean not null,
-    amenities_id int references amenities(id),
-    owner_id int references homeowner(id),
+    amenities int references amenities(id),
+    owner int references homeowner(id),
+    latitude numeric,
+    longitude numeric
 )
 
 create table house_photos (
@@ -90,7 +91,6 @@ create table amenities (
     grandfather_clock boolean not null,
     dolls boolean not null,
     electricity boolean not null,
-    pets boolean not null
 )
 
 create table swiped (
@@ -113,3 +113,23 @@ SELECT * FROM homeowner
 inner join users on users.id = homeowner.user_id
 inner join house on homeowner.id = house.owner
 left JOIN swiped on users.id = swiped.user_id;
+
+create table matches (
+    id serial primary key,
+    swipping_user int references users(id),
+    matched_user int references users(id)
+)
+
+
+
+
+
+
+-- DATA ON LOCATIONS
+select Round(point(house.latitude, house.longitude)<@>point(ghosts.latitude, ghosts.longitude)) as distance
+FROM house, ghosts
+WHERE house.id = id AND ghosts.id = id
+
+
+-- ONE OF THESE IS MORE ACCURATE THAN THE OTHER. STILL WORKING IT OUT
+select earth_distance(ll_to_earth(34.0522, 118.2437), ll_to_earth(40.7608,111.8910))
