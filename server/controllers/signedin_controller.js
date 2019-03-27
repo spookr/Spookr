@@ -18,7 +18,7 @@ module.exports = {
             const userHouses = await db.auth.filtered_houses()
             const location_filtered = userHouses.filter((user, i) => {
                 console.log(typeof user.latitude, typeof user.longitude)
-                return geodist({ lat: 34.0522, lon: 118.2437 }, { lat: parseInt(user.latitude), lon: parseInt(user.latitude) }, { exact: true, unit: 'miles', limit: 600 })
+                return geodist({ lat: 34.0522, lon: 118.2437 }, { lat: parseInt(user.latitude), lon: parseInt(user.longitude) }, { exact: true, unit: 'miles', limit: 600 })
 
             })
             // console.log(geodist({ lat: 34.0522, lon: 118.2437 }, { lat: 40.76078, lon: 111.89105 }, { exact: true, unit: 'miles' }))
