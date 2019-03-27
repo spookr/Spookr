@@ -134,15 +134,15 @@ module.exports = {
   },
 
   houseDetails: async (req, res) => {
-    const { header, body, rooms, remodeled, amenities, owner, living_occupants, lat, lng } = req.body
+    const { header, body, rooms, remodeled, owner, living_occupants, lat, lng } = req.body
     const db = req.app.get('db')
 
-    if (!header || !body || !rooms || !remodeled || !amenities || !owner || !living_occupants || !lat || !lng) {
+    if (!header || !body || !rooms || !remodeled || !owner || !living_occupants || !lat || !lng) {
       return res.status(400).send('Need All House Info Filled Out')
     }
 
     try {
-      let newHouse = await db.auth.new_house([header, body, rooms, remodeled, amenities, owner, living_occupants, lat, lng])
+      let newHouse = await db.auth.new_house([header, body, rooms, remodeled, owner, living_occupants, lat, lng])
       console.log('Hello Home Owner', newHouse)
       newHouse = newHouse[0]
       return res.status(200).send(newHouse)
