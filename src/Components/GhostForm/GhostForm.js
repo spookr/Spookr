@@ -156,7 +156,6 @@ class GhostForm extends Component {
     // console.log('gender', gender)
     console.log(this.props)
 
-
     const displayToggle1 = toggle1 &&
       <div className="QuestionnaireMain">
         <h1>Let's set up your profile!</h1>
