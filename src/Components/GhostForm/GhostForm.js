@@ -91,7 +91,6 @@ class GhostForm extends Component {
     .then(
       response => {
         const {lat, lng} = response.results[0].geometry.location;
-        console.log(lat, lng);
 
         const ghostDetails = {
           name,
@@ -102,6 +101,7 @@ class GhostForm extends Component {
           lat,
           lng
         }
+
         axios.post('/ghost', ghostDetails).then(res => {
           console.log(res.data)
         })

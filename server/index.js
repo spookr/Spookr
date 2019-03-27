@@ -12,7 +12,6 @@ const path = require('path')
 const auth = require('./controllers/auth_controller');
 const signedin = require('./controllers/signedin_controller');
 const amazon = require('./controllers/amazon_controller');
-const form = require('./controllers/form_controller')
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env
 
@@ -39,7 +38,7 @@ app.get('/api/user', auth.getUser)
 app.post('/ghost', auth.ghostDetails)
 app.post('/owner', auth.ownerDetails)
 app.post('/house', auth.houseDetails)
-app.get('/logout', auth.logout)
+app.post('/logout', auth.logout)
 
 //Aws
 app.get('/sign-s3', amazon.awsS3)

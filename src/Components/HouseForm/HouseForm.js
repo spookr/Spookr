@@ -4,6 +4,9 @@ import NumericInput from 'react-numeric-input'
 import { Checkbox } from 'antd'
 import Geocode from 'react-geocode'
 
+// Packages
+import axios from 'axios'
+
 // Images
 import Placeholder from './assets/Placeholder.jpg'
 import Add from './assets/add.svg'
@@ -15,7 +18,7 @@ class HouseForm extends Component {
     super()
     this.state = {
       header: '',
-      description: '',
+      body: '',
       rooms: 1,
       location: '',
       remodeled: false,
@@ -27,9 +30,11 @@ class HouseForm extends Component {
         electricity: false,
         pets: false
       },
+      livingOccupants: 1,
       toggle1: true,
       toggle2: false,
-      toggle3: false
+      toggle3: false,
+      files: []
     }
   }
 
@@ -39,15 +44,30 @@ class HouseForm extends Component {
     })
   }
 
-  submitHouse = (header, description, rooms, location, remodeled, amenities) => {
+  submitHouse = (header, body, rooms, remodeled, amenities, livingOccupants, location) => {
+    // console.log(header, body, rooms, remodeled, amenities, location)
     Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
     Geocode.enableDebug();
     Geocode.fromAddress(location)
     .then(
       response => {
         const {lat, lng} = response.results[0].geometry.location;
-        console.log(lat, lng);
-        console.log(header, description, rooms, lat, lng, remodeled, amenities)
+        console.log(header, body, rooms, remodeled, amenities, livingOccupants, lat, lng)
+
+        const houseDetails = {
+          header,
+          body,
+          rooms,
+          remodeled,
+          amenities,
+          livingOccupants,
+          lat,
+          lng
+        }
+
+        axios.post('/house', houseDetails).then(res => {
+          console.log(res.data)
+        })
       },
       error => {
         console.error(error);
@@ -102,22 +122,31 @@ class HouseForm extends Component {
      })
    }
 
+   inputLiving = (valueAsNumber) => {
+     this.setState({
+       livingOccupants: valueAsNumber
+     })
+   }
+
   render () {
 
-    const {header, description, location, amenities, remodeled, livingOccupants, toggle1, toggle2, toggle3, rooms, toggleAmenities} = this.state
-    const {handleToggle1, handleToggle2, handleToggle3, handleInput, submitHouse, inputQuantity, toggleRemodeled} = this
+    const {header, body, location, amenities, remodeled, livingOccupants, toggle1, toggle2, toggle3, rooms, toggleAmenities} = this.state
+    const {handleToggle1, handleToggle2, handleToggle3, handleInput, submitHouse, inputQuantity, toggleRemodeled, inputLiving} = this
 
     const displayToggle1 = toggle1 &&
     <div className="QuestionnaireMain">
       <h1>Add a Listing</h1>
       <h2>Header</h2><input name="header" type="text" value={header} onChange={(e) => handleInput(e)}/>
-      <h2>Description</h2><input name="description" type="text" value={description} onChange={(e) => handleInput(e)}/>
+      <h2>Description</h2><input name="body" type="text" value={body} onChange={(e) => handleInput(e)}/>
       <h2>Rooms</h2>
       <span><NumericInput style={{marginLeft: '.5rem'}} min={1} value={rooms} onChange={inputQuantity}/></span>
       <h2><Checkbox
-            checked={this.state.toggleAmenities}
-            onClick={this.toggleRemodeled}>
+            checked={remodeled}
+            onClick={toggleRemodeled}>
           </Checkbox>Remodeled</h2>
+        <h2>Living Occupants</h2>
+        <span><NumericInput style={{marginLeft: '.5rem'}} min={1} value={livingOccupants} onChange={inputLiving}/></span>
+
 
       <div id="FirstToggle" className="ToggleNavigation">
         <img id="Arrow" src={Forward} onClick={handleToggle2} />
@@ -210,7 +239,7 @@ class HouseForm extends Component {
         </div>
         <div className="ToggleNavigation">
           <img id="Arrow" src={Previous} onClick={handleToggle2} />
-          <button id="NextButton" onClick={() => submitHouse(header, description, rooms, location, remodeled, amenities)}>Submit</button>
+          <button id="NextButton" onClick={() => submitHouse(header, body, rooms, remodeled, amenities, livingOccupants, location)}>Submit</button>
         </div>
       </div>
 

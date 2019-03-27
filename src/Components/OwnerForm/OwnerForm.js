@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
 import './OwnerForm.scss'
+
+// Packages
+import {withRouter} from 'react-router-dom'
 import axios from 'axios'
 
 // Components
@@ -48,7 +51,20 @@ class OwnerForm extends Component {
     })
   }
 
-  submitOwner = () => {
+  submitOwner = (firstName, lastName, bio, user_id, profilePhoto) => {
+
+    const ownerDetails = {
+      firstName,
+      lastName,
+      bio,
+      user_id,
+      profilePhoto
+    }
+
+    axios.post('/owner', ownerDetails).then(res => {
+      console.log(res.data)
+    })
+
     this.setState({
       toggleHouse: true,
       toggleOwner: false
@@ -84,7 +100,6 @@ class OwnerForm extends Component {
         this.setState({ profilePhoto: url })
       })
       .catch(err => {
-
         if (err.response.status === 403) {
           alert('Your request for a signed URL failed with a status 403. Double check the CORS configuration and bucket policy in the README. You also will want to double check your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your .env and ensure that they are the same as the ones that you created in the IAM dashboard. You may need to generate new keys\n' + err.stack)
         } else {
@@ -115,7 +130,7 @@ class OwnerForm extends Component {
         <h2>Bio</h2><input name="bio" type="text" value={bio} onChange={(e) => handleInput(e)}/>
         <div className="ToggleNavigation">
           <img id="Arrow" src={Previous} onClick={handleToggle2} />
-          <button id="NextButton" onClick={submitOwner}>Submit</button>
+          <button id="NextButton" onClick={() => submitOwner(firstName, lastName, bio, this.props.match.params.id, profilePhoto)}>Submit</button>
         </div>
       </div>
 
@@ -134,4 +149,4 @@ class OwnerForm extends Component {
   }
 }
 
-export default OwnerForm
+export default withRouter(OwnerForm)
