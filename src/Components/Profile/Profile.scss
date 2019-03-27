@@ -1,1 +1,7 @@
 @import '../../index';
+
+.Profile {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.25fr 3fr;
+}

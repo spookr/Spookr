@@ -34,7 +34,22 @@ button {
 	background: #2A3680;
 }
 
+.ant-checkbox-checked .ant-checkbox-inner {
+	background: #7289da;
+	border: none;
+}
+
 @font-face {
   font-family: 'This Is The Future';
   src: url('./fonts/This Is The Future.ttf') format('truetype');
+}
+
+.ant-checkbox-inner {
+  margin-right: .5rem;
+}
+
+#Arrow {
+  width: 3rem;
+  height: 3rem;
+	align-self: flex-end;
 }

@@ -5,6 +5,11 @@ import axios from 'axios'
 // Components
 import HouseForm from '../../Components/HouseForm/HouseForm'
 
+// Images
+import Placeholder from './assets/Placeholder.png'
+import Forward from '../assets/Forward.svg'
+import Previous from '../assets/Previous.svg'
+
 class OwnerForm extends Component {
   constructor () {
     super()
@@ -18,7 +23,7 @@ class OwnerForm extends Component {
       toggleOwner: true,
       profilePhoto: '',
       isUploading: false,
-      profilePhoto: 'http://www.panostaja.fi/wp-content/uploads/2016/02/placeholder-person-960x960.png',
+      profilePhoto: null,
       files: []
     }
   }
@@ -97,9 +102,9 @@ class OwnerForm extends Component {
     const displayToggle1 = toggle1 &&
       <div className="QuestionnaireMain">
         <h1>Let's set up your profile!</h1>
-          {profilePhoto && <img id="ProfilePhoto" src={profilePhoto} />}
-          <input type="file" onChange={(e) => this.getSignedRequest(e, false)} />
-        <button id="NextButton" onClick={handleToggle1}>Next</button>
+          {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} /> : <img id="ProfilePhoto" src={Placeholder} />}
+          <input style={{border: 'none'}} type="file" onChange={(e) => this.getSignedRequest(e, false)} />
+          <img id="Arrow" src={Forward} onClick={handleToggle1} />
       </div>
 
     const displayToggle2 = toggle2 &&
@@ -109,7 +114,7 @@ class OwnerForm extends Component {
         <h2>Last Name</h2><input name="lastName" type="text" value={lastName} onChange={(e) => handleInput(e)}/>
         <h2>Bio</h2><input name="bio" type="text" value={bio} onChange={(e) => handleInput(e)}/>
         <div className="ToggleNavigation">
-          <button id="NextButton" onClick={handleToggle2}>Previous</button>
+          <img id="Arrow" src={Previous} onClick={handleToggle2} />
           <button id="NextButton" onClick={submitOwner}>Submit</button>
         </div>
       </div>
