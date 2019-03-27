@@ -44,7 +44,7 @@ app.get('/logout', auth.logout)
 app.get('/sign-s3', amazon.awsS3)
 
 // Is Signed In
-app.get('/filterswipes', signedin.filteredSwipes)
+app.post('/filterswipes', signedin.filteredSwipes)
 
 // EndPoints
 app.listen(SERVER_PORT, () => {
