@@ -37,11 +37,8 @@ class Homepage extends Component {
             <div className="HeaderBody">
               <div className="HeaderContainer">
                 <img id="Moon" src={Moon} />
-                <img id="Spooker" src={Spooker} />
                 <img id="Building" src={Building} />
                 <img id="CityScape" src={CityScape} />
-                <img id="Responsive" src={Responsive} />
-                <img id="Rip" src={Rip} />
                 <img id="Star3" src={Star} />
                 <img id="Star4" src={Star} />
                 <img id="Star5" src={Star} />
@@ -56,7 +53,9 @@ class Homepage extends Component {
                 {displayRegister}
             </div>
             <div className="HomepageGraphic">
-              <img src={Ghost} alt="Homepage Ghost" />
+              <img id="Responsive" src={Responsive} />
+                <img id="Spooker" src={Spooker} />
+              <img id="Rip" src={Rip} />
             </div>
           </div>
         </div>

@@ -15,18 +15,18 @@ class App extends Component {
 
     // console.log(this.props)
 
-    const displayNavigation = this.props.location.pathname === '/register' ||
+    const displayHeader = this.props.location.pathname === '/register' ||
       this.props.location.pathname === '/login' ||
       this.props.location.pathname === `/questionnaire/${this.props.user.id}` ?
-      <Header /> : <Navigation />
+      <Header /> : null
 
-    const displayFooter = this.props.location.pathname === '/register' ||
-      this.props.location.pathname === '/login' ||
-      this.props.location.pathname === `/questionnaire/${this.props.user.id}` ?
-      null : <Footer />
+    const displayNavigation = this.props.location.pathname !== '/' ? null : <Navigation />
+
+    const displayFooter = this.props.location.pathname !== '/' ? null :  <Footer />
 
     return (
       <div className="App">
+        {displayHeader}
         {displayNavigation}
         {routes}
         {displayFooter}
