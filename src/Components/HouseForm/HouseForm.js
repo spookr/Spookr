@@ -2,7 +2,13 @@ import React, {Component} from 'react'
 import './HouseForm.scss'
 import NumericInput from 'react-numeric-input'
 import { Checkbox } from 'antd'
-import Geocode from "react-geocode"
+import Geocode from 'react-geocode'
+
+// Images
+import Placeholder from './assets/Placeholder.jpg'
+import Add from './assets/add.svg'
+import Forward from '../assets/Forward.svg'
+import Previous from '../assets/Previous.svg'
 
 class HouseForm extends Component {
   constructor() {
@@ -34,7 +40,7 @@ class HouseForm extends Component {
   }
 
   submitHouse = (header, description, rooms, location, remodeled, amenities) => {
-    Geocode.setApiKey("AIzaSyCdZuqe3hLZO8Tq1wYHOA4WJ8bmPFK1XT4");
+    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
     Geocode.enableDebug();
     Geocode.fromAddress(location)
     .then(
@@ -106,21 +112,22 @@ class HouseForm extends Component {
       <h1>Add a Listing</h1>
       <h2>Header</h2><input name="header" type="text" value={header} onChange={(e) => handleInput(e)}/>
       <h2>Description</h2><input name="description" type="text" value={description} onChange={(e) => handleInput(e)}/>
-      <h2>Rooms <NumericInput min={1} value={rooms} onChange={inputQuantity}/></h2>
+      <h2>Rooms</h2>
+      <span><NumericInput style={{marginLeft: '.5rem'}} min={1} value={rooms} onChange={inputQuantity}/></span>
       <h2><Checkbox
             checked={this.state.toggleAmenities}
             onClick={this.toggleRemodeled}>
           </Checkbox>Remodeled</h2>
 
       <div id="FirstToggle" className="ToggleNavigation">
-        <button id="NextButton" onClick={handleToggle2}>Next</button>
+        <img id="Arrow" src={Forward} onClick={handleToggle2} />
       </div>
     </div>
 
     const displayToggle2 = toggle2 &&
       <div className="QuestionnaireMain">
-        <h2>Location</h2><input name="location" type="text" value={location} onChange={(e) => handleInput(e)} />
-        <h2>Amenities</h2>
+        <h2 id="Margin">Location</h2><input name="location" type="text" value={location} onChange={(e) => handleInput(e)} />
+        <h2 id="Margin">Amenities</h2>
           <form className="ToggleAmenities">
             <h2><Checkbox
                   checked={amenities.spiderwebs}
@@ -166,16 +173,43 @@ class HouseForm extends Component {
             </Checkbox>Pets</h2>
           </form>
           <div className="ToggleNavigation">
-            <button id="NextButton" onClick={handleToggle1}>Previous</button>
-            <button id="NextButton" onClick={handleToggle3}>Next</button>
+            <img id="Arrow"  src={Previous} onClick={handleToggle1} />
+            <img id="Arrow"  src={Forward} onClick={handleToggle3} />
           </div>
       </div>
 
       const displayToggle3 = toggle3 &&
       <div className="QuestionnaireMain">
         <h1>Upload photos of your House!</h1>
+        <div className="UploadGrid">
+
+          <div className="UploadPhoto">
+            <img id="HousePhoto" src={Placeholder} />
+            <img id="AddPhoto" src={Add} />
+          </div>
+          <div className="UploadPhoto">
+            <img id="HousePhoto" src={Placeholder} />
+            <img id="AddPhoto" src={Add} />
+          </div>
+          <div className="UploadPhoto">
+            <img id="HousePhoto" src={Placeholder} />
+            <img id="AddPhoto" src={Add} />
+          </div>
+          <div className="UploadPhoto">
+            <img id="HousePhoto" src={Placeholder} />
+            <img id="AddPhoto" src={Add} />
+          </div>
+          <div className="UploadPhoto">
+            <img id="HousePhoto" src={Placeholder} />
+            <img id="AddPhoto" src={Add} />
+          </div>
+          <div className="UploadPhoto">
+            <img id="HousePhoto" src={Placeholder} />
+            <img id="AddPhoto" src={Add} />
+          </div>
+        </div>
         <div className="ToggleNavigation">
-          <button id="NextButton" onClick={handleToggle2}>Previous</button>
+          <img id="Arrow" src={Previous} onClick={handleToggle2} />
           <button id="NextButton" onClick={() => submitHouse(header, description, rooms, location, remodeled, amenities)}>Submit</button>
         </div>
       </div>

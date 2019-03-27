@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {Component} from 'react'
 import './Conversation.scss'
 
 class Conversation extends Component {
