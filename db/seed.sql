@@ -121,10 +121,6 @@ create table matches (
 )
 
 
-
-
-
-
 -- DATA ON LOCATIONS
 select Round(point(house.latitude, house.longitude)<@>point(ghosts.latitude, ghosts.longitude)) as distance
 FROM house, ghosts

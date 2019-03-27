@@ -12,6 +12,7 @@ import { Radio } from 'antd';
 // Images
 import Ghost from './assets/ghost.svg'
 import House from './assets/house.svg'
+import Graveyard from './assets/graveyard.jpg'
 
 const RadioGroup = Radio.Group;
 
@@ -28,18 +29,6 @@ class Register extends Component {
   handleInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value
-    })
-  }
-
-  toggleGhost = () => {
-    this.setState({
-      ghost: true
-    })
-  }
-
-  toggleHome = () => {
-    this.setState({
-      ghost: false
     })
   }
 
@@ -71,12 +60,12 @@ class Register extends Component {
     const {username, password, ghost} = this.state
 
     return (
-      <div className="Questionnaire">
+      <div id="RegisterBackground" className="Questionnaire">
         <div className="QuestionnaireSecondary">
           <div className="QuestionnaireMain">
             <h1>Create an account</h1>
             <h2>Username</h2><input name="username" type="text" onChange={(e) => this.handleInput(e)}/>
-            <h2>Password</h2><input name="password" type="text" onChange={(e) => this.handleInput(e)}/>
+            <h2>Password</h2><input name="password" type="password" onChange={(e) => this.handleInput(e)}/>
             <h2 style={{paddingBottom: '1rem'}}>Are you a ghost or home owner?</h2>
             <div className="QuestionnaireSelection">
               <RadioGroup onChange={this.onChange} value={this.state.ghost}>
