@@ -97,15 +97,15 @@ module.exports = {
   },
 
   ghostDetails: async (req, res) => {
-    const { name, bio, type, user_id, location, profile_pic } = req.body;
+    const { name, bio, type, user_id, profile_pic, lat, lng } = req.body;
     const db = req.app.get('db');
 
-    if (!name || !bio || !type || !user_id || !location || !profile_pic) {
+    if (!name || !bio || !type || !user_id || !profile_pic || !lat || !lng) {
       return res.status(400).send('need all info')
     }
 
     try {
-      let newGhost = await db.auth.new_ghost([name, bio, type, user_id, location, profile_pic])
+      let newGhost = await db.auth.new_ghost([name, bio, type, user_id, profile_pic, lat, lng])
       console.log('Hello my dudes', newGhost)
       newGhost = newGhost[0]
       return res.status(200).send(newGhost)
@@ -116,6 +116,7 @@ module.exports = {
 
   ownerDetails: async (req, res) => {
     const { first_name, last_name, user_id } = req.body;
+    console.log(session.user.id)
     const db = req.app.get('db');
 
     if (!first_name || !last_name || !user_id) {
@@ -133,15 +134,15 @@ module.exports = {
   },
 
   houseDetails: async (req, res) => {
-    const { header, body, rooms, location, remodeled, amenities, owner, living_occupants } = req.body
+    const { header, body, rooms, remodeled, amenities, owner, living_occupants, lat, lng } = req.body
     const db = req.app.get('db')
 
-    if (!header || !body || !rooms || !location || !remodeled || !amenities || !owner || !living_occupants) {
+    if (!header || !body || !rooms || !remodeled || !amenities || !owner || !living_occupants || !lat || !lng) {
       return res.status(400).send('Need All House Info Filled Out')
     }
 
     try {
-      let newHouse = await db.auth.new_house([header, body, rooms, location, remodeled, amenities, owner, living_occupants])
+      let newHouse = await db.auth.new_house([header, body, rooms, remodeled, amenities, owner, living_occupants, lat, lng])
       console.log('Hello Home Owner', newHouse)
       newHouse = newHouse[0]
       return res.status(200).send(newHouse)
@@ -154,7 +155,6 @@ module.exports = {
   logout: (req, res) => {
     console.log(req.session.user)
     req.session.destroy();
-    // console.log(req.session.user)
     res.sendStatus(200);
   }
 }
