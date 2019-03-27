@@ -4,7 +4,7 @@ module.exports = {
         const { session } = req;
         const { radius } = req.body;
         const db = req.app.get('db')
-        const { latitude, longitude } = session.user;
+        const { latitude, longitude, id } = session.user;
         const userType = session.user.ghost;
         if (userType) {
             try{
@@ -12,6 +12,7 @@ module.exports = {
             const location_filtered = await userHouses.filter(user => {
                 return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: radius })
             })
+            const yesChecks = await db.auth.yesChecks(id)
             return res.status(200).send(location_filtered)
 
             }catch(err){
