@@ -12,7 +12,6 @@ const path = require('path')
 const auth = require('./controllers/auth_controller');
 const signedin = require('./controllers/signedin_controller');
 const amazon = require('./controllers/amazon_controller');
-const form = require('./controllers/form_controller')
 
 const { SERVER_PORT, CONNECTION_STRING, SESSION_SECRET } = process.env
 
