@@ -2,28 +2,31 @@ var geodist = require('geodist')
 module.exports = {
     filteredSwipes: async (req, res) => {
         const { session } = req;
+        const { radius } = req.body;
         const db = req.app.get('db')
-        // const { radius } = search_prefs;
-        // const { latitude, longitude } = session.user;
+        const { latitude, longitude } = session.user;
         const userType = session.user.ghost;
-        const userID = session.user.id;
-
-        // let LA = { lat: 34.0522, lon: 118.2437 }
-        let SLC = { lat: 40.76078, lon: 111.89105 }
-        // console.log(geodist(LA, SLC, { exact: true, unit: 'miles', limit: 600 }))
-
-
         if (userType) {
-            // const meters = radius * 1609.344;
+            try{
             const userHouses = await db.auth.filtered_houses()
-            const location_filtered = userHouses.filter((user, i) => {
-                console.log(typeof user.latitude, typeof user.longitude)
-                return geodist({ lat: 34.0522, lon: 118.2437 }, { lat: parseInt(user.latitude), lon: parseInt(user.longitude) }, { exact: true, unit: 'miles', limit: 600 })
-
+            const location_filtered = await userHouses.filter(user => {
+                return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: radius })
             })
-            // console.log(geodist({ lat: 34.0522, lon: 118.2437 }, { lat: 40.76078, lon: 111.89105 }, { exact: true, unit: 'miles' }))
-            console.log(location_filtered, 'Filtered Location')
-        }
+            return res.status(200).send(location_filtered)
 
+            }catch(err){
+                return res.status(400).send('Could not get users from database')
+            }
+        }else{
+            try{
+                const userGhosts = await db.auth.filtered_ghosts()
+                const location_filtered = await userGhosts.filter(user => {
+                    return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: radius })
+                })
+                return res.status(200).send(location_filtered)
+            }catch(err){
+                return res.status(400).send('Could not get users from database')
+            }
+        }
     }
 }
