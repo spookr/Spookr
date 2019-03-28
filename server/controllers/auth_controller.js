@@ -137,7 +137,7 @@ module.exports = {
     const {header, body, rooms, remodeled, amenities : {spiderwebs, basement, grandfatherClock, dolls, electricity, pets}, lat, lng, livingOccupants} = req.body
     const db = req.app.get('db')
 
-  console.log(req.session.homeowner.id)
+    console.log(req.session.homeowner.id)
 
     try {
       let newHouse = await db.auth.new_house([header, body, rooms, remodeled, req.session.homeowner.id, livingOccupants, lat, lng])

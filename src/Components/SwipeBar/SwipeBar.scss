@@ -1,1 +1,16 @@
 @import '../../index';
+
+.SwipeBar {
+  width: 100%;
+  background: none;
+  position: absolute;
+  display: flex;
+  justify-content: space-evenly;
+  bottom: 0;
+  padding-bottom: 1rem;
+
+  img {
+    width: 4rem;
+    height: 4rem;
+  }
+}
