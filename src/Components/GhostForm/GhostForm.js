@@ -87,9 +87,11 @@ class GhostForm extends Component {
 
   submitGhost = (name, bio, type, user_id, profile_pic, location, radius) => {
     let googleKey = process.env.REACT_APP_GOOGLE_API
-    googleKey=googleKey.split('')
-    googleKey.pop()
-    googleKey=googleKey.join('')
+    console.log("string here", googleKey)
+    // googleKey=googleKey.split('')
+    // googleKey.pop()
+    // googleKey=googleKey.join('')
+    console.log("string here", googleKey)
     
     Geocode.setApiKey(googleKey);
     Geocode.enableDebug();
