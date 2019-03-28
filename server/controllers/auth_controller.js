@@ -133,22 +133,26 @@ module.exports = {
   },
 
   houseDetails: async (req, res) => {
-    const { header, body, rooms, location, remodeled, owner, living_occupants, amenities: {spiderweb, basement, grandfather_clock, dolls, electricity, pets, house_id} } = req.body
+    const { header, description, rooms, remodeled, lat, lng, amenities, amenities: {spiderwebs, basement, grandfatherClock, dolls, electricity, pets} } = req.body
     const db = req.app.get('db')
+    const owner = req.session.user.id
 
-    if (!header || !body || !rooms || !location || !remodeled || !owner || !living_occupants || !amenities) {
+    if (!header || !description || !rooms || !amenities || !lat || !lng) {
       console.log(req.body)
       return res.status(400).send('Need All House Info Filled Out')
     }
 
     try {
-      let newHouse = await db.auth.new_house([header, body, rooms, location, remodeled, owner, living_occupants])
+      let newHouse = await db.auth.new_house([header, description, rooms, remodeled, owner, lat, lng])
       console.log('Hello Home Owner', newHouse)
       newHouse = newHouse[0]
-      const amenities = await db.auth.amenties(spiderweb, basement, grandfather_clock, dolls, electricity, pets, house_id)
-      newHouse.amenities = amenities
+      console.log({spiderwebs, basement, grandfatherClock, dolls, electricity, pets, house_id: newHouse.id})
+      const savedAmenities = await db.auth.amenities([spiderwebs, basement, grandfatherClock, dolls, electricity, pets, newHouse.id])
+      newHouse.amenities = savedAmenities[0]
+      console.log(newHouse)
       return res.status(200).send(newHouse)
     } catch (err) {
+      console.log('amenities',amenities)
       return res.status(500).send('Could Not Create House')
     }
   },
