@@ -3,6 +3,7 @@ import './HouseForm.scss'
 import NumericInput from 'react-numeric-input'
 import { Checkbox } from 'antd'
 import Geocode from 'react-geocode'
+import axios from 'axios'
 
 // Images
 import Placeholder from './assets/Placeholder.jpg'
@@ -40,14 +41,30 @@ class HouseForm extends Component {
   }
 
   submitHouse = (header, description, rooms, location, remodeled, amenities) => {
-    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
+    let googleKey = process.env.REACT_APP_GOOGLE_API
+    googleKey=googleKey.split('')
+    googleKey.pop()
+    googleKey=googleKey.join('')
+    
+    Geocode.setApiKey(googleKey);
     Geocode.enableDebug();
     Geocode.fromAddress(location)
     .then(
       response => {
         const {lat, lng} = response.results[0].geometry.location;
-        console.log(lat, lng);
-        console.log(header, description, rooms, lat, lng, remodeled, amenities)
+
+        const houseDetails = {
+          header,
+          description, 
+          rooms, 
+          lat,
+          lng, 
+          remodeled, 
+          amenities
+        }
+        axios.post('/house', houseDetails).then(res => {
+          console.log(res.data)
+        })
       },
       error => {
         console.error(error);
