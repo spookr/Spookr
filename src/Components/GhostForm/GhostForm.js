@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import './GhostForm.scss'
 import Geocode from 'react-geocode'
+import dotenv from 'dotenv'
 
 // Packages
 import { DropdownButton, Dropdown } from 'react-bootstrap'
@@ -84,8 +85,13 @@ class GhostForm extends Component {
     })
   }
 
-  submitGhost = (name, bio, type, user_id, profile_pic, location) => {
-    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
+  submitGhost = (name, bio, type, user_id, profile_pic, location, radius) => {
+    let googleKey = process.env.REACT_APP_GOOGLE_API
+    googleKey=googleKey.split('')
+    googleKey.pop()
+    googleKey=googleKey.join('')
+    
+    Geocode.setApiKey(googleKey);
     Geocode.enableDebug();
     Geocode.fromAddress(location)
     .then(
@@ -100,7 +106,8 @@ class GhostForm extends Component {
           user_id,
           profile_pic,
           lat,
-          lng
+          lng,
+          radius
         }
         axios.post('/ghost', ghostDetails).then(res => {
           console.log(res.data)
@@ -215,7 +222,7 @@ class GhostForm extends Component {
         <input name="location" type="text" value={location} onChange={(e) => handleInput(e)} />
         <div className="ToggleNavigation">
           <img id="Arrow" src={Previous} onClick={handleToggle1} />
-          <button id="SubmitButton" onClick={() => submitGhost(name, bio, type, this.props.match.params.id, profilePhoto, location)}>Submit</button>
+          <button id="SubmitButton" onClick={() => submitGhost(name, bio, type, this.props.match.params.id, profilePhoto, location, 400)}>Submit</button>
         </div>
       </div>
 
