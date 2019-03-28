@@ -32,7 +32,7 @@ module.exports = {
             try{
                 const userGhosts = await db.auth.filtered_ghosts(id)
                 const location_filtered = await userGhosts.filter(user => {
-                    return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.raduis), lon: parseFloat(user.radius) }, { exact: true, unit: 'miles', limit: radius })
+                    return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.radius), lon: parseFloat(user.radius) }, { exact: true, unit: 'miles', limit: radius })
                 })
 
                 const yesChecks = await db.auth.yes_checks(id);
