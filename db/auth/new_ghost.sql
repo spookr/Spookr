@@ -4,8 +4,9 @@ insert into ghosts(
     type,
     user_id,
     profile_pic,
-    lat, 
-    lng
+    latitude, 
+    longitude,
+    radius
 )values(
     $1,
     $2,
@@ -13,6 +14,7 @@ insert into ghosts(
     $4,
     $5,
     $6,
-    $7
+    $7,
+    $8
 )
 returning *
