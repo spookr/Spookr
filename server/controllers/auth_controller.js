@@ -133,10 +133,11 @@ module.exports = {
   },
 
   houseDetails: async (req, res) => {
-    const { header, body, rooms, location, remodeled, owner, living_occupants } = req.body
+    const { header, body, rooms, location, remodeled, owner, living_occupants, amenities: {spiderweb, basement, grandfather_clock, dolls, electricity, pets, house_id} } = req.body
     const db = req.app.get('db')
 
-    if (!header || !body || !rooms || !location || !remodeled || !owner || !living_occupants) {
+    if (!header || !body || !rooms || !location || !remodeled || !owner || !living_occupants || !amenities) {
+      console.log(req.body)
       return res.status(400).send('Need All House Info Filled Out')
     }
 
@@ -144,6 +145,8 @@ module.exports = {
       let newHouse = await db.auth.new_house([header, body, rooms, location, remodeled, owner, living_occupants])
       console.log('Hello Home Owner', newHouse)
       newHouse = newHouse[0]
+      const amenities = await db.auth.amenties(spiderweb, basement, grandfather_clock, dolls, electricity, pets, house_id)
+      newHouse.amenities = amenities
       return res.status(200).send(newHouse)
     } catch (err) {
       return res.status(500).send('Could Not Create House')
