@@ -97,15 +97,15 @@ module.exports = {
   },
 
   ghostDetails: async (req, res) => {
-    const { name, bio, type, user_id, profile_pic, lat, lng } = req.body;
+    const { name, bio, type, user_id, profile_pic, lat, lng, radius } = req.body;
     const db = req.app.get('db');
 
-    if (!name || !bio || !type || !user_id || !profile_pic || !lat || !lng) {
+    if (!name || !bio || !type || !user_id || !profile_pic || !lat || !lng || !radius) {
       return res.status(400).send('need all info')
     }
 
     try {
-      let newGhost = await db.auth.new_ghost([name, bio, type, user_id, profile_pic, lat, lng])
+      let newGhost = await db.auth.new_ghost([name, bio, type, user_id, profile_pic, lat, lng, radius])
       console.log('Hello my dudes', newGhost)
       newGhost = newGhost[0]
       return res.status(200).send(newGhost)
@@ -133,10 +133,11 @@ module.exports = {
   },
 
   houseDetails: async (req, res) => {
-    const { header, body, rooms, location, remodeled, owner, living_occupants } = req.body
+    const { header, body, rooms, location, remodeled, owner, living_occupants, amenities: {spiderweb, basement, grandfather_clock, dolls, electricity, pets, house_id} } = req.body
     const db = req.app.get('db')
 
-    if (!header || !body || !rooms || !location || !remodeled || !owner || !living_occupants) {
+    if (!header || !body || !rooms || !location || !remodeled || !owner || !living_occupants || !amenities) {
+      console.log(req.body)
       return res.status(400).send('Need All House Info Filled Out')
     }
 
@@ -144,6 +145,8 @@ module.exports = {
       let newHouse = await db.auth.new_house([header, body, rooms, location, remodeled, owner, living_occupants])
       console.log('Hello Home Owner', newHouse)
       newHouse = newHouse[0]
+      const amenities = await db.auth.amenties(spiderweb, basement, grandfather_clock, dolls, electricity, pets, house_id)
+      newHouse.amenities = amenities
       return res.status(200).send(newHouse)
     } catch (err) {
       return res.status(500).send('Could Not Create House')
