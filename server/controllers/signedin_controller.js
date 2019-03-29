@@ -52,5 +52,18 @@ module.exports = {
                 return res.status(400).send('Could not get users from database')
             }
         }
+    },
+
+    swipe: async (req, res) => {
+        const { id } = session.user;
+        const db = req.app.get('db')
+        const {swiped, swipedUser} = req.body
+
+        try{
+            const swipedRight = await db.auth.swiped_right(id, swipedUser, swiped)
+            return res.status(200)
+        }catch(err){
+            return res.status(500).send('could not process swipe')
+        }      
     }
 }
