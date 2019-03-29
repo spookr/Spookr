@@ -10,9 +10,9 @@ class SwipeBar extends Component {
   render () {
     return (
       <div className="SwipeBar">
-        <img src={Delete} />
-        <img src={Favorite} />
-        <img src={Heart} />
+        <img src={Delete} alt="Delete Button"/>
+        <img src={Favorite} alt="Favorite Button" />
+        <img src={Heart} alt="Heart Button" />
       </div>
     )
   }

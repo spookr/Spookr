@@ -130,7 +130,7 @@ class HouseForm extends Component {
 
   render () {
 
-    const {header, body, location, amenities, remodeled, livingOccupants, toggle1, toggle2, toggle3, rooms, toggleAmenities} = this.state
+    const {header, body, location, amenities, remodeled, livingOccupants, toggle1, toggle2, toggle3, rooms} = this.state
     const {handleToggle1, handleToggle2, handleToggle3, handleInput, submitHouse, inputQuantity, toggleRemodeled, inputLiving} = this
 
     const displayToggle1 = toggle1 &&
@@ -149,7 +149,7 @@ class HouseForm extends Component {
 
 
       <div id="FirstToggle" className="ToggleNavigation">
-        <img id="Arrow" src={Forward} onClick={handleToggle2} />
+        <img id="Arrow" src={Forward} onClick={handleToggle2} alt="Next" />
       </div>
     </div>
 
@@ -202,8 +202,8 @@ class HouseForm extends Component {
             </Checkbox>Pets</h2>
           </form>
           <div className="ToggleNavigation">
-            <img id="Arrow"  src={Previous} onClick={handleToggle1} />
-            <img id="Arrow"  src={Forward} onClick={handleToggle3} />
+            <img id="Arrow"  src={Previous} onClick={handleToggle1} alt="Previous" />
+            <img id="Arrow"  src={Forward} onClick={handleToggle3} alt="Next" />
           </div>
       </div>
 
@@ -213,32 +213,32 @@ class HouseForm extends Component {
         <div className="UploadGrid">
 
           <div className="UploadPhoto">
-            <img id="HousePhoto" src={Placeholder} />
-            <img id="AddPhoto" src={Add} />
+            <img id="HousePhoto" src={Placeholder} alt="House Default" />
+            <img id="AddPhoto" src={Add} alt="Add Toggle" />
           </div>
           <div className="UploadPhoto">
-            <img id="HousePhoto" src={Placeholder} />
-            <img id="AddPhoto" src={Add} />
+            <img id="HousePhoto" src={Placeholder} alt="House Default" />
+            <img id="AddPhoto" src={Add} alt="Add Toggle" />
           </div>
           <div className="UploadPhoto">
-            <img id="HousePhoto" src={Placeholder} />
-            <img id="AddPhoto" src={Add} />
+            <img id="HousePhoto" src={Placeholder} alt="House Default"  />
+            <img id="AddPhoto" src={Add} alt="Add Toggle" />
           </div>
           <div className="UploadPhoto">
-            <img id="HousePhoto" src={Placeholder} />
-            <img id="AddPhoto" src={Add} />
+            <img id="HousePhoto" src={Placeholder} alt="House Default"  />
+            <img id="AddPhoto" src={Add} alt="Add Toggle" />
           </div>
           <div className="UploadPhoto">
-            <img id="HousePhoto" src={Placeholder} />
-            <img id="AddPhoto" src={Add} />
+            <img id="HousePhoto" src={Placeholder} alt="House Default"  />
+            <img id="AddPhoto" src={Add} alt="Add Toggle" />
           </div>
           <div className="UploadPhoto">
-            <img id="HousePhoto" src={Placeholder} />
-            <img id="AddPhoto" src={Add} />
+            <img id="HousePhoto" src={Placeholder} alt="House Default"  />
+            <img id="AddPhoto" src={Add} alt="Add Toggle" />
           </div>
         </div>
         <div className="ToggleNavigation">
-          <img id="Arrow" src={Previous} onClick={handleToggle2} />
+          <img id="Arrow" src={Previous} onClick={handleToggle2} alt="Forward"/>
           <button id="NextButton" onClick={() => submitHouse(header, body, rooms, remodeled, amenities, livingOccupants, location)}>Submit</button>
         </div>
       </div>

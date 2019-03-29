@@ -24,7 +24,6 @@ class OwnerForm extends Component {
       toggle2: false,
       toggleHouse: false,
       toggleOwner: true,
-      profilePhoto: '',
       isUploading: false,
       profilePhoto: null,
       files: []
@@ -110,16 +109,16 @@ class OwnerForm extends Component {
 
   render () {
 
-    const {firstName, lastName, bio, toggle1, toggle2, toggleHouse, toggleOwner, profilePhoto} = this.state
+    const {firstName, lastName, bio, toggle1, toggle2, toggleOwner, profilePhoto} = this.state
     const {handleInput, handleToggle1, handleToggle2, submitOwner} = this
     // console.log(this.state)
 
     const displayToggle1 = toggle1 &&
       <div className="QuestionnaireMain">
         <h1>Let's set up your profile!</h1>
-          {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} /> : <img id="ProfilePhoto" src={Placeholder} />}
+          {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} alt="User" /> : <img id="ProfilePhoto" src={Placeholder} alt="User"  />}
           <input style={{border: 'none'}} type="file" onChange={(e) => this.getSignedRequest(e, false)} />
-          <img id="Arrow" src={Forward} onClick={handleToggle1} />
+          <img id="Arrow" src={Forward} onClick={handleToggle1} alt="Forward"  />
       </div>
 
     const displayToggle2 = toggle2 &&
@@ -129,7 +128,7 @@ class OwnerForm extends Component {
         <h2>Last Name</h2><input name="lastName" type="text" value={lastName} onChange={(e) => handleInput(e)}/>
         <h2>Bio</h2><input name="bio" type="text" value={bio} onChange={(e) => handleInput(e)}/>
         <div className="ToggleNavigation">
-          <img id="Arrow" src={Previous} onClick={handleToggle2} />
+          <img id="Arrow" src={Previous} onClick={handleToggle2} alt="Previous" />
           <button id="NextButton" onClick={() => submitOwner(firstName, lastName, bio, this.props.match.params.id, profilePhoto)}>Submit</button>
         </div>
       </div>

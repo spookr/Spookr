@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import './Main.scss'
 
 // Components
-import Conversation from '../../Components/Conversation/Conversation'
+// import Conversation from '../Conversation/Conversation'
 import Swiper from '../Swiper/Swiper'
 import UserEdit from '../UserEdit/UserEdit'
 

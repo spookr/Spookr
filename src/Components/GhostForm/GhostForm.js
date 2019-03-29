@@ -152,15 +152,12 @@ class GhostForm extends Component {
 
   render() {
 
-    console.log(this.state)
+    // console.log(this.state)
 
     const { name, bio, type, location, toggle1, toggle2, toggle3, profilePhoto } = this.state
     const { handleInput,
       handleDropdown,
-      handleToggleMale,
-      handleToggleFemale,
       handleToggle1,
-      handleToggle2,
       handleToggle3,
       submitGhost } = this
 
@@ -171,10 +168,10 @@ class GhostForm extends Component {
     const displayToggle1 = toggle1 &&
       <div className="QuestionnaireMain">
         <h1>Let's set up your profile!</h1>
-        {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} /> : <img id="ProfilePhoto" src={Placeholder} />}
+        {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} alt="User" /> : <img id="ProfilePhoto" alt="User"  src={Placeholder} />}
         <input style={{border: 'none'}} type="file" onChange={(e) => this.getSignedRequest(e, false)} />
         <div className="ToggleNavigation">
-          <img id="Arrow" src={Forward} onClick={handleToggle1} />
+          <img id="Arrow" src={Forward} onClick={handleToggle1} alt="Forward" />
         </div>
       </div>
 
@@ -202,8 +199,7 @@ class GhostForm extends Component {
           <Dropdown.Item name="type" type="8" onClick={(e) => handleDropdown(e)}>Other</Dropdown.Item>
         </DropdownButton>
         <div className="ToggleNavigation">
-          <img id="Arrow" src={Previous} onClick={handleToggle3} />
-          <img id="Arrow" src={Forward} onClick={handleToggle2} />
+          <img id="Arrow" src={Previous} onClick={handleToggle3} alt="Forward Icon" />
         </div>
       </div>
 
@@ -213,7 +209,7 @@ class GhostForm extends Component {
         <h2>Location:</h2>
         <input name="location" type="text" value={location} onChange={(e) => handleInput(e)} />
         <div className="ToggleNavigation">
-          <img id="Arrow" src={Previous} onClick={handleToggle1} />
+          <img id="Arrow" src={Previous} onClick={handleToggle1} alt="Back" />
           <button id="SubmitButton" onClick={() => submitGhost(name, bio, type, this.props.match.params.id, profilePhoto, location)}>Submit</button>
         </div>
       </div>
