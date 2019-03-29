@@ -87,10 +87,10 @@ create table amenities (
     id serial primary key,
     spiderwebs boolean not null,
     basement boolean not null,
-    children boolean not null,
     grandfather_clock boolean not null,
     dolls boolean not null,
     electricity boolean not null,
+    house_id integer
 )
 
 create table swiped (
