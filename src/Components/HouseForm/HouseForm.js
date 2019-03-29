@@ -42,9 +42,12 @@ class HouseForm extends Component {
 
   submitHouse = (header, description, rooms, location, remodeled, amenities) => {
     let googleKey = process.env.REACT_APP_GOOGLE_API
-    googleKey=googleKey.split('')
-    googleKey.pop()
-    googleKey=googleKey.join('')
+    console.log("string here", googleKey)
+    // googleKey=googleKey.split('')
+    // googleKey.pop()
+    // googleKey=googleKey.join('')
+    console.log(googleKey)
+    console.log(process.env.REACT_APP_GOOGLE_API)
     
     Geocode.setApiKey(googleKey);
     Geocode.enableDebug();

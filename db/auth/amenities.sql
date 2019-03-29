@@ -6,7 +6,7 @@ insert into amenities(
     electricity,
     pets,
     house_id
-)(
+)values(
     $1,
     $2,
     $3,
