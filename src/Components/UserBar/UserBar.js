@@ -10,9 +10,9 @@ class UserBar extends Component {
   render () {
     return (
       <div className="UserBar">
-        <ProfileTab />
+        <ProfileTab toggleEdit={this.props.toggleEdit} />
         <Matches />
-        <Messages /> 
+        <Messages />
       </div>
     )
   }

@@ -86,7 +86,6 @@ module.exports = {
     }
   },
 
-
   getUser: (req, res) => {
     const { user } = req.session
     if (user) {
@@ -115,17 +114,20 @@ module.exports = {
   },
 
   ownerDetails: async (req, res) => {
-    const { first_name, last_name, user_id } = req.body;
+    const { firstName, lastName, bio, user_id, profilePhoto } = req.body;
     const db = req.app.get('db');
+    console.log(req.body);
+    
 
-    if (!first_name || !last_name || !user_id) {
+    if (!firstName || !lastName || !bio || !user_id || !profilePhoto) {
       return res.status(400).send('Need all info, you Human')
     }
 
     try {
-      let newOwner = await db.auth.new_owner([first_name, last_name, user_id])
-      console.log('Hello My Peeps', newOwner)
+      let newOwner = await db.auth.new_owner([firstName, lastName, user_id, profilePhoto, bio])
       newOwner = newOwner[0]
+      req.session.homeowner = newOwner
+      console.log(req.session.homeowner.id)
       return res.status(200).send(newOwner)
     } catch (err) {
       return res.status(500).send('Could Not Create Account')
@@ -156,7 +158,6 @@ module.exports = {
       return res.status(500).send('Could Not Create House')
     }
   },
-
 
   logout: (req, res) => {
     console.log(req.session.user)
