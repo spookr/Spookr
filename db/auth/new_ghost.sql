@@ -17,4 +17,4 @@ insert into ghosts(
     $7,
     $8
 )
-returning *
+returning *;

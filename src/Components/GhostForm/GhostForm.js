@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import './GhostForm.scss'
 import Geocode from 'react-geocode'
-import dotenv from 'dotenv'
 
 // Packages
 import { DropdownButton, Dropdown } from 'react-bootstrap'
@@ -85,21 +84,14 @@ class GhostForm extends Component {
     })
   }
 
-  submitGhost = (name, bio, type, user_id, profile_pic, location, radius) => {
+  submitGhost = (name, bio, type, user_id, profile_pic, location, radius=400) => {
     let googleKey = process.env.REACT_APP_GOOGLE_API
-    console.log("string here", googleKey)
-    // googleKey=googleKey.split('')
-    // googleKey.pop()
-    // googleKey=googleKey.join('')
-    console.log("string here", googleKey)
-    
     Geocode.setApiKey(googleKey);
     Geocode.enableDebug();
     Geocode.fromAddress(location)
     .then(
       response => {
         const {lat, lng} = response.results[0].geometry.location;
-        console.log(lat, lng);
 
         const ghostDetails = {
           name,
@@ -111,6 +103,7 @@ class GhostForm extends Component {
           lng,
           radius
         }
+
         axios.post('/ghost', ghostDetails).then(res => {
           console.log(res.data)
         })
@@ -162,15 +155,12 @@ class GhostForm extends Component {
   render() {
     console.log(this.state)
 
-    console.log(this.state)
+    // console.log(this.state)
 
     const { name, bio, type, location, toggle1, toggle2, toggle3, profilePhoto } = this.state
     const { handleInput,
       handleDropdown,
-      handleToggleMale,
-      handleToggleFemale,
       handleToggle1,
-      handleToggle2,
       handleToggle3,
       submitGhost } = this
 
@@ -181,10 +171,10 @@ class GhostForm extends Component {
     const displayToggle1 = toggle1 &&
       <div className="QuestionnaireMain">
         <h1>Let's set up your profile!</h1>
-        {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} /> : <img id="ProfilePhoto" src={Placeholder} />}
+        {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} alt="User" /> : <img id="ProfilePhoto" alt="User"  src={Placeholder} />}
         <input style={{border: 'none'}} type="file" onChange={(e) => this.getSignedRequest(e, false)} />
         <div className="ToggleNavigation">
-          <img id="Arrow" src={Forward} onClick={handleToggle1} />
+          <img id="Arrow" src={Forward} onClick={handleToggle1} alt="Forward" />
         </div>
       </div>
 
@@ -212,8 +202,7 @@ class GhostForm extends Component {
           <Dropdown.Item name="type" type="8" onClick={(e) => handleDropdown(e)}>Other</Dropdown.Item>
         </DropdownButton>
         <div className="ToggleNavigation">
-          <img id="Arrow" src={Previous} onClick={handleToggle3} />
-          <img id="Arrow" src={Forward} onClick={handleToggle2} />
+          <img id="Arrow" src={Previous} onClick={handleToggle3} alt="Forward Icon" />
         </div>
       </div>
 
@@ -223,8 +212,8 @@ class GhostForm extends Component {
         <h2>Location:</h2>
         <input name="location" type="text" value={location} onChange={(e) => handleInput(e)} />
         <div className="ToggleNavigation">
-          <img id="Arrow" src={Previous} onClick={handleToggle1} />
-          <button id="SubmitButton" onClick={() => submitGhost(name, bio, type, this.props.match.params.id, profilePhoto, location, 400)}>Submit</button>
+          <img id="Arrow" src={Previous} onClick={handleToggle1} alt="Back" />
+          <button id="SubmitButton" onClick={() => submitGhost(name, bio, type, this.props.match.params.id, profilePhoto, location)}>Submit</button>
         </div>
       </div>
 

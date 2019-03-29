@@ -27,7 +27,7 @@ class Navigation extends Component {
   }
 
   logout = () => {
-    axios.post("/logout").then(res => {
+    axios.post('/logout').then(res => {
       this.props.logOut();
       this.props.history.push("/");
     }).catch(err => {

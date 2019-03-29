@@ -4,7 +4,7 @@ import './ProfileTab.scss'
 const ProfileTab = (props) => {
   return (
     <div className="ProfileTab">
-      My Profile
+      <h1 onClick={props.toggleEdit}>My Profile</h1>
     </div>
   )
 }
