@@ -60,7 +60,7 @@ module.exports = {
         const {swiped, swipedUser} = req.body
 
         try{
-            const swipedRight = await db.auth.swiped_right(id, swipedUser, swiped)
+            const swipedOn = await db.auth.swiped_right(id, swipedUser, swiped)
             return res.status(200)
         }catch(err){
             return res.status(500).send('could not process swipe')
