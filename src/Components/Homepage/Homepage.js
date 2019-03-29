@@ -6,7 +6,6 @@ import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
 
 // Images
-import Ghost from './assets/ghost.svg'
 import CityScape from './assets/cityscape.svg'
 import Moon from './assets/moon.svg'
 import Building from './assets/building.svg'
@@ -36,13 +35,13 @@ class Homepage extends Component {
             </div>
             <div className="HeaderBody">
               <div className="HeaderContainer">
-                <img id="Moon" src={Moon} />
-                <img id="Building" src={Building} />
-                <img id="CityScape" src={CityScape} />
-                <img id="Star3" src={Star} />
-                <img id="Star4" src={Star} />
-                <img id="Star5" src={Star} />
-                <img id="Star6" src={Star} />
+                <img id="Moon" src={Moon} alt="Moon Icon" />
+                <img id="Building" src={Building} alt=" Building Icon" />
+                <img id="CityScape" src={CityScape} alt="City Icon" />
+                <img id="Star3" src={Star} alt="Star Icon" />
+                <img id="Star4" src={Star} alt="Star Icon" />
+                <img id="Star5" src={Star} alt="Star Icon" />
+                <img id="Star6" src={Star} alt="Star Icon" />
               </div>
             </div>
           </div>
@@ -53,9 +52,9 @@ class Homepage extends Component {
                 {displayRegister}
             </div>
             <div className="HomepageGraphic">
-              <img id="Responsive" src={Responsive} />
-                <img id="Spooker" src={Spooker} />
-              <img id="Rip" src={Rip} />
+              <img id="Responsive" src={Responsive} alt="Responsive Icon" />
+                <img id="Spooker" src={Spooker} alt="Spooker Main" />
+              <img id="Rip" src={Rip} alt="Tombstone" />
             </div>
           </div>
         </div>

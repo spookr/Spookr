@@ -5,7 +5,7 @@ const {
     AWS_ACCESS_KEY_ID,
     AWS_SECRET_ACCESS_KEY,
 } = process.env;
- 
+
 module.exports = {
     awsS3: (req, res) => {
         aws.config = {
@@ -24,7 +24,7 @@ module.exports = {
             ContentType: fileType,
             ACL: 'public-read'
         };
-        console.log(s3Params)
+        // console.log(s3Params)
         s3.getSignedUrl('putObject', s3Params, (err, data) => {
             if (err) {
                 console.log(err);
