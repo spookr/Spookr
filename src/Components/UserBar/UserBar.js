@@ -3,7 +3,6 @@ import './UserBar.scss'
 
 // Components
 import ProfileTab from '../../Components/ProfileTab/ProfileTab'
-import Matches from '../../Components/Matches/Matches'
 import Messages from '../../Components/Messages/Messages'
 
 class UserBar extends Component {
@@ -11,7 +10,6 @@ class UserBar extends Component {
     return (
       <div className="UserBar">
         <ProfileTab toggleEdit={this.props.toggleEdit} />
-        <Matches />
         <Messages />
       </div>
     )

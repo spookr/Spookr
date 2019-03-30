@@ -48,6 +48,14 @@ main {
           justify-content: flex-end;
           align-items: flex-end;
 
+          #Ghost {
+            position: absolute;
+            width: 15rem;
+            height: 15rem;
+            left: 0;
+            bottom: 5rem;
+          }
+
           #Moon {
             width: 12rem;
             height: 12rem;
@@ -67,7 +75,8 @@ main {
             height: 20rem;
             position: absolute;
             right: 35%;
-            bottom: 1.5rem;
+            bottom: 0;
+            z-index: 4;
           }
 
           #Graveyard {
@@ -90,8 +99,8 @@ main {
             width: 2.5rem;
             height: 2.5rem;
             position: absolute;
-            top: 7rem;
-            right: 23rem;
+            top: 8rem;
+            right: 25rem;
             transform: rotate(-2deg);
           }
 
@@ -109,7 +118,7 @@ main {
             height: 1.75rem;
             position: absolute;
             top: 3rem;
-            right: 30rem;
+            right: 37rem;
             transform: rotate(-10deg);
           }
 
@@ -119,6 +128,25 @@ main {
             position: absolute;
             bottom: 18rem;
             right: 6.5rem;
+            transform: rotate(-10deg);
+          }
+
+          #Factory {
+            position: absolute;
+            width: 25rem;
+            height: 25rem;
+            right: 13rem;
+            bottom: 5rem;
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1)
+          }
+
+          #Star7 {
+            width: 2.18rem;
+            height: 2.18rem;
+            position: absolute;
+            top: 10rem;
+            right: 40rem;
             transform: rotate(-10deg);
           }
         }
