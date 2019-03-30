@@ -10,8 +10,6 @@ import HouseForm from '../../Components/HouseForm/HouseForm'
 
 // Images
 import Placeholder from './assets/Placeholder.png'
-import Forward from '../assets/Forward.svg'
-import Previous from '../assets/Previous.svg'
 
 class OwnerForm extends Component {
   constructor () {
@@ -20,12 +18,10 @@ class OwnerForm extends Component {
       firstName: '',
       lastName: '',
       bio: '',
-      toggle1: true,
-      toggle2: false,
       toggleHouse: false,
       toggleOwner: true,
       isUploading: false,
-      profilePhoto: null,
+      profilePhoto: '',
       files: []
     }
   }
@@ -33,20 +29,6 @@ class OwnerForm extends Component {
   handleInput = (event) => {
     this.setState({
       [event.target.name]: event.target.value
-    })
-  }
-
-  handleToggle1 = () => {
-    this.setState({
-      toggle1: false,
-      toggle2: true
-    })
-  }
-
-  handleToggle2 = () => {
-    this.setState({
-      toggle1: true,
-      toggle2: false
     })
   }
 
@@ -109,34 +91,23 @@ class OwnerForm extends Component {
 
   render () {
 
-    const {firstName, lastName, bio, toggle1, toggle2, toggleOwner, profilePhoto} = this.state
-    const {handleInput, handleToggle1, handleToggle2, submitOwner} = this
+    const {firstName, lastName, bio, toggleOwner, profilePhoto} = this.state
+    const {handleInput, submitOwner} = this
     // console.log(this.state)
-
-    const displayToggle1 = toggle1 &&
-      <div className="QuestionnaireMain">
-        <h1>Let's set up your profile!</h1>
-          {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} alt="User" /> : <img id="ProfilePhoto" src={Placeholder} alt="User"  />}
-          <input style={{border: 'none'}} type="file" onChange={(e) => this.getSignedRequest(e, false)} />
-          <img id="Arrow" src={Forward} onClick={handleToggle1} alt="Forward"  />
-      </div>
-
-    const displayToggle2 = toggle2 &&
-      <div className="QuestionnaireMain">
-        <h1>Now let's get some information.</h1>
-        <h2>First Name</h2><input name="firstName" type="text" value={firstName} onChange={(e) => handleInput(e)}/>
-        <h2>Last Name</h2><input name="lastName" type="text" value={lastName} onChange={(e) => handleInput(e)}/>
-        <h2>Bio</h2><input name="bio" type="text" value={bio} onChange={(e) => handleInput(e)}/>
-        <div className="ToggleNavigation">
-          <img id="Arrow" src={Previous} onClick={handleToggle2} alt="Previous" />
-          <button id="NextButton" onClick={() => submitOwner(firstName, lastName, bio, this.props.match.params.id, profilePhoto)}>Submit</button>
-        </div>
-      </div>
 
     const displayOwner =  toggleOwner ?
       <div className="QuestionnaireSecondary">
-        {displayToggle1}
-        {displayToggle2}
+        <div className="QuestionnaireMain">
+          <h1 id="HeaderPadding">Let's set up your profile!</h1>
+          <div className="QuestionnairePhoto">
+            {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} alt="User" /> : <img id="ProfilePhoto" src={Placeholder} alt="User"  />}
+          </div>
+            <input style={{border: 'none'}} type="file" onChange={(e) => this.getSignedRequest(e, false)} />
+            <h2>First Name</h2><input name="firstName" type="text" value={firstName} onChange={(e) => handleInput(e)}/>
+            <h2>Last Name</h2><input name="lastName" type="text" value={lastName} onChange={(e) => handleInput(e)}/>
+            <h2>Bio</h2><input name="bio" type="text" value={bio} onChange={(e) => handleInput(e)}/>
+            <button id="NextButton" onClick={() => submitOwner(firstName, lastName, bio, this.props.match.params.id, profilePhoto)}>Submit</button>
+        </div>
       </div>
      : <HouseForm />
 

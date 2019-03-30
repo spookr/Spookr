@@ -32,7 +32,7 @@ class Homepage extends Component {
         <div className="HomepageSecondary">
           <div className="HomepageHeader">
             <div className="HeaderText">
-              <h1>Swipe. Match. Haunt</h1>
+              <h1>Swipe. Match. Haunt.</h1>
               <p>All-in-one voice and text chat for ghosts and homeowners that's free, secure, and works on both your desktop and phone. Stop watching Ghost Adventures and experience a haunting all your own.</p>
             </div>
             <div className="HeaderBody">
