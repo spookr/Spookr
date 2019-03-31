@@ -6,6 +6,9 @@ import Main from '../Main/Main'
 import UserBar from '../UserBar/UserBar'
 import Discovery from '../Discovery/Discovery'
 
+// Packages
+import {connect} from 'react-redux'
+
 class Profile extends Component {
   constructor () {
     super()
@@ -27,6 +30,8 @@ class Profile extends Component {
 
     const displayDiscovery = edit ? <Discovery toggleEdit={toggleEdit} /> : <UserBar toggleEdit={toggleEdit} />
 
+  console.log(this.props)
+
     return (
       <div className="Profile">
         {displayDiscovery}
@@ -36,4 +41,11 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+const mapStateToProps = (state) => {
+  return {
+    house: state.house,
+    owner: state.owner
+  }
+}
+
+export default connect(mapStateToProps)(Profile)

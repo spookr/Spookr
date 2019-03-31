@@ -29,6 +29,10 @@
       position: relative;
       overflow: scroll;
 
+      #LoginSub {
+        margin-bottom: -.5rem;
+      }
+
       .QuestionnairePhoto {
         display: flex;
         justify-content: center;

@@ -4,5 +4,10 @@
 
   .DiscoverySettings {
     padding: 1rem 1.25rem;
+
+    .NavigationButton {
+      display: flex;
+      justify-content: center;
+    }
   }
 }

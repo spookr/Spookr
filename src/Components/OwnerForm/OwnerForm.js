@@ -4,6 +4,8 @@ import './OwnerForm.scss'
 // Packages
 import {withRouter} from 'react-router-dom'
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {getOwner} from '../../redux/reducer'
 
 // Components
 import HouseForm from '../../Components/HouseForm/HouseForm'
@@ -43,9 +45,8 @@ class OwnerForm extends Component {
     }
 
     axios.post('/owner', ownerDetails).then(res => {
-      console.log(res.data)
+      this.props.getOwner(res.data)
     })
-
     this.setState({
       toggleHouse: true,
       toggleOwner: false
@@ -119,4 +120,14 @@ class OwnerForm extends Component {
   }
 }
 
-export default withRouter(OwnerForm)
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = {
+  getOwner
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OwnerForm))

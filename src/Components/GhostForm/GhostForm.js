@@ -6,6 +6,8 @@ import Geocode from 'react-geocode'
 // Packages
 import { DropdownButton, Dropdown } from 'react-bootstrap'
 import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {getGhost} from '../../redux/reducer'
 
 // Images
 import Placeholder from './assets/Placeholder.png'
@@ -55,7 +57,7 @@ class GhostForm extends Component {
     })
   }
 
-  submitGhost = (name, bio, type, user_id, profile_pic, location, radius=400) => {
+  submitGhost = (name, bio, type, user_id, profile_pic, location, radius=50) => {
     let googleKey = process.env.REACT_APP_GOOGLE_API
     Geocode.setApiKey(googleKey);
     Geocode.enableDebug();
@@ -76,7 +78,7 @@ class GhostForm extends Component {
         }
 
         axios.post('/ghost', ghostDetails).then(res => {
-          console.log(res.data)
+          this.props.getGhost(res.data)
         })
         this.props.history.push(`/profile/${user_id}`)
       },
@@ -174,4 +176,14 @@ class GhostForm extends Component {
   }
 }
 
-export default withRouter(GhostForm)
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = {
+  getGhost
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GhostForm))

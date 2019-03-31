@@ -45,8 +45,8 @@ class Login extends Component {
           <div className="QuestionnaireMain">
             <h1 id="LoginHeader">Welcome back!</h1>
             <h4>We're so excited to see you again!</h4>
-            <h2 id="Margin">Username</h2><input name="username" type="text" onChange={(e) => this.handleInput(e)}/>
-            <h2 id="Margin">Password</h2><input name="password" type="password" onChange={(e) => this.handleInput(e)} />
+            <h2 id="LoginSub">Username</h2><input name="username" type="text" onChange={(e) => this.handleInput(e)}/>
+            <h2 id="LoginSub">Password</h2><input name="password" type="password" onChange={(e) => this.handleInput(e)} />
             <button id="SubmitButton" onClick={() => this.submitLogin(username, password)}>Submit</button>
           </div>
         </div>

@@ -8,6 +8,7 @@ import Geocode from 'react-geocode'
 import axios from 'axios'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
+import {getHouse} from '../../redux/reducer'
 
 // Images
 import Placeholder from './assets/Placeholder.jpg'
@@ -62,7 +63,7 @@ class HouseForm extends Component {
             amenities
           }
           axios.post('/house', houseDetails).then(res => {
-            console.log(res.data)
+            this.props.getHouse(res.data)
           })
           this.props.history.push(`/profile/${this.props.user.id}`)
         },
@@ -208,4 +209,8 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps)(HouseForm))
+const mapDispatchToProps = {
+  getHouse
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HouseForm))

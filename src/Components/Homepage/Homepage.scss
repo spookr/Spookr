@@ -54,6 +54,8 @@ main {
             height: 15rem;
             left: 0;
             bottom: 5rem;
+            animation: ghost 1.5s linear  infinite;
+            animation-direction: alternate-reverse;
           }
 
           #Moon {
@@ -234,5 +236,14 @@ main {
         z-index: 9;
       }
     }
+  }
+}
+
+@keyframes ghost {
+  from{
+    transform: translate(0px,0px)
+  }
+  to{
+    transform: translate(0px, -70px);
   }
 }
