@@ -6,6 +6,8 @@ import Geocode from 'react-geocode'
 
 // Packages
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 
 // Images
 import Placeholder from './assets/Placeholder.jpg'
@@ -62,6 +64,7 @@ class HouseForm extends Component {
           axios.post('/house', houseDetails).then(res => {
             console.log(res.data)
           })
+          this.props.history.push(`/profile/${this.props.user.id}`)
         },
       ).catch(
         error => {
@@ -103,6 +106,8 @@ class HouseForm extends Component {
 
     const { header, description, location, amenities, remodeled, rooms } = this.state
     const { handleInput, submitHouse, inputQuantity, toggleRemodeled } = this
+
+    // console.log(this.props)
 
     return (
       <div className="Questionnaire">
@@ -197,4 +202,10 @@ class HouseForm extends Component {
   }
 }
 
-export default HouseForm
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+export default withRouter(connect(mapStateToProps)(HouseForm))

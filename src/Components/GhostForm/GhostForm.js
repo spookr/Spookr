@@ -78,6 +78,7 @@ class GhostForm extends Component {
         axios.post('/ghost', ghostDetails).then(res => {
           console.log(res.data)
         })
+        this.props.history.push(`/profile/${user_id}`)
       },
       error => {
         console.error(error);
@@ -124,7 +125,7 @@ class GhostForm extends Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
 
     // console.log(this.state)
 
@@ -133,7 +134,6 @@ class GhostForm extends Component {
 
     // console.log('type', type)
     // console.log('gender', gender)
-    // console.log(this.props)
 
     return (
       <div className="Questionnaire">
