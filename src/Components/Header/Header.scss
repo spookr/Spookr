@@ -1,12 +1,15 @@
 @import '../../index';
 
 header {
-  padding: 4rem 5rem 0 5rem;
-  background: none;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
   position: fixed;
+  padding: 3rem 5rem;
 
   h1 {
     font-family: $secondary-font;
-    font-size: 2.5rem;
+    font-size: 3rem;
   }
 }

@@ -1,10 +1,14 @@
 const initialState = {
   user: {},
-  ghostProfile: {}
+  ghost: {},
+  house: {},
+  owner: {}
 }
 const LOGGED_IN = 'LOGGED_IN',
       LOGGED_OUT = 'LOGGED_OUT',
-      GET_GHOST_PROFILE = 'GET_GHOST_PROFILE'
+      GET_GHOST = 'GET_GHOST',
+      GET_HOUSE = 'GET_HOUSE',
+      GET_OWNER = 'GET_OWNER'
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -12,27 +16,45 @@ export default function (state = initialState, action) {
       return { ...state, user: action.payload }
     case LOGGED_OUT:
       return {...state, user: {}}
-    case GET_GHOST_PROFILE:
-      return {...state, ghostProfile: action.payload}
+    case GET_GHOST:
+      return {...state, ghost: action.payload}
+    case GET_HOUSE:
+      return {...state, house: action.payload}
+      case GET_OWNER:
+        return {...state, owner: action.payload}
     default:
       return { ...state }
   }
 }
-export function logIn(user) {
+export function logIn (user) {
   return {
     type: LOGGED_IN,
     payload: user
   }
 }
-export function logOut(user) {
+export function logOut (user) {
   return {
     type: LOGGED_OUT
   }
 }
 
-export function getGhostProfile (ghostProfile) {
+export function getGhost (ghost) {
   return {
-    type: GET_GHOST_PROFILE,
-    payload: ghostProfile
+    type: GET_GHOST,
+    payload: ghost
+  }
+}
+
+export function getHouse (house) {
+  return {
+    type: GET_HOUSE,
+    payload: house
+  }
+}
+
+export function getOwner (owner) {
+  return {
+    type: GET_OWNER,
+    payload: owner
   }
 }

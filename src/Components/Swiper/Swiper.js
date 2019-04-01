@@ -8,7 +8,6 @@ class Swiper extends Component {
   render () {
     return (
       <div className="Swiper">
-        Swiper
         <SwipeBar />
       </div>
     )

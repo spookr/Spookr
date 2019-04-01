@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Register.scss'
+import '../Questionnaire/Stars.scss'
 
 // Packages
 import axios from 'axios'
@@ -73,6 +74,9 @@ class Register extends Component {
             <button id="SubmitButton" onClick={() => this.submitRegister(username, password, ghost)}>Submit</button>
           </div>
         </div>
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
       </div>
     )
   }
