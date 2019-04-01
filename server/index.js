@@ -44,7 +44,7 @@ app.post('/logout', auth.logout)
 app.get('/sign-s3', amazon.awsS3)
 
 // Is Signed In
-app.post('/filterswipes', signedin.filteredSwipes)
+app.get('/filterswipes', signedin.filteredSwipes)
 app.post('/swipe', signedin.swipe)
 app.get('/matches', signedin.getMatches)
 app.post('/insertmatch', signedin.insertMatched)

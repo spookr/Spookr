@@ -39,7 +39,6 @@ class Conversation extends Component {
             <input type="text" placeholder="Type a message..." value={this.state.message} onChange={(e) => this.inputMessage(e)} />
             <button>Send</button>
           </div>
-
         </div>
         <div className="ConversationProfile">
           <ProfileSideBar user={{

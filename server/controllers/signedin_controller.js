@@ -1,23 +1,28 @@
 var geodist = require('geodist')
 module.exports = {
     filteredSwipes: async (req, res) => {
+      console.log('hit filtered swipes')
         const { session } = req;
-        const { radius } = req.body;
         const db = req.app.get('db')
-        const { latitude, longitude, user_id } = session.user;
-        const userType = session.user.ghost;
+        const { latitude, longitude, user_id } = session.ghost;
+        const userType = session.ghost.ghost
+
         if (userType) {
+          // console.log(session.ghost.radius)
+
             try{
             const userHouses = await db.auth.filtered_houses(user_id)
             const location_filtered = await userHouses.filter(user => {
                 delete user.username
                 delete user.password
-                return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: radius })
+                return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: session.ghost.radius })
             })
+
+            console.log(location_filtered)
 
             return res.status(200).send(location_filtered)
 
-            }catch(err){
+            } catch(err) {
                 return res.status(400).send('Could not get users from database')
             }
         }else{
@@ -46,7 +51,7 @@ module.exports = {
             return res.status(200).send('user added to swiped')
         }catch(err){
             return res.status(500).send('could not process swipe')
-        }      
+        }
     },
 
     insertMatched: async (req,res) => {

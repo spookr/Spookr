@@ -45,6 +45,8 @@ class OwnerForm extends Component {
       profilePhoto
     }
 
+    // console.log(ownerDetails)
+
     axios.post('/owner', ownerDetails).then(res => {
       this.props.getOwner(res.data)
     })

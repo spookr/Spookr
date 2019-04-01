@@ -8,14 +8,28 @@ import Discovery from '../Discovery/Discovery'
 
 // Packages
 import {connect} from 'react-redux'
+import axios from 'axios'
 
 class Profile extends Component {
   constructor () {
     super()
     this.state = {
       edit: false,
-      conversation: false
+      conversation: false,
+      swipes: null
     }
+  }
+
+  componentDidMount () {
+    this.getFilteredSwipes()
+  }
+
+  getFilteredSwipes = () => {
+    axios.get('/filterswipes').then(res => {
+      this.setState({
+        swipes: res.data
+      })
+    })
   }
 
   toggleEdit = () => {
@@ -40,6 +54,8 @@ class Profile extends Component {
   }
 
   render () {
+
+    console.log(this.state.swipes)
 
     const {edit, conversation} = this.state
     const {toggleEdit, toggleConversation, closeConversation} = this

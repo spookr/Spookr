@@ -47,7 +47,7 @@ class Register extends Component {
     // console.log('User submits register', submitInfo)
 
     axios.post('/register', submitInfo).then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       this.props.logIn(res.data)
       this.props.history.push(`/questionnaire/${res.data.id}`)
     })
