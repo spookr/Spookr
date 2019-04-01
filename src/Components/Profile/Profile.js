@@ -53,6 +53,7 @@ class Profile extends Component {
       <div className="Profile">
         {displayDiscovery}
         <Main edit={edit} conversation={conversation} closeConversation={closeConversation} />
+
       </div>
     )
   }

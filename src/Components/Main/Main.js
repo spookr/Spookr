@@ -5,6 +5,7 @@ import './Main.scss'
 import Conversation from '../Conversation/Conversation'
 import Swiper from '../Swiper/Swiper'
 import UserEdit from '../UserEdit/UserEdit'
+import MatchModal from '../MatchModal/MatchModal'
 
 class Main extends Component {
   render () {
@@ -16,6 +17,7 @@ class Main extends Component {
     return (
       <div className="Main">
         {displayToggle}
+        <MatchModal />
       </div>
     )
   }

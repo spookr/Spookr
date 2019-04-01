@@ -1,0 +1,69 @@
+@import '../../index';
+
+.MatchModal {
+  width: 21rem;
+  height: 32rem;
+  background: #1A1A1A;
+  position: absolute;
+  top: 16%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.5rem;
+  display: none;
+
+  .MatchModalHeader {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      font-family: $secondary-font;
+      font-size: 2rem;
+      padding: 4rem 0 1rem 0;
+    }
+
+    h2 {
+      font-size: .9rem;
+    }
+  }
+
+  .MatchModalBody {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    padding-top: 2rem;
+
+    img {
+      width: 7rem;
+      height: 7rem;
+      border: 2px solid white;
+    }
+  }
+
+  .MatchModalFooter {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    height: 10rem;
+    padding-top: 2rem;
+
+    #SendMessage {
+      background-image: linear-gradient(to top, #4D32E2 0%, #1cb5e0 100%);
+      border-radius: 30px;
+      color: $accent-three;
+      border: none;
+    }
+
+    #SwipeButton {
+      background: none;
+      border-radius: 30px;
+      color: $accent-three;
+      border: 1px solid linear-gradient(to top, #4D32E2 0%, #1cb5e0 100%)
+    }
+
+
+  }
+}

@@ -19,7 +19,6 @@ class Conversation extends Component {
     })
   }
 
-
   render () {
     return (
       <div className="Conversation">
@@ -38,7 +37,6 @@ class Conversation extends Component {
             <input type="text" placeholder="Type a message..." value={this.state.message} onChange={(e) => this.inputMessage(e)}/>
             <button>Send</button>
           </div>
-
         </div>
         <div className="ConversationProfile">
           <p>Profile of who are you communicating with!</p>
