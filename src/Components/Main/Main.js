@@ -10,7 +10,7 @@ class Main extends Component {
   render () {
 
     const displayEdit = this.props.edit ? <UserEdit /> : <Swiper />
-  const displayConversation = this.props.conversation && <Conversation closeConversation={this.props.closeConversation} />
+    const displayConversation = this.props.conversation && <Conversation closeConversation={this.props.closeConversation} />
     const displayToggle = this.props.conversation ? displayConversation : displayEdit
 
     return (
