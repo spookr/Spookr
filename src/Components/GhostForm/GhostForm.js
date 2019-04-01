@@ -34,7 +34,7 @@ class GhostForm extends Component {
   }
 
   handleDropdown = (event) => {
-    console.log(event.target)
+    // console.log(event.target)
     this.setState({
       [event.target.name]: event.target.type
     })
@@ -79,9 +79,9 @@ class GhostForm extends Component {
         }
 
         axios.post('/ghost', ghostDetails).then(res => {
-          this.props.getGhost(res.data)
+          // this.props.getGhost(res.data)
+          this.props.history.push(`/profile/${user_id}`)
         })
-        this.props.history.push(`/profile/${user_id}`)
       },
       error => {
         console.error(error);
