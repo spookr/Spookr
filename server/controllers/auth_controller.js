@@ -115,6 +115,7 @@ module.exports = {
       // console.log('Hello my dudes', newGhost)
       newGhost = newGhost[0]
       req.session.ghost = newGhost
+      req.session.ghost.ghost = true
       // console.log(req.session)
       return res.status(200).send(newGhost)
     } catch (err) {
