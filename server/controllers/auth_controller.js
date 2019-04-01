@@ -145,7 +145,7 @@ module.exports = {
   },
 
   houseDetails: async (req, res) => {
-    const { header, description, rooms, remodeled, lat, lng, amenities, amenities: {spiderwebs, basement, grandfatherClock, dolls, electricity, pets} } = req.body
+    const { header, description, rooms, remodeled, lat, lng, amenities, amenities: { spiderwebs, basement, grandfatherClock, dolls, electricity, pets } } = req.body
     const db = req.app.get('db')
     const owner = req.session.user.id
 
@@ -158,13 +158,13 @@ module.exports = {
       let newHouse = await db.auth.new_house([header, description, rooms, remodeled, owner, lat, lng])
       console.log('Hello Home Owner', newHouse)
       newHouse = newHouse[0]
-      console.log({spiderwebs, basement, grandfatherClock, dolls, electricity, pets, house_id: newHouse.id})
+      console.log({ spiderwebs, basement, grandfatherClock, dolls, electricity, pets, house_id: newHouse.id })
       const savedAmenities = await db.auth.amenities([spiderwebs, basement, grandfatherClock, dolls, electricity, pets, newHouse.id])
       newHouse.amenities = savedAmenities[0]
       console.log(newHouse)
       return res.status(200).send(newHouse)
     } catch (err) {
-      console.log('amenities',amenities)
+      console.log('amenities', amenities)
       return res.status(500).send('Could Not Create House')
     }
   },

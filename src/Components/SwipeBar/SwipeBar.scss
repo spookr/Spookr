@@ -1,16 +1,37 @@
 @import '../../index';
 
 .SwipeBar {
-  width: 100%;
-  background: none;
-  position: absolute;
-  display: flex;
-  justify-content: space-evenly;
-  bottom: 0;
-  padding-bottom: 1rem;
+    width: 100%;
+    background: none;
+    position: absolute;
+    display: flex;
+    justify-content: space-evenly;
+    bottom: 0;
+    padding-bottom: 1rem;
 
-  img {
-    width: 4rem;
-    height: 4rem;
-  }
+    background-image: linear-gradient(to bottom,
+        rgba(235, 237, 236, .3) 0%,
+        rgba(235, 237, 236, 1.0) 50%,
+        rgba(236, 236, 236, 1.0) 100%,
+        );
+
+    img {
+        width: 4rem;
+        height: 4rem;
+        background-color: white;
+        border-radius: 50%;
+    }
+
+    .swipeBar-X:hover {
+        background-color: #eb5969;
+    }
+
+    .swipeBar-star:hover {
+        background-color: #428dff;
+    }
+
+    .swipeBar-heart:hover {
+        background-color: #23eeab
+    }
+
 }
