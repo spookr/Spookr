@@ -58,6 +58,8 @@ module.exports = {
               return res.status(406).send('No House Found')
             } else {
               delete maybeHouse.password
+              delete maybeHouse.username
+              session.user = maybeHouse
               return res.status(200).send(maybeHouse)
             }
           }
@@ -70,10 +72,12 @@ module.exports = {
           session.user = ghost
           return res.status(200).send(session.user)
         } else {
+          //this section doesnt hit when a homeowner logs in, hits starting line 60 instead
           let owner = await db.auth.check_for_owner(username)
           owner = owner[0]
           delete owner.password
           session.user = owner
+          console.log(session.user)
           return res.status(200).send(session.user)
         }
 
@@ -88,6 +92,7 @@ module.exports = {
 
   getUser: (req, res) => {
     const { user } = req.session
+    console.log(user)
     if (user) {
       res.status(200).send(user)
     } else {

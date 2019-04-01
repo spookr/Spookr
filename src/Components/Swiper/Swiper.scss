@@ -1,11 +1,63 @@
 @import '../../index';
 
 .Swiper {
-  background-image: linear-gradient(to top, #4D32E2 0%, #1cb5e0 100%);
-  width: 21rem;
-  height: 31rem;
-  overflow: scroll;
-  position: relative;
-  border-radius: 10px;
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.12), 0px 4px 5px 0px rgba(0, 0, 0, 0.12), 0px 1px 10px 0px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    // background-image: linear-gradient(to top, #4D32E2 0%, #1cb5e0 100%);
+    background-color: whitesmoke;
+    width: 21rem;
+    height: 31rem;
+    overflow: scroll;
+    position: relative;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.12), 0px 4px 5px 0px rgba(0, 0, 0, 0.12), 0px 1px 10px 0px rgba(0, 0, 0, 0.2);
+    .swiper-picture {
+        min-height: 55%;
+
+        img {
+            height: 100%;
+            width: 100%;
+        }
+    }
+    .swiper-info {
+        height: 20%;
+        padding-left: 3%;
+
+        h1 {
+            font-weight: bold;
+            font-size: 1.5em;
+            color: black;
+        }
+
+        h3 {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: darkgray;
+        }
+
+    }
+    .swiper-bio {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 3%;
+
+        p {
+            font-weight: bold;
+            font-size: 1.1em;
+            color: darkgray;
+        }
+    }
+}
+
+.Swiper::-webkit-scrollbar {
+    overflow: scroll;
+    width: 0px;
+    height: 0px;
+}
+
+.swiper-swipeBar {
+    position: sticky;
+    bottom: 0;
+
 }
