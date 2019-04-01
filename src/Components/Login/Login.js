@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './Login.scss'
+import '../Questionnaire/Stars.scss'
 
 // Packages
 import axios from 'axios'
@@ -50,6 +51,9 @@ class Login extends Component {
             <button id="SubmitButton" onClick={() => this.submitLogin(username, password)}>Submit</button>
           </div>
         </div>
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
       </div>
     )
   }
