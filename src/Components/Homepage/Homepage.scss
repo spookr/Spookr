@@ -28,7 +28,7 @@ main {
         }
 
         p {
-          max-width: 30rem;
+          max-width: 31rem;
           text-align: center;
         }
       }
@@ -47,6 +47,16 @@ main {
           display: flex;
           justify-content: flex-end;
           align-items: flex-end;
+
+          #Ghost {
+            position: absolute;
+            width: 15rem;
+            height: 15rem;
+            left: 0;
+            bottom: 5rem;
+            animation: ghost 1.5s linear  infinite;
+            animation-direction: alternate-reverse;
+          }
 
           #Moon {
             width: 12rem;
@@ -67,7 +77,8 @@ main {
             height: 20rem;
             position: absolute;
             right: 35%;
-            bottom: 1.5rem;
+            bottom: 0;
+            z-index: 4;
           }
 
           #Graveyard {
@@ -90,8 +101,8 @@ main {
             width: 2.5rem;
             height: 2.5rem;
             position: absolute;
-            top: 7rem;
-            right: 23rem;
+            top: 8rem;
+            right: 25rem;
             transform: rotate(-2deg);
           }
 
@@ -109,7 +120,7 @@ main {
             height: 1.75rem;
             position: absolute;
             top: 3rem;
-            right: 30rem;
+            right: 37rem;
             transform: rotate(-10deg);
           }
 
@@ -119,6 +130,25 @@ main {
             position: absolute;
             bottom: 18rem;
             right: 6.5rem;
+            transform: rotate(-10deg);
+          }
+
+          #Factory {
+            position: absolute;
+            width: 25rem;
+            height: 25rem;
+            right: 13rem;
+            bottom: 5rem;
+            -webkit-transform: scaleX(-1);
+            transform: scaleX(-1)
+          }
+
+          #Star7 {
+            width: 2.18rem;
+            height: 2.18rem;
+            position: absolute;
+            top: 10rem;
+            right: 40rem;
             transform: rotate(-10deg);
           }
         }
@@ -157,16 +187,20 @@ main {
           button {
             border: 1px solid $accent-three;
             border-radius: 3px;
-            color: white;
             font-size: 1.15rem;
             padding: .75rem 6rem;
             text-decoration: none;
             cursor: pointer;
+            background: $accent-one;
+            font-weight: bolder;
+
           }
 
           button:hover {
-            background: #1C2367;
+          	background: #32C4E2;
+            transition: .7s;
           }
+
         }
       }
     }
@@ -206,5 +240,14 @@ main {
         z-index: 9;
       }
     }
+  }
+}
+
+@keyframes ghost {
+  from{
+    transform: translate(0px,0px)
+  }
+  to{
+    transform: translate(0px, -70px);
   }
 }

@@ -21,15 +21,17 @@ nav {
     button {
       border: 1px solid $accent-three;
       border-radius: 3px;
-      color: white;
       font-size: 1.15rem;
       padding: .75rem 2rem;
       text-decoration: none;
       cursor: pointer;
+      background: $accent-one;
+      font-weight: bolder;
     }
 
     button:hover {
-      background: #1C2367;
+      background: #32C4E2;
+      transition: .7s;
     }
   }
 }

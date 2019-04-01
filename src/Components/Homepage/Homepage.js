@@ -13,6 +13,8 @@ import Rip from './assets/rip.svg'
 import Star from './assets/star.svg'
 import Spooker from './assets/spooker.svg'
 import Responsive from './assets/responsive.svg'
+import Factory from './assets/factory.svg'
+import Ghost from './assets/ghost.svg'
 
 class Homepage extends Component {
 
@@ -30,18 +32,21 @@ class Homepage extends Component {
         <div className="HomepageSecondary">
           <div className="HomepageHeader">
             <div className="HeaderText">
-              <h1>Swipe. Match. Haunt</h1>
-              <p>All-in-one voice and text chat for gamers that's free, secure, and works on both your desktop and phone. Stop paying for TeamSpeak servers and hassling with Skype. Simplify your life.</p>
+              <h1>Swipe. Match. Haunt.</h1>
+              <p>All-in-one match and text chat for ghosts and homeowners that's free, secure, and works on both your desktop and phone. Stop watching Ghost Adventures and experience a haunting all your own.</p>
             </div>
             <div className="HeaderBody">
               <div className="HeaderContainer">
                 <img id="Moon" src={Moon} alt="Moon Icon" />
                 <img id="Building" src={Building} alt=" Building Icon" />
                 <img id="CityScape" src={CityScape} alt="City Icon" />
+                <img id="Factory" src={Factory} alt="Factory Icon" />
                 <img id="Star3" src={Star} alt="Star Icon" />
                 <img id="Star4" src={Star} alt="Star Icon" />
                 <img id="Star5" src={Star} alt="Star Icon" />
                 <img id="Star6" src={Star} alt="Star Icon" />
+                <img id="Star7" src={Star} alt="Star Icon" />
+                <img id="Ghost" src={Ghost} alt="Spooky Ghost" />
               </div>
             </div>
           </div>
