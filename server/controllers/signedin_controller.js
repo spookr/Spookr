@@ -27,17 +27,17 @@ module.exports = {
               // console.log(err)
                 return res.status(400).send('Could not get users from database')
             }
-        }else{
-            try{
+        } else {
+            try {
                 const userGhosts = await db.auth.filtered_ghosts(id)
                 const location_filtered = await userGhosts.filter(user => {
                     delete user.username
                     delete user.password
-                    return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.radius), lon: parseFloat(user.radius) }, { exact: true, unit: 'miles', limit: radius })
+                    return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: user.radius })
                 })
 
                 return res.status(200).send(location_filtered)
-            }catch(err){
+            } catch(err){
                 return res.status(400).send('Could not get users from database')
             }
         }
