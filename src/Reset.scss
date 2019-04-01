@@ -20,18 +20,21 @@ time, mark, audio, video {
 	vertical-align: baseline;
   box-sizing: border-box;
 	line-height: 1.25;
-	font-family: 'Source Sans Pro', sans-serif;
+	font-family: 'M PLUS Rounded 1c', sans-serif;
 	color: white;
+	letter-spacing: -.5px;
 }
 
 .App {
 	min-height: 100vh;
-	background: #18191c;
+	background: #0A0923;
 }
 
 button {
 	font-family: 'Source Sans Pro', sans-serif;
-	background: #2A3680;
+	background: #76E2F8;
+	color: black;
+	font-weight: bolder;
 }
 
 .ant-checkbox-checked .ant-checkbox-inner {

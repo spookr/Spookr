@@ -27,7 +27,7 @@ class Navigation extends Component {
   }
 
   logout = () => {
-    axios.post("/logout").then(res => {
+    axios.post('/logout').then(res => {
       this.props.logOut();
       this.props.history.push("/");
     }).catch(err => {
@@ -37,7 +37,7 @@ class Navigation extends Component {
 
   render() {
 
-    console.log(this.props)
+    // console.log(this.props)
 
     const displayLogin = this.props.user.id ?
       <div className="NavigationProfile">

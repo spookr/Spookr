@@ -1,10 +1,14 @@
 import React from 'react'
 import './ProfileTab.scss'
 
+// Components
+import UserIcon from '../UserIcon/UserIcon'
+
 const ProfileTab = (props) => {
   return (
     <div className="ProfileTab">
-      My Profile
+      <UserIcon />
+      <h1 onClick={props.toggleEdit}>My Profile</h1>
     </div>
   )
 }

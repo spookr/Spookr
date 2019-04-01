@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
 import './Register.scss'
+import '../Questionnaire/Stars.scss'
 
 // Packages
 import axios from 'axios'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { logIn } from '../../redux/reducer'
-import { InputGroup, FormControl } from 'react-bootstrap'
+import {connect} from 'react-redux'
+import {logIn} from '../../redux/reducer'
 import { Radio } from 'antd';
 
 // Images
 import Ghost from './assets/ghost.svg'
 import House from './assets/house.svg'
-import Graveyard from './assets/graveyard.jpg'
 
 const RadioGroup = Radio.Group;
 
@@ -69,13 +67,16 @@ class Register extends Component {
             <h2 style={{paddingBottom: '1rem'}}>Are you a ghost or home owner?</h2>
             <div className="QuestionnaireSelection">
               <RadioGroup onChange={this.onChange} value={this.state.ghost}>
-                <Radio value={true}><img id="GhostIcon" src={Ghost} /></Radio>
-                <Radio value={false}><img src={House} /></Radio>
+                <Radio value={true}><img id="GhostIcon" src={Ghost} alt="Ghost" /></Radio>
+                <Radio value={false}><img src={House} alt="House" /></Radio>
               </RadioGroup>
             </div>
             <button id="SubmitButton" onClick={() => this.submitRegister(username, password, ghost)}>Submit</button>
           </div>
         </div>
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
       </div>
     )
   }

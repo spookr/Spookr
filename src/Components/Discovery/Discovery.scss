@@ -1,1 +1,51 @@
 @import '../../index';
+
+.Discovery {
+  background: $accent-three;
+  border-right: 1px solid gray;
+
+  h2 {
+    color: #1A1A1A;
+    font-weight: bolder;
+  }
+  color: #1A1A1A;
+
+  .DiscoverySettings {
+    padding: 1rem 1.25rem;
+
+    .DiscoveryHeader {
+      display: flex;
+      justify-content: space-between;
+
+      h3 {
+        color: #1A1A1A;
+      }
+    }
+
+    .NavigationButton {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      min-height: 20vh;
+
+      #LogoutButton {
+        box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.12), 0px 4px 5px 0px rgba(0, 0, 0, 0.12), 0px 1px 10px 0px rgba(0, 0, 0, 0.2);
+        border: none;
+        background: $primary-color;
+        color: $accent-three;
+
+      }
+    }
+  }
+
+  .ant-slider-track {
+    background-color: $secondary-color;
+  }
+
+  .ant-slider-handle {
+    width: 25px;
+    height: 25px;
+    margin-top: -10px;
+    border: 2px solid $secondary-color;
+  }
+}

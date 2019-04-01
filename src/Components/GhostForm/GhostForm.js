@@ -2,16 +2,16 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import './GhostForm.scss'
 import Geocode from 'react-geocode'
-import dotenv from 'dotenv'
+import '../Questionnaire/Stars.scss'
 
 // Packages
 import { DropdownButton, Dropdown } from 'react-bootstrap'
-import { withRouter } from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
+import {connect} from 'react-redux'
+import {getGhost} from '../../redux/reducer'
 
 // Images
 import Placeholder from './assets/Placeholder.png'
-import Forward from '../assets/Forward.svg'
-import Previous from '../assets/Previous.svg'
 
 class GhostForm extends Component {
   constructor() {
@@ -21,9 +21,6 @@ class GhostForm extends Component {
       bio: '',
       type: null,
       location: '',
-      toggle1: true,
-      toggle2: false,
-      toggle3: false,
       isUploading: false,
       profilePhoto: null,
       files: []
@@ -61,64 +58,35 @@ class GhostForm extends Component {
     })
   }
 
-  handleToggle1 = () => {
-    this.setState({
-      toggle1: false,
-      toggle2: true,
-      toggle3: false
-    })
-  }
-
-  handleToggle2 = () => {
-    this.setState({
-      toggle1: false,
-      toggle2: false,
-      toggle3: true
-    })
-  }
-
-  handleToggle3 = () => {
-    this.setState({
-      toggle1: true,
-      toggle2: false,
-      toggle3: false
-    })
-  }
-
-  submitGhost = (name, bio, type, user_id, profile_pic, location, radius) => {
+  submitGhost = (name, bio, type, user_id, profile_pic, location, radius=50) => {
     let googleKey = process.env.REACT_APP_GOOGLE_API
-    console.log("string here", googleKey)
-    // googleKey=googleKey.split('')
-    // googleKey.pop()
-    // googleKey=googleKey.join('')
-    console.log("string here", googleKey)
-
     Geocode.setApiKey(googleKey);
     Geocode.enableDebug();
     Geocode.fromAddress(location)
-      .then(
-        response => {
-          const { lat, lng } = response.results[0].geometry.location;
-          console.log(lat, lng);
+    .then(
+      response => {
+        const {lat, lng} = response.results[0].geometry.location;
 
-          const ghostDetails = {
-            name,
-            bio,
-            type,
-            user_id,
-            profile_pic,
-            lat,
-            lng,
-            radius
-          }
-          axios.post('/ghost', ghostDetails).then(res => {
-            console.log(res.data)
-          })
-        },
-        error => {
-          console.error(error);
+        const ghostDetails = {
+          name,
+          bio,
+          type,
+          user_id,
+          profile_pic,
+          lat,
+          lng,
+          radius
         }
-      )
+
+        axios.post('/ghost', ghostDetails).then(res => {
+          this.props.getGhost(res.data)
+        })
+        this.props.history.push(`/profile/${user_id}`)
+      },
+      error => {
+        console.error(error);
+      }
+    )
   }
 
   //AWS
@@ -160,85 +128,66 @@ class GhostForm extends Component {
   }
 
   render() {
-    console.log(this.state)
+    // console.log(this.state)
 
-    console.log(this.state)
+    // console.log(this.state)
 
-    const { name, bio, type, location, toggle1, toggle2, toggle3, profilePhoto } = this.state
-    const { handleInput,
-      handleDropdown,
-      handleToggleMale,
-      handleToggleFemale,
-      handleToggle1,
-      handleToggle2,
-      handleToggle3,
-      submitGhost } = this
+    const { name, bio, type, location, profilePhoto } = this.state
+    const { handleInput, handleDropdown, submitGhost } = this
 
     // console.log('type', type)
     // console.log('gender', gender)
-    console.log(this.props)
-
-    const displayToggle1 = toggle1 &&
-      <div className="QuestionnaireMain">
-        <h1>Let's set up your profile!</h1>
-        
-        {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} /> : <img id="ProfilePhoto" src={Placeholder} />}
-        <input id='profilePic-dropzone' type="file" onChange={(e) => this.getSignedRequest(e, false)} />
-        <div className="ToggleNavigation">
-          <img id="Arrow" src={Forward} onClick={handleToggle1} />
-        </div>
-      </div>
-
-    const displayToggle2 = toggle2 &&
-      <div className="QuestionnaireMain">
-        <h1>Now let's get some information.</h1>
-        <h2>Name</h2><input name="name" type="text" value={name} onChange={(e) => handleInput(e)} />
-        <h2>Bio</h2><input name="bio" type="text" value={bio} onChange={(e) => handleInput(e)} />
-        <h2>Type</h2>
-        <DropdownButton id="dropdown-basic-button" title={type === "1" ? "Poltergeist" :
-          type === "2" ? "Demon" :
-            type === "3" ? "Ectoplasm" :
-              type === "4" ? "Interactive" :
-                type === "5" ? "Orb" :
-                  type === "6" ? "Sheet" :
-                    type === "7" ? "Specter" :
-                      type === "8" ? "Other" : "Type"}>
-          <Dropdown.Item name="type" type="1" onClick={(e) => handleDropdown(e)}>Poltergeist</Dropdown.Item>
-          <Dropdown.Item name="type" type="2" onClick={(e) => handleDropdown(e)}>Demon</Dropdown.Item>
-          <Dropdown.Item name="type" type="3" onClick={(e) => handleDropdown(e)}>Ectoplasm</Dropdown.Item>
-          <Dropdown.Item name="type" type="4" onClick={(e) => handleDropdown(e)}>Interactive</Dropdown.Item>
-          <Dropdown.Item name="type" type="5" onClick={(e) => handleDropdown(e)}>Orb</Dropdown.Item>
-          <Dropdown.Item name="type" type="6" onClick={(e) => handleDropdown(e)}>Sheet</Dropdown.Item>
-          <Dropdown.Item name="type" type="7" onClick={(e) => handleDropdown(e)}>Specter</Dropdown.Item>
-          <Dropdown.Item name="type" type="8" onClick={(e) => handleDropdown(e)}>Other</Dropdown.Item>
-        </DropdownButton>
-        <div className="ToggleNavigation">
-          <img id="Arrow" src={Previous} onClick={handleToggle3} />
-          <img id="Arrow" src={Forward} onClick={handleToggle2} />
-        </div>
-      </div>
-
-    const displayToggle3 = toggle3 &&
-      <div className="QuestionnaireMain">
-        <h1>Almost finished.</h1>
-        <h2>Location:</h2>
-        <input name="location" type="text" value={location} onChange={(e) => handleInput(e)} />
-        <div className="ToggleNavigation">
-          <img id="Arrow" src={Previous} onClick={handleToggle1} />
-          <button id="SubmitButton" onClick={() => submitGhost(name, bio, type, this.props.match.params.id, profilePhoto, location, 400)}>Submit</button>
-        </div>
-      </div>
 
     return (
-      <div className="Questionnaire">
+      <div className="Questionnaire" id="GhostBackground">
         <div className="QuestionnaireSecondary">
-          {displayToggle1}
-          {displayToggle2}
-          {displayToggle3}
+          <div className="QuestionnaireMain">
+            <h1 id="GhostPadding">Let's set up your profile!</h1>
+              <div className="QuestionnairePhoto">
+                {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} alt="User" /> : <img id="ProfilePhoto" src={Placeholder} alt="User"  />}
+              </div>
+            <input style={{border: 'none'}} type="file" onChange={(e) => this.getSignedRequest(e, false)} />
+              <h2>Name</h2><input name="name" type="text" value={name} onChange={(e) => handleInput(e)} />
+              <h2>Bio</h2><input name="bio" type="text" value={bio} onChange={(e) => handleInput(e)} />
+              <h2>Type</h2>
+              <DropdownButton id="dropdown-basic-button" title={type === "1" ? "Poltergeist" :
+                type === "2" ? "Demon" :
+                  type === "3" ? "Ectoplasm" :
+                    type === "4" ? "Interactive" :
+                      type === "5" ? "Orb" :
+                        type === "6" ? "Sheet" :
+                          type === "7" ? "Specter" :
+                            type === "8" ? "Other" : "Type"}>
+                <Dropdown.Item name="type" type="1" onClick={(e) => handleDropdown(e)}>Poltergeist</Dropdown.Item>
+                <Dropdown.Item name="type" type="2" onClick={(e) => handleDropdown(e)}>Demon</Dropdown.Item>
+                <Dropdown.Item name="type" type="3" onClick={(e) => handleDropdown(e)}>Ectoplasm</Dropdown.Item>
+                <Dropdown.Item name="type" type="4" onClick={(e) => handleDropdown(e)}>Interactive</Dropdown.Item>
+                <Dropdown.Item name="type" type="5" onClick={(e) => handleDropdown(e)}>Orb</Dropdown.Item>
+                <Dropdown.Item name="type" type="6" onClick={(e) => handleDropdown(e)}>Sheet</Dropdown.Item>
+                <Dropdown.Item name="type" type="7" onClick={(e) => handleDropdown(e)}>Specter</Dropdown.Item>
+                <Dropdown.Item name="type" type="8" onClick={(e) => handleDropdown(e)}>Other</Dropdown.Item>
+              </DropdownButton>
+              <h2>Zip Code:</h2>
+              <input name="location" type="text" value={location} onChange={(e) => handleInput(e)} />
+              <button id="SubmitButton" onClick={() => submitGhost(name, bio, type, this.props.match.params.id, profilePhoto, location)}>Submit</button>
+          </div>
         </div>
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
       </div>
     )
   }
 }
 
-export default withRouter(GhostForm)
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = {
+  getGhost
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GhostForm))

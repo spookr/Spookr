@@ -1,1 +1,14 @@
 @import '../../index';
+
+.Messages {
+  background: $accent-three;
+  min-height: 90vh;
+  padding: 1rem 1.25rem;
+  overflow: scroll;
+
+  h1 {
+    padding-bottom: 1rem;
+    color: $secondary-color;
+    font-weight: bolder;
+  }
+}

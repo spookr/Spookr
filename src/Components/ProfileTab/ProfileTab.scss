@@ -1,6 +1,10 @@
+@import '../../index';
+
 .ProfileTab {
-  background: red;
-  padding: 1.25rem;
+  background-image: linear-gradient(to top, #4D32E2 0%, #1cb5e0 100%);
   color: white;
-  font-weight: bolder;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  padding-left: 1.25rem;
 }

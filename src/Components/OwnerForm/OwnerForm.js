@@ -1,14 +1,18 @@
 import React, { Component } from 'react'
 import './OwnerForm.scss'
+import '../Questionnaire/Stars.scss'
+
+// Packages
+import {withRouter} from 'react-router-dom'
 import axios from 'axios'
+import {connect} from 'react-redux'
+import {getOwner} from '../../redux/reducer'
 
 // Components
 import HouseForm from '../../Components/HouseForm/HouseForm'
 
 // Images
 import Placeholder from './assets/Placeholder.png'
-import Forward from '../assets/Forward.svg'
-import Previous from '../assets/Previous.svg'
 
 class OwnerForm extends Component {
   constructor() {
@@ -17,13 +21,10 @@ class OwnerForm extends Component {
       firstName: '',
       lastName: '',
       bio: '',
-      toggle1: true,
-      toggle2: false,
       toggleHouse: false,
       toggleOwner: true,
-      profilePhoto: '',
       isUploading: false,
-      profilePhoto: null,
+      profilePhoto: '',
       files: []
     }
   }
@@ -34,21 +35,19 @@ class OwnerForm extends Component {
     })
   }
 
-  handleToggle1 = () => {
-    this.setState({
-      toggle1: false,
-      toggle2: true
-    })
-  }
+  submitOwner = (firstName, lastName, bio, user_id, profilePhoto) => {
 
-  handleToggle2 = () => {
-    this.setState({
-      toggle1: true,
-      toggle2: false
-    })
-  }
+    const ownerDetails = {
+      firstName,
+      lastName,
+      bio,
+      user_id,
+      profilePhoto
+    }
 
-  submitOwner = () => {
+    axios.post('/owner', ownerDetails).then(res => {
+      this.props.getOwner(res.data)
+    })
     this.setState({
       toggleHouse: true,
       toggleOwner: false
@@ -84,7 +83,6 @@ class OwnerForm extends Component {
         this.setState({ profilePhoto: url })
       })
       .catch(err => {
-
         if (err.response.status === 403) {
           alert('Your request for a signed URL failed with a status 403. Double check the CORS configuration and bucket policy in the README. You also will want to double check your AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY in your .env and ensure that they are the same as the ones that you created in the IAM dashboard. You may need to generate new keys\n' + err.stack)
         } else {
@@ -95,43 +93,45 @@ class OwnerForm extends Component {
 
   render() {
 
-    const { firstName, lastName, bio, toggle1, toggle2, toggleHouse, toggleOwner, profilePhoto } = this.state
-    const { handleInput, handleToggle1, handleToggle2, submitOwner } = this
+    const {firstName, lastName, bio, toggleOwner, profilePhoto} = this.state
+    const {handleInput, submitOwner} = this
     // console.log(this.state)
 
-    const displayToggle1 = toggle1 &&
-      <div className="QuestionnaireMain">
-        <h1>Let's set up your profile!</h1>
-        {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} /> : <img id="ProfilePhoto" src={Placeholder} />}
-        <input style={{ border: 'none' }} type="file" onChange={(e) => this.getSignedRequest(e, false)} />
-        <img id="Arrow" src={Forward} onClick={handleToggle1} />
-      </div>
-
-    const displayToggle2 = toggle2 &&
-      <div className="QuestionnaireMain">
-        <h1>Now let's get some information.</h1>
-        <h2>First Name</h2><input name="firstName" type="text" value={firstName} onChange={(e) => handleInput(e)} />
-        <h2>Last Name</h2><input name="lastName" type="text" value={lastName} onChange={(e) => handleInput(e)} />
-        <h2>Bio</h2><input name="bio" type="text" value={bio} onChange={(e) => handleInput(e)} />
-        <div className="ToggleNavigation">
-          <img id="Arrow" src={Previous} onClick={handleToggle2} />
-          <button id="NextButton" onClick={submitOwner}>Submit</button>
-        </div>
-      </div>
-
-    const displayOwner = toggleOwner ?
+    const displayOwner =  toggleOwner ?
       <div className="QuestionnaireSecondary">
-        {displayToggle1}
-        {displayToggle2}
+        <div className="QuestionnaireMain">
+          <h1 id="HeaderPadding">Let's set up your profile!</h1>
+          <div className="QuestionnairePhoto">
+            {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} alt="User" /> : <img id="ProfilePhoto" src={Placeholder} alt="User"  />}
+          </div>
+            <input style={{border: 'none'}} type="file" onChange={(e) => this.getSignedRequest(e, false)} />
+            <h2>First Name</h2><input name="firstName" type="text" value={firstName} onChange={(e) => handleInput(e)}/>
+            <h2>Last Name</h2><input name="lastName" type="text" value={lastName} onChange={(e) => handleInput(e)}/>
+            <h2>Bio</h2><input name="bio" type="text" value={bio} onChange={(e) => handleInput(e)}/>
+            <button id="NextButton" onClick={() => submitOwner(firstName, lastName, bio, this.props.match.params.id, profilePhoto)}>Submit</button>
+        </div>
       </div>
       : <HouseForm />
 
     return (
-      <div className="Questionnaire">
+      <div className="Questionnaire" id="OwnerBackground">
         {displayOwner}
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
       </div>
     )
   }
 }
 
-export default OwnerForm
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+
+const mapDispatchToProps = {
+  getOwner
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(OwnerForm))
