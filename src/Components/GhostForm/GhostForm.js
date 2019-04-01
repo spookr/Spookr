@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import './GhostForm.scss'
 import Geocode from 'react-geocode'
+import '../Questionnaire/Stars.scss'
 
 // Packages
 import { DropdownButton, Dropdown } from 'react-bootstrap'
@@ -138,7 +139,7 @@ class GhostForm extends Component {
     // console.log('gender', gender)
 
     return (
-      <div className="Questionnaire">
+      <div className="Questionnaire" id="GhostBackground">
         <div className="QuestionnaireSecondary">
           <div className="QuestionnaireMain">
             <h1 id="GhostPadding">Let's set up your profile!</h1>
@@ -171,6 +172,9 @@ class GhostForm extends Component {
               <button id="SubmitButton" onClick={() => submitGhost(name, bio, type, this.props.match.params.id, profilePhoto, location)}>Submit</button>
           </div>
         </div>
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
       </div>
     )
   }

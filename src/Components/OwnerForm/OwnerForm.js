@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import './OwnerForm.scss'
+import '../Questionnaire/Stars.scss'
 
 // Packages
 import {withRouter} from 'react-router-dom'
@@ -113,8 +114,11 @@ class OwnerForm extends Component {
      : <HouseForm />
 
     return (
-      <div className="Questionnaire">
+      <div className="Questionnaire" id="OwnerBackground">
         {displayOwner}
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
       </div>
     )
   }

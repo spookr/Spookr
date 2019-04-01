@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './HouseForm.scss'
+import '../Questionnaire/Stars.scss'
 import NumericInput from 'react-numeric-input'
 import { Checkbox } from 'antd'
 import Geocode from 'react-geocode'
@@ -111,7 +112,7 @@ class HouseForm extends Component {
     // console.log(this.props)
 
     return (
-      <div className="Questionnaire">
+      <div className="Questionnaire" id="HouseBackground">
         <div className="QuestionnaireSecondary">
           <div className="QuestionnaireMain">
             <h1 id="HousePadding">Add a Listing</h1>
@@ -198,6 +199,9 @@ class HouseForm extends Component {
               <button id="NextButton" onClick={() => submitHouse(header, description, rooms, location, remodeled, amenities)}>Submit</button>
           </div>
         </div>
+        <div id='stars'></div>
+        <div id='stars2'></div>
+        <div id='stars3'></div>
       </div>
     )
   }

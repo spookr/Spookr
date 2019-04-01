@@ -28,5 +28,10 @@ nav {
       background: $accent-one;
       font-weight: bolder;
     }
+
+    button:hover {
+      background: #32C4E2;
+      transition: .7s;
+    }
   }
 }

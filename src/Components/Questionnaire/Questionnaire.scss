@@ -8,6 +8,11 @@
   min-height: 100vh;
   overflow: hidden;
 
+  button:hover {
+    background: #32C4E2;
+    transition: .7s;
+  }
+
   .QuestionnaireSecondary {
     height: 100%;
     max-width: 85vw;
@@ -56,6 +61,7 @@
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
         grid-row-gap: 10px;
+        padding-left: 1.5rem;
         padding-top: 1rem;
 
         .UploadPhoto {
@@ -93,7 +99,6 @@
         }
 
       }
-
 
       #PhotoButton {
         width: 12rem;
@@ -190,6 +195,11 @@
         button {
           width: 15rem;
           padding: .5rem;
+        }
+
+        button:hover {
+          background: #32C4E2;
+          transition: .7s;
         }
       }
     }
