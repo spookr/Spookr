@@ -69,16 +69,16 @@ module.exports = {
           let ghost = await db.auth.check_for_ghost(username)
           ghost = ghost[0]
           delete ghost.password
-          session.user = ghost
-          return res.status(200).send(session.user)
+          session.ghost = ghost
+          return res.status(200).send(session.ghost)
         } else {
           //this section doesnt hit when a homeowner logs in, hits starting line 60 instead
           let owner = await db.auth.check_for_owner(username)
           owner = owner[0]
           delete owner.password
           session.user = owner
-          console.log(session.user)
-          return res.status(200).send(session.user)
+          // console.log(session.user)
+          return res.status(200).send(session.ghost)
         }
 
       } else {
@@ -86,7 +86,7 @@ module.exports = {
       }
     }
     catch (err) {
-      console.log(err)
+      console.log(err) 
     }
   },
 
@@ -104,14 +104,19 @@ module.exports = {
     const { name, bio, type, user_id, profile_pic, lat, lng } = req.body;
     const db = req.app.get('db');
 
-    if (!name || !bio || !type || !user_id || !profile_pic || !lat || !lng) {
+    const radius = 50;
+
+    if (!name || !bio || !type || !user_id || !profile_pic || !lat || !lng ) {
       return res.status(400).send('need all info')
     }
 
     try {
-      let newGhost = await db.auth.new_ghost([name, bio, type, user_id, profile_pic, lat, lng, radius = 50])
-      console.log('Hello my dudes', newGhost)
+      let newGhost = await db.auth.new_ghost([name, bio, type, user_id, profile_pic, lat, lng, radius])
+      // console.log('Hello my dudes', newGhost)
       newGhost = newGhost[0]
+      req.session.ghost = newGhost
+      req.session.ghost.ghost = true
+      // console.log(req.session)
       return res.status(200).send(newGhost)
     } catch (err) {
       return res.status(500).send('Could not create account')
