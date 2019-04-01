@@ -96,16 +96,15 @@ module.exports = {
   },
 
   ghostDetails: async (req, res) => {
-    const { name, bio, type, user_id, profile_pic, lat, lng } = req.body;
-    console.log(name, bio, type, user_id, profile_pic, lat, lng)
+    const { name, bio, type, user_id, profile_pic, lat, lng, radius } = req.body;
     const db = req.app.get('db');
 
-    if (!name || !bio || !type || !user_id || !profile_pic || !lat || !lng) {
+    if (!name || !bio || !type || !user_id || !profile_pic || !lat || !lng || !radius) {
       return res.status(400).send('need all info')
     }
 
     try {
-      let newGhost = await db.auth.new_ghost([name, bio, type, user_id, profile_pic, lat, lng])
+      let newGhost = await db.auth.new_ghost([name, bio, type, user_id, profile_pic, lat, lng, radius])
       console.log('Hello my dudes', newGhost)
       newGhost = newGhost[0]
       return res.status(200).send(newGhost)
@@ -134,19 +133,26 @@ module.exports = {
   },
 
   houseDetails: async (req, res) => {
-    const { header, body, rooms, remodeled, amenities, lat, lng, livingOccupants } = req.body
+    const { header, description, rooms, remodeled, lat, lng, amenities, amenities: {spiderwebs, basement, grandfatherClock, dolls, electricity, pets} } = req.body
     const db = req.app.get('db')
+    const owner = req.session.user.id
 
-    console.log(amenities)
+    if (!header || !description || !rooms || !amenities || !lat || !lng) {
+      console.log(req.body)
+      return res.status(400).send('Need All House Info Filled Out')
+    }
 
     try {
-      let newHouse = await db.auth.new_house([header, body, rooms, remodeled, req.session.homeowner.id, livingOccupants, lat, lng])
-      // console.log('Hello Home Owner', newHouse)
+      let newHouse = await db.auth.new_house([header, description, rooms, remodeled, owner, lat, lng])
+      console.log('Hello Home Owner', newHouse)
       newHouse = newHouse[0]
+      console.log({spiderwebs, basement, grandfatherClock, dolls, electricity, pets, house_id: newHouse.id})
+      const savedAmenities = await db.auth.amenities([spiderwebs, basement, grandfatherClock, dolls, electricity, pets, newHouse.id])
+      newHouse.amenities = savedAmenities[0]
       console.log(newHouse)
-      // return res.status(200).send(newHouse)
+      return res.status(200).send(newHouse)
     } catch (err) {
-      console.log(err)
+      console.log('amenities',amenities)
       return res.status(500).send('Could Not Create House')
     }
   },

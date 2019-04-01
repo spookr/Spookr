@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import './OwnerForm.scss'
 import axios from 'axios'
 
@@ -11,7 +11,7 @@ import Forward from '../assets/Forward.svg'
 import Previous from '../assets/Previous.svg'
 
 class OwnerForm extends Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       firstName: '',
@@ -93,38 +93,38 @@ class OwnerForm extends Component {
       })
   }
 
-  render () {
+  render() {
 
-    const {firstName, lastName, bio, toggle1, toggle2, toggleHouse, toggleOwner, profilePhoto} = this.state
-    const {handleInput, handleToggle1, handleToggle2, submitOwner} = this
+    const { firstName, lastName, bio, toggle1, toggle2, toggleHouse, toggleOwner, profilePhoto } = this.state
+    const { handleInput, handleToggle1, handleToggle2, submitOwner } = this
     // console.log(this.state)
 
     const displayToggle1 = toggle1 &&
       <div className="QuestionnaireMain">
         <h1>Let's set up your profile!</h1>
-          {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} /> : <img id="ProfilePhoto" src={Placeholder} />}
-          <input style={{border: 'none'}} type="file" onChange={(e) => this.getSignedRequest(e, false)} />
-          <img id="Arrow" src={Forward} onClick={handleToggle1} />
+        {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} /> : <img id="ProfilePhoto" src={Placeholder} />}
+        <input style={{ border: 'none' }} type="file" onChange={(e) => this.getSignedRequest(e, false)} />
+        <img id="Arrow" src={Forward} onClick={handleToggle1} />
       </div>
 
     const displayToggle2 = toggle2 &&
       <div className="QuestionnaireMain">
         <h1>Now let's get some information.</h1>
-        <h2>First Name</h2><input name="firstName" type="text" value={firstName} onChange={(e) => handleInput(e)}/>
-        <h2>Last Name</h2><input name="lastName" type="text" value={lastName} onChange={(e) => handleInput(e)}/>
-        <h2>Bio</h2><input name="bio" type="text" value={bio} onChange={(e) => handleInput(e)}/>
+        <h2>First Name</h2><input name="firstName" type="text" value={firstName} onChange={(e) => handleInput(e)} />
+        <h2>Last Name</h2><input name="lastName" type="text" value={lastName} onChange={(e) => handleInput(e)} />
+        <h2>Bio</h2><input name="bio" type="text" value={bio} onChange={(e) => handleInput(e)} />
         <div className="ToggleNavigation">
           <img id="Arrow" src={Previous} onClick={handleToggle2} />
           <button id="NextButton" onClick={submitOwner}>Submit</button>
         </div>
       </div>
 
-    const displayOwner =  toggleOwner ?
+    const displayOwner = toggleOwner ?
       <div className="QuestionnaireSecondary">
         {displayToggle1}
         {displayToggle2}
       </div>
-     : <HouseForm />
+      : <HouseForm />
 
     return (
       <div className="Questionnaire">

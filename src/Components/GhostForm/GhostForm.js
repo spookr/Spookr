@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import axios from 'axios';
 import './GhostForm.scss'
 import Geocode from 'react-geocode'
+import dotenv from 'dotenv'
 
 // Packages
 import { DropdownButton, Dropdown } from 'react-bootstrap'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 // Images
 import Placeholder from './assets/Placeholder.png'
@@ -84,32 +85,40 @@ class GhostForm extends Component {
     })
   }
 
-  submitGhost = (name, bio, type, user_id, profile_pic, location) => {
-    Geocode.setApiKey(process.env.REACT_APP_GOOGLE_API);
+  submitGhost = (name, bio, type, user_id, profile_pic, location, radius) => {
+    let googleKey = process.env.REACT_APP_GOOGLE_API
+    console.log("string here", googleKey)
+    // googleKey=googleKey.split('')
+    // googleKey.pop()
+    // googleKey=googleKey.join('')
+    console.log("string here", googleKey)
+
+    Geocode.setApiKey(googleKey);
     Geocode.enableDebug();
     Geocode.fromAddress(location)
-    .then(
-      response => {
-        const {lat, lng} = response.results[0].geometry.location;
-        console.log(lat, lng);
+      .then(
+        response => {
+          const { lat, lng } = response.results[0].geometry.location;
+          console.log(lat, lng);
 
-        const ghostDetails = {
-          name,
-          bio,
-          type,
-          user_id,
-          profile_pic,
-          lat,
-          lng
+          const ghostDetails = {
+            name,
+            bio,
+            type,
+            user_id,
+            profile_pic,
+            lat,
+            lng,
+            radius
+          }
+          axios.post('/ghost', ghostDetails).then(res => {
+            console.log(res.data)
+          })
+        },
+        error => {
+          console.error(error);
         }
-        axios.post('/ghost', ghostDetails).then(res => {
-          console.log(res.data)
-        })
-      },
-      error => {
-        console.error(error);
-      }
-    )
+      )
   }
 
   //AWS
@@ -172,8 +181,9 @@ class GhostForm extends Component {
     const displayToggle1 = toggle1 &&
       <div className="QuestionnaireMain">
         <h1>Let's set up your profile!</h1>
+        
         {profilePhoto ? <img id="ProfilePhoto" src={profilePhoto} /> : <img id="ProfilePhoto" src={Placeholder} />}
-        <input style={{border: 'none'}} type="file" onChange={(e) => this.getSignedRequest(e, false)} />
+        <input id='profilePic-dropzone' type="file" onChange={(e) => this.getSignedRequest(e, false)} />
         <div className="ToggleNavigation">
           <img id="Arrow" src={Forward} onClick={handleToggle1} />
         </div>
@@ -215,7 +225,7 @@ class GhostForm extends Component {
         <input name="location" type="text" value={location} onChange={(e) => handleInput(e)} />
         <div className="ToggleNavigation">
           <img id="Arrow" src={Previous} onClick={handleToggle1} />
-          <button id="SubmitButton" onClick={() => submitGhost(name, bio, type, this.props.match.params.id, profilePhoto, location)}>Submit</button>
+          <button id="SubmitButton" onClick={() => submitGhost(name, bio, type, this.props.match.params.id, profilePhoto, location, 400)}>Submit</button>
         </div>
       </div>
 

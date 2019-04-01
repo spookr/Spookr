@@ -23,12 +23,14 @@
     "react": "^16.8.4",
     "react-bootstrap": "^1.0.0-beta.5",
     "react-dom": "^16.8.4",
+    "react-dropzone": "^10.0.6",
     "react-geocode": "^0.1.2",
     "react-numeric-input": "^2.2.3",
     "react-redux": "^6.0.1",
     "react-router-dom": "^5.0.0",
     "react-scripts": "2.1.8",
-    "redux": "^4.0.1"
+    "redux": "^4.0.1",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",

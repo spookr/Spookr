@@ -1,1 +1,16 @@
 @import '../../index';
+
+#profilePic-dropzone{
+    height: 30%;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 1%;
+    border-radius: 15px;
+    input{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+    }
+}

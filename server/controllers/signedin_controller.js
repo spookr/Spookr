@@ -8,17 +8,13 @@ module.exports = {
         const userType = session.user.ghost;
         if (userType) {
             try{
-            const userHouses = await db.auth.filtered_houses()
+            const userHouses = await db.auth.filtered_houses(id)
             const location_filtered = await userHouses.filter(user => {
                 return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: radius })
             })
             const yesChecks = await db.auth.yes_checks(id);
-            console.log(yesChecks)
-            console.log(location_filtered)
-            console.log(userHouses)
 
             for(let i=0; i < location_filtered.length;  i++){
-                console.log(location_filtered[i])
                 for(let j = 0; j < yesChecks.length; j++){
                     console.log(yesChecks[j])
                     if(location_filtered[i].user_id === yesChecks[j].swiped_id){
@@ -34,10 +30,23 @@ module.exports = {
             }
         }else{
             try{
-                const userGhosts = await db.auth.filtered_ghosts()
+                const userGhosts = await db.auth.filtered_ghosts(id)
                 const location_filtered = await userGhosts.filter(user => {
-                    return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: radius })
+                    return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.radius), lon: parseFloat(user.radius) }, { exact: true, unit: 'miles', limit: radius })
                 })
+
+                const yesChecks = await db.auth.yes_checks(id);
+
+                for(let i=0; i < location_filtered.length;  i++){
+                    for(let j = 0; j < yesChecks.length; j++){
+                        console.log(yesChecks[j])
+                        if(location_filtered[i].user_id === yesChecks[j].swiped_id){
+                            location_filtered[i].saidYes = true;
+                        }
+                    }
+                }
+
+
                 return res.status(200).send(location_filtered)
             }catch(err){
                 return res.status(400).send('Could not get users from database')
