@@ -1,7 +1,7 @@
-$primary-color: #26262b;
+$primary-color: #0A0923;
 $secondary-color: #1E028C;
-$accent-one: #7289da;
-$accent-two: #1C2367;
+$accent-one: #76E2F8;
+$accent-two: #434857;;
 $accent-three: #EEF0F2;
 
 $primary-font: 'M PLUS Rounded 1c', sans-serif;
@@ -10,7 +10,7 @@ $secondary-font: 'This Is The Future';
 button {
   border: 1px solid $accent-three;
   border-radius: 3px;
-  color: white;
+  color: $primary-color;
   font-size: 1.15rem;
   padding: .75rem 2rem;
   text-decoration: none;
@@ -18,9 +18,6 @@ button {
   font-family: $primary-font;
 }
 
-button:hover {
-  background: $accent-two;
-}
 
 
 // Maybe Later? #434857;

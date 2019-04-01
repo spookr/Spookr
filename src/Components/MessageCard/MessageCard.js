@@ -11,7 +11,7 @@ class Conversation extends Component {
         <ProfileIcon />
         <div className="RecentMessage">
           <h2>Name</h2>
-          <p>This is where the most recent message will lie.</p>
+          <p>Most recent message.</p>
         </div>
       </div>
     )

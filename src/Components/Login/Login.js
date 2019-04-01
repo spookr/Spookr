@@ -42,7 +42,7 @@ class Login extends Component {
     return (
       <div id="RegisterBackground" className="Questionnaire">
         <div className="QuestionnaireSecondary">
-          <div className="QuestionnaireMain">
+          <div id="HeaderPadding" className="QuestionnaireMain">
             <h1 id="LoginHeader">Welcome back!</h1>
             <h4>We're so excited to see you again!</h4>
             <h2 id="LoginSub">Username</h2><input name="username" type="text" onChange={(e) => this.handleInput(e)}/>

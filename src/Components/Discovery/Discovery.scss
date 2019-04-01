@@ -2,6 +2,7 @@
 
 .Discovery {
   background: $accent-three;
+  border-right: 1px solid gray;
 
   h2 {
     color: #1A1A1A;
@@ -28,9 +29,23 @@
       min-height: 20vh;
 
       #LogoutButton {
-        height: 3rem;
-        background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+        box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.12), 0px 4px 5px 0px rgba(0, 0, 0, 0.12), 0px 1px 10px 0px rgba(0, 0, 0, 0.2);
+        border: none;
+        background: $primary-color;
+        color: $accent-three;
+
       }
     }
+  }
+
+  .ant-slider-track {
+    background-color: $secondary-color;
+  }
+
+  .ant-slider-handle {
+    width: 25px;
+    height: 25px;
+    margin-top: -10px;
+    border: 2px solid $secondary-color;
   }
 }
