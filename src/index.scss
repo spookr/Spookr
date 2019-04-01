@@ -4,7 +4,7 @@ $accent-one: #7289da;
 $accent-two: #1C2367;
 $accent-three: #EEF0F2;
 
-$primary-font: 'Source Sans Pro', sans-serif;
+$primary-font: 'M PLUS Rounded 1c', sans-serif;
 $secondary-font: 'This Is The Future';
 
 button {
@@ -15,6 +15,7 @@ button {
   padding: .75rem 2rem;
   text-decoration: none;
   cursor: pointer;
+  font-family: $primary-font;
 }
 
 button:hover {

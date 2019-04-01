@@ -1,7 +1,14 @@
 @import '../../index';
 
 .Messages {
-  background: blue;
-  min-height: 95vh;
+  background: $accent-three;
+  min-height: 90vh;
   padding: 1rem 1.25rem;
+  overflow: scroll;
+
+  h1 {
+    padding-bottom: 1rem;
+    color: #E50042;
+    font-weight: bolder;
+  }
 }

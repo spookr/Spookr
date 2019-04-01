@@ -1,13 +1,36 @@
 @import '../../index';
 
 .Discovery {
+  background: $accent-three;
+
+  h2 {
+    color: #1A1A1A;
+    font-weight: bolder;
+  }
+  color: #1A1A1A;
 
   .DiscoverySettings {
     padding: 1rem 1.25rem;
 
+    .DiscoveryHeader {
+      display: flex;
+      justify-content: space-between;
+
+      h3 {
+        color: #1A1A1A;
+      }
+    }
+
     .NavigationButton {
       display: flex;
       justify-content: center;
+      align-items: flex-end;
+      min-height: 20vh;
+
+      #LogoutButton {
+        height: 3rem;
+        background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+      }
     }
   }
 }

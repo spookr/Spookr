@@ -42,11 +42,13 @@ class Discovery extends Component {
       <div className="Discovery">
         <ProfileTab toggleEdit={this.props.toggleEdit}/>
         <div className="DiscoverySettings">
-          <h1>Discovery Settings</h1>
+          <div className="DiscoveryHeader">
+            <h2>Discovery Settings</h2>
+            <h3>{this.state.slider} miles</h3>
+          </div>
           <Slider defaultValue={this.state.slider} onChange={this.onSliderChange}/>
-
           <div className='NavigationButton'>
-            <button id="NextButton" onClick={this.logout}>Logout</button>
+            <button id="LogoutButton" onClick={this.logout}>Logout</button>
           </div>
         </div>
       </div>

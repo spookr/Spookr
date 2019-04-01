@@ -10,7 +10,7 @@ class UserBar extends Component {
     return (
       <div className="UserBar">
         <ProfileTab toggleEdit={this.props.toggleEdit} />
-        <Messages />
+        <Messages toggleConversation={this.props.toggleConversation}/>
       </div>
     )
   }

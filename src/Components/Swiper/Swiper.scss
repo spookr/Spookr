@@ -1,9 +1,11 @@
 @import '../../index';
 
 .Swiper {
-  background: red;
+  background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
   width: 21rem;
   height: 31rem;
   overflow: scroll;
   position: relative;
+  border-radius: 10px;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.12), 0px 4px 5px 0px rgba(0, 0, 0, 0.12), 0px 1px 10px 0px rgba(0, 0, 0, 0.2);
 }
