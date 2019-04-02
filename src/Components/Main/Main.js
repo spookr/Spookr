@@ -11,6 +11,7 @@ class Main extends Component {
   render () {
 
     const displaySwipes = this.props.swipes && this.props.swipes.map(swipe => {
+      // console.log(swipe)
       return (
         <Swiper key={swipe.user_id} {...swipe} swipeRight={this.props.swipeRight} swipeLeft={this.props.swipeLeft} />
       )

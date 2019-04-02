@@ -51,7 +51,7 @@ module.exports = {
 
         try {
             const swipedOn = await db.auth.swiped(user_id, swipedUser, swiped)
-            return res.status(200).send('user added to swiped')
+            return res.status(200).send('user added to swipe')
         } catch (err) {
             return res.status(500).send('could not process swipe')
         }
@@ -94,8 +94,8 @@ module.exports = {
     editProfile : async (req,res) => {
         const db = req.app.get('db')
         const {ghost, user_id} = req.session.user
-        
-    
+
+
         if(ghost){
             const {name, bio, imageUrl} = req.body
             if(!name || !bio || !imageUrl){

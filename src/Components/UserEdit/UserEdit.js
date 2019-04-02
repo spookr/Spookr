@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { connect } from 'react-redux'
+import { getGhost } from '../../redux/reducer'
+
+// Styling
 import './UserEdit.scss'
 
 class UserEdit extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       user: {},
       updateBio: null,
@@ -14,13 +18,13 @@ class UserEdit extends Component {
 
   componentDidMount() {
     this.getuser();
+    // console.log(props)
   }
 
   getuser = () => {
     axios.get(`/api/user`).then(res => {
       this.setState({ user: res.data })
-      console.log(this.state.user, 'The Logged In User.')
-      console.log(this.state.user.name)
+      // console.log(this.state.user, 'The Logged In User.')
     })
   }
 
@@ -31,11 +35,11 @@ class UserEdit extends Component {
 
   // All this page needs is the update endpoint from there will be able to do further testing to make sure it works.
 
-  // updateBio = () => {
-  //   axios.put('/api/user', { updateBio: this.state.updateBio }).then(res => {
-  //     this.setState({ updateBio: res.data })
-  //   })
-  // }
+  updateBio = () => {
+    axios.put('/api/user', { updateBio: this.state.updateBio }).then(res => {
+      this.props.getGhost(res.data);
+    })
+  }
 
   handleUpdate(updateText) {
     this.setState({ updateBio: updateText })
@@ -47,28 +51,42 @@ class UserEdit extends Component {
     var shown = { display: this.state.shown ? "flex" : "none" };
     var hidden = { display: this.state.shown ? "none" : "flex" }
 
-    console.log(this.state.user)
+    // console.log(this.props)
 
-    const houseProfile = !this.state.ghost && <h1>{this.state.user.first_name}</h1>
+    const houseProfile = !this.props.user.ghost &&
+      <div>
+
+        <h1>{this.props.user.first_name} {this.props.user.last_name}</h1>
+      </div>
+    const ghostProfile = this.props.user.ghost &&
+      <div>
+        <h1> {this.props.user.name} </h1>
+        <input
+          name="username"
+          style={hidden}
+        // onChange={(e) => this.handleUpdate(e.target.value)}
+        />
+
+
+        <h3> {this.props.user.bio} </h3>
+        <input
+          style={hidden}
+        // onChange={(e) => this.handleUpdate(e.target.value)}
+        />
+      </div>
 
     return (
       <div className="UserEdit">
         <div className='userEdit-picture'>
-          <img src={this.state.user.profile_pic} alt='profile pic' />
+          <img src={this.props.user.profile_pic} alt='profile pic' />
         </div>
         <div className='userEdit-name'>
           {houseProfile}
-          <input
-            name="username"
-            style={hidden}
-            // onChange={(e) => this.handleUpdate(e.target.value)}
-             />
+          {ghostProfile}
+
         </div>
         <div className='userEdit-bio'>
-          <input
-            style={hidden}
-            // onChange={(e) => this.handleUpdate(e.target.value)}
-             />
+
         </div>
         <div className='userEdit-editButton'>
           <button
@@ -85,4 +103,13 @@ class UserEdit extends Component {
   }
 }
 
-export default UserEdit
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
+  }
+}
+const mapDispatchToProps = {
+  getGhost
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(UserEdit)

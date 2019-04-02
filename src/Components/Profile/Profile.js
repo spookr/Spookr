@@ -20,12 +20,6 @@ class Profile extends Component {
     }
   }
 
-  // componentDidUpdate (prevState, prevProps) {
-  //   if (prevProps.swipes !== this.state.swipes) {
-  //     this.getFilteredSwipes()
-  //   }
-  // }
-
   componentDidMount () {
     this.getFilteredSwipes()
     this.getMatches()
@@ -40,7 +34,7 @@ class Profile extends Component {
   }
 
   getMatches = () => {
-    console.log('hit matches')
+    // console.log('hit matches')
     axios.get('/matches').then(res => {
       this.setState({
         matches: res.data
@@ -79,6 +73,8 @@ class Profile extends Component {
     axios.post('/swipe', swipedUser).then(res => {
       console.log(res.data)
     })
+
+
   }
 
   swipeLeft = (id) => {
@@ -94,6 +90,8 @@ class Profile extends Component {
   }
 
   render () {
+
+    // console.log(this.state.swipes)
 
     const {edit, conversation, swipes, matches} = this.state
     const {toggleEdit, toggleConversation, closeConversation, swipeRight, swipeLeft} = this

@@ -6,5 +6,4 @@ insert into swiped(
     $1,
     $2,
     $3
-
 )
