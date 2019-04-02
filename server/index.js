@@ -3,6 +3,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const massive = require('massive')
 const session = require('express-session')
+const socket = require('socket.io')
 const aws = require('aws-sdk');
 const bcrypt = require('bcryptjs')
 const axios = require('axios')
@@ -51,6 +52,32 @@ app.post('/insertmatch', signedin.insertMatched)
 app.post('/editprofile', signedin.editProfile)
 
 // EndPoints
-app.listen(SERVER_PORT, () => {
-  console.log(`Spooking on Port ${SERVER_PORT} 👻`)
-});
+// app.listen(SERVER_PORT, () => {
+//   console.log(`Spooking on Port ${SERVER_PORT} 👻`)
+// });
+
+
+const io = socket(app.listen(SERVER_PORT, () => console.log(`Spooking on Port ${SERVER_PORT} 👻`)));
+
+
+io.on('connection', socket => {
+  console.log('User connected')
+  // const db = app.get('db')
+
+  socket.on('Join room', async ({ roomName, user_id, receiver_id }) => {
+    socket.join(roomName)
+    console.log('Apple Bottom Jeans')
+    // this is where you make your DB query
+    // const messages = await db.getMessages([user_id, receiver_id])
+    // io.to(roomName).emit('Messages', messages)
+  })
+
+  socket.on('New Message', async ({ messenger, receiver, message, roomName }) => {
+    const messages = await db.addMessage([messenger, receiver, message])
+    // DB call return all messages
+    io.to(roomName).emit('Messages', messages)
+  })
+
+
+
+})
