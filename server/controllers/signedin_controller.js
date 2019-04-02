@@ -88,5 +88,37 @@ module.exports = {
                 res.status(500).send('could not get matches')
             }
         }
+    },
+    editProfile : async (req,res) => {
+        const db = req.app.get('db')
+        const {ghost, user_id} = req.session.user
+        
+    
+        if(ghost){
+            const {name, bio, imageUrl} = req.body
+            if(!name || !bio || !imageUrl){
+                return res.status(500).send('need all info')
+            }
+            try{
+                const editInfo = await db.auth.edit_ghost(user_id, name, bio, imageUrl)
+                return res.status(200).send('info edited!')
+            }catch(err){
+                return res.status(500).send('could not edit profile')
+          }
+        }else{
+            console.log(req.session.user)
+            const {owner} = req.session.user
+            const{firstName, lastName, bio, imageUrl, body, header} = req.body
+            if(!firstName || !lastName ||  !bio || !imageUrl || !body || !header){
+                return res.status(500).send('need all infoooooo')
+            }
+            try{
+                const editOwner = await db.auth.edit_owner(user_id, firstName, lastName, bio, imageUrl)
+                const editHouse = await db.auth.edit_house(owner, header, body)
+                return res.status(200).send('info edited!')
+            }catch(err){
+                return res.status(500).send('could not edit profile')
+            }
+        }
     }
 }
