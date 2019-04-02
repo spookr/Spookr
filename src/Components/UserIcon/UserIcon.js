@@ -1,34 +1,22 @@
-import React, { Component } from 'react'
-import axios from 'axios'
+import React from 'react'
 import './UserIcon.scss'
+import {connect} from 'react-redux'
 
-import Kitty from './assets/kitty.jpg'
+const UserIcon = (props) => {
 
-export default class UserIcon extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      user: ''
-    }
-  }
+  console.log(props)
 
-  componentDidMount() {
-    this.getProfilePic();
-  }
+  return (
+    <div className="UserIcon">
+      <img src={props.user.profile_pic} alt="Chatting User" />
+    </div>
+  )
+}
 
-  getProfilePic = () => {
-    axios.get('/api/user').then(res => {
-      this.setState({ user: res.data })
-    })
-  }
-
-
-  render() {
-    return (
-      <div className="UserIcon" >
-        <img src={this.state.user.profile_pic} alt="User Account" />
-      </div>
-    )
+const mapStateToProps = (state) => {
+  return {
+    user: state.user
   }
 }
 
+export default connect(mapStateToProps)(UserIcon)

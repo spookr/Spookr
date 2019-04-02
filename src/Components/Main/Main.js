@@ -10,9 +10,16 @@ import MatchModal from '../MatchModal/MatchModal'
 class Main extends Component {
   render () {
 
-    const displayEdit = this.props.edit ? <UserEdit /> : <Swiper />
+    const displaySwipes = this.props.swipes && this.props.swipes.map(swipe => {
+      return (
+        <Swiper key={swipe.user_id} {...swipe} />
+      )
+    }) 
+
+    const displayEdit = this.props.edit ? <UserEdit /> : displaySwipes
     const displayConversation = this.props.conversation && <Conversation closeConversation={this.props.closeConversation} />
     const displayToggle = this.props.conversation ? displayConversation : displayEdit
+
 
     return (
       <div className="Main">
