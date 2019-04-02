@@ -48,6 +48,7 @@ app.get('/filterswipes', signedin.filteredSwipes)
 app.post('/swipe', signedin.swipe)
 app.get('/matches', signedin.getMatches)
 app.post('/insertmatch', signedin.insertMatched)
+app.post('/editprofile', signedin.editProfile)
 
 // EndPoints
 app.listen(SERVER_PORT, () => {

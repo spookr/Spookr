@@ -195,14 +195,5 @@ module.exports = {
     req.session.destroy();
     // console.log(req.session.user)
     res.sendStatus(200);
-  },
-  editProfile : async (req,res) => {
-    const db = req.app.get('db')
-    const {ghost, user_id} = req.session.user
-
-    // if(ghost){
-    //   if()
-    // }
-
   }
 }
