@@ -21,16 +21,16 @@ class Profile extends Component {
   }
 
   componentDidMount () {
-    this.getFilteredSwipes()
+    // this.getFilteredSwipes()
   }
 
-  getFilteredSwipes = () => {
-    axios.get('/filterswipes').then(res => {
-      this.setState({
-        swipes: res.data
-      })
-    })
-  }
+  // getFilteredSwipes = () => {
+  //   axios.get('/filterswipes').then(res => {
+  //     this.setState({
+  //       swipes: res.data
+  //     })
+  //   })
+  // }
 
   toggleEdit = () => {
     this.setState({
