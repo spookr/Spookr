@@ -31,13 +31,13 @@ class Profile extends Component {
     this.getMatches()
   }
 
-  getFilteredSwipes = () => {
-    axios.get('/filterswipes').then(res => {
-      this.setState({
-        swipes: res.data
-      })
-    })
-  }
+  // getFilteredSwipes = () => {
+  //   axios.get('/filterswipes').then(res => {
+  //     this.setState({
+  //       swipes: res.data
+  //     })
+  //   })
+  // }
 
   getMatches = () => {
     console.log('hit matches')
