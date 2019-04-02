@@ -55,9 +55,9 @@ class Profile extends Component {
 
   render () {
 
-    console.log(this.state.swipes)
+    console.log(this.props)
 
-    const {edit, conversation} = this.state
+    const {edit, conversation, swipes} = this.state
     const {toggleEdit, toggleConversation, closeConversation} = this
 
     const displayDiscovery = edit ? <Discovery toggleEdit={toggleEdit} /> :
@@ -68,7 +68,7 @@ class Profile extends Component {
     return (
       <div className="Profile">
         {displayDiscovery}
-        <Main edit={edit} conversation={conversation} closeConversation={closeConversation} />
+        <Main edit={edit} conversation={conversation} closeConversation={closeConversation} swipes={swipes}/>
       </div>
     )
   }
