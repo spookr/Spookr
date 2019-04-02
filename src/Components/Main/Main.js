@@ -12,13 +12,15 @@ class Main extends Component {
 
     const displaySwipes = this.props.swipes && this.props.swipes.map(swipe => {
       return (
-        <Swiper key={swipe.user_id} {...swipe} />
+        <Swiper key={swipe.user_id} {...swipe} swipeRight={this.props.swipeRight} swipeLeft={this.props.swipeLeft} />
       )
-    }) 
+    })
 
     const displayEdit = this.props.edit ? <UserEdit /> : displaySwipes
     const displayConversation = this.props.conversation && <Conversation closeConversation={this.props.closeConversation} />
     const displayToggle = this.props.conversation ? displayConversation : displayEdit
+
+    // console.log(this.props)
 
 
     return (

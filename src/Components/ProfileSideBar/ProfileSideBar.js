@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class ProfileSideBar extends Component {
     render() {
         return (
-            <div className="ConversationProfile">
+            <div className="ProfileSideBar">
                 <div style={{ height: 400}}>
                     <div>
                         <img src={this.props.user.profile_pic} style={{ width:350, height: 300 }} />
