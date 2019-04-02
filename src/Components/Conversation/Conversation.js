@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './Conversation.scss'
+import io from 'socket.io-client'
 
 // Components
 import ProfileIcon from '../ProfileIcon/ProfileIcon'
@@ -11,9 +12,52 @@ class Conversation extends Component {
   constructor() {
     super()
     this.state = {
-      message: ''
+      message: '',
+      allMessages: []
     }
   }
+
+  componentDidMount() {
+    this.socket = io("http://localhost:4000/");
+
+    const roomName = this.roomNameBuilder(this.props.user_id, this.props.receiver_id)
+
+    this.socket.emit('Join room', {
+      roomName,
+      senderID: this.props.user_id,
+      receiverID: this.props.receiver_id //not sure what the reciever ID is called will need to check
+    })
+
+    this.socket.on('Messages', messages => {
+      this.setState({ allMessages: messages })
+    })
+  }
+
+
+  roomNameBuilder = (user_id, receiver_id) => {
+    const roomName = `${Math.min(user_id, receiver_id)}_${Math.max(user_id, receiver_id)}`
+    return roomName;
+  }
+
+  sendMessage = () => {
+    const roomName = this.roomNameBuilder(this.props.user_id, this.props.receiver_id)
+    const body = {
+      messenger: this.props.user_id,
+      receiver: this.props.receiver_id,
+      message: this.state.message,
+      roomName
+    }
+    this.socket.emit('New Message', body)
+  }
+
+
+  componentWillUnmount() {
+    this.socket.disconnect()
+  }
+
+
+
+
 
   inputMessage = (event) => {
     this.setState({
@@ -21,6 +65,21 @@ class Conversation extends Component {
     })
   }
 
+<<<<<<< HEAD
+=======
+
+
+
+
+
+
+
+
+
+
+
+
+>>>>>>> master
   render() {
     return (
       <div className="Conversation">

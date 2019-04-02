@@ -23,8 +23,12 @@ class UserEdit extends Component {
 
   getuser = () => {
     axios.get(`/api/user`).then(res => {
+<<<<<<< HEAD
       this.setState({ user: res.data })
       // console.log(this.state.user, 'The Logged In User.')
+=======
+      this.props.getGhost(res.data);
+>>>>>>> master
     })
   }
 
@@ -35,11 +39,11 @@ class UserEdit extends Component {
 
   // All this page needs is the update endpoint from there will be able to do further testing to make sure it works.
 
-  updateBio = () => {
-    axios.put('/api/user', { updateBio: this.state.updateBio }).then(res => {
-      this.props.getGhost(res.data);
-    })
-  }
+  // updateBio = () => {
+  //   axios.put('/api/user', { updateBio: this.state.updateBio }).then(res => {
+  //     this.props.getGhost(res.data);
+  //   })
+  // }
 
   handleUpdate(updateText) {
     this.setState({ updateBio: updateText })
