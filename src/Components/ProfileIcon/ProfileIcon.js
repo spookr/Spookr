@@ -5,7 +5,7 @@ import Cat from './assets/Cat03.jpg'
 
 const ProfileIcon = (props) => {
 
-  console.log(props)
+  // console.log(props)
 
   return (
     <div className="ProfileIcon">

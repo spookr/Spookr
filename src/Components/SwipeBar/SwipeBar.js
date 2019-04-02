@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './SwipeBar.scss'
 
 // Images
@@ -6,16 +6,18 @@ import Favorite from './assets/star.svg'
 import Delete from './assets/delete.svg'
 import Heart from './assets/heart.svg'
 
-class SwipeBar extends Component {
-  render() {
-    return (
-      <div className="SwipeBar">
-        <img className='swipeBar-X' src={Delete} alt="Delete Button" />
-        <img className='swipeBar-star' src={Favorite} alt="Favorite Button" />
-        <img className='swipeBar-heart' src={Heart} alt="Heart Button" />
-      </div>
-    )
-  }
+const SwipeBar = (props) => {
+
+  // console.log(props)
+
+  return (
+    <div className="SwipeBar">
+      <img src={Delete} alt="Delete Button" onClick={() => props.swipeLeft(props.swipedUser)} />
+      <img src={Favorite} alt="Favorite Button" />
+      <img src={Heart} alt="Heart Button" onClick={() => props.swipeRight(props.swipedUser)}/>
+    </div>
+  )
 }
+
 
 export default SwipeBar

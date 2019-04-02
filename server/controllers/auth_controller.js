@@ -78,7 +78,7 @@ module.exports = {
             ...session.user,
             ...ghost
           }
-          console.log(session.user)
+          // console.log(session.user)
           return res.status(200).send(session.user)
         } else {
           //this section doesnt hit when a homeowner logs in, hits starting line 60 instead
