@@ -11,7 +11,7 @@ module.exports = {
 
         if (userType) {
 
-            try{
+            try {
             const userHouses = await db.auth.filtered_houses(user_id)
             const location_filtered = await userHouses.filter(user => {
                 delete user.username
@@ -27,17 +27,16 @@ module.exports = {
               // console.log(err)
                 return res.status(400).send('Could not get users from database')
             }
-        }else{
-            try{
+        } else {
+            try {
                 const userGhosts = await db.auth.filtered_ghosts(user_id)
                 const location_filtered = await userGhosts.filter(user => {
                     delete user.username
                     delete user.password
                     return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: user.radius })
                 })
-
                 return res.status(200).send(location_filtered)
-            } catch(err){
+            } catch(err) {
                 return res.status(400).send('Could not get users from database')
             }
         }
@@ -48,10 +47,12 @@ module.exports = {
         const db = req.app.get('db')
         const {swiped, swipedUser} = req.body
 
-        try{
+        // console.log(user_id, swipedUser, swiped)
+
+        try {
             const swipedOn = await db.auth.swiped(user_id, swipedUser, swiped)
             return res.status(200).send('user added to swiped')
-        }catch(err){
+        } catch (err) {
             return res.status(500).send('could not process swipe')
         }
     },
@@ -60,10 +61,10 @@ module.exports = {
         const { user_id } = req.session.user;
         const {matchedUser} = req.body
         const db = req.app.get('db')
-        try{
+        try {
             const insertMatched = await db.auth.matches_insert(user_id, matchedUser)
             return res.status(200).send('Matched users!')
-        }catch(err){
+        } catch(err) {
             res.status(500).send("could not match the users")
         }
     },
@@ -71,20 +72,21 @@ module.exports = {
     getMatches : async (req,res) => {
         const db = req.app.get('db')
         const { user_id } = req.session.user;
+        const userType = req.session.user.ghost
 
-        if(userType){
-            try{
+        if (userType) {
+            try {
                 const getMatches = await db.auth.get_ghost_matches(user_id)
                 res.status(200).send(getMatches)
-            }catch(err){
+            } catch(err) {
                 res.status(500).send('could not get matches')
             }
 
-        }else{
-            try{
+        } else {
+            try {
                 const getMatches = await db.auth.get_house_matches(user_id)
                 res.status(200).send(getMatches)
-            }catch(err){
+            } catch(err) {
                 res.status(500).send('could not get matches')
             }
         }

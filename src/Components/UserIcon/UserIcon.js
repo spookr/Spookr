@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 
 const UserIcon = (props) => {
 
-  console.log(props)
+  // console.log(props)
 
   return (
     <div className="UserIcon">

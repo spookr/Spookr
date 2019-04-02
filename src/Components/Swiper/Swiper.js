@@ -20,6 +20,8 @@ class Swiper extends Component {
       8: 'Other'
     }
 
+    // console.log(this.props)
+
     const houseProfile = !this.props.ghost &&
       <div>
         <div className='SwiperHeader'>
@@ -35,7 +37,7 @@ class Swiper extends Component {
           <p> {this.props.body} </p>
         </div>
         <div className='SwipeBar'>
-          <SwipeBar />
+          <SwipeBar swipeRight={this.props.swipeRight} swipedUser={this.props.user_id} swipeLeft={this.props.swipeLeft} />
         </div>
       </div>
 
@@ -54,7 +56,7 @@ class Swiper extends Component {
             <p> {this.props.bio} </p>
           </div>
           <div className='SwipeBar'>
-            <SwipeBar />
+            <SwipeBar swipeRight={this.props.swipeRight} swipedUser={this.props.user_id} swipeLeft={this.props.swipeLeft} />
           </div>
         </div>
 
