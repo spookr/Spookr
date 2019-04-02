@@ -7,7 +7,7 @@ class UserEdit extends Component {
     super()
     this.state = {
       user: {},
-      updateBio: '',
+      updateBio: null,
       shown: true
     }
   }
@@ -38,9 +38,8 @@ class UserEdit extends Component {
   // }
 
   handleUpdate(updateText) {
-    this.state({ updateBio: updateText })
+    this.setState({ updateBio: updateText })
   }
-
 
 
   render() {
@@ -48,13 +47,17 @@ class UserEdit extends Component {
     var shown = { display: this.state.shown ? "flex" : "none" };
     var hidden = { display: this.state.shown ? "none" : "flex" }
 
+    console.log(this.state.user)
+
+    const houseProfile = !this.state.ghost && <h1>{this.state.user.first_name}</h1>
+
     return (
       <div className="UserEdit">
         <div className='userEdit-picture'>
           <img src={this.state.user.profile_pic} alt='profile pic' />
         </div>
         <div className='userEdit-name'>
-          {this.state.user.name}
+          {houseProfile}
           <input
             name="username"
             style={hidden}
@@ -62,7 +65,6 @@ class UserEdit extends Component {
              />
         </div>
         <div className='userEdit-bio'>
-          {this.state.user.bio}
           <input
             style={hidden}
             // onChange={(e) => this.handleUpdate(e.target.value)}
@@ -73,8 +75,6 @@ class UserEdit extends Component {
             style={shown}
             onClick={() => this.toggleShown()}
           > Edit Info </button>
-
-
           <button
             style={hidden}
             onClick={() => this.toggleShown()}

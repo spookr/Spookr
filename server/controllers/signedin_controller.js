@@ -7,7 +7,7 @@ module.exports = {
         const { latitude, longitude, user_id } = session.user;
         const userType = session.user.ghost
 
-        console.log(session)
+        // console.log(session)
 
         if (userType) {
 

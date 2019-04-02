@@ -64,8 +64,8 @@ module.exports = {
                 ...session.user,
                 ...maybeHouse
               }
-              console.log(session.user)
-              return res.status(200).send(maybeHouse)
+              // console.log(session.user)
+              return res.status(200).send(session.user)
             }
           }
         }
@@ -79,7 +79,7 @@ module.exports = {
             ...ghost
           }
           console.log(session.user)
-          return res.status(200).send(session.ghost)
+          return res.status(200).send(session.user)
         } else {
           //this section doesnt hit when a homeowner logs in, hits starting line 60 instead
           let owner = await db.auth.check_for_owner(username)
@@ -87,7 +87,7 @@ module.exports = {
           delete owner.password
           session.user = owner
           // console.log(session.user)
-          return res.status(200).send(session.ghost)
+          return res.status(200).send(session.user)
         }
 
       } else {
@@ -95,13 +95,13 @@ module.exports = {
       }
     }
     catch (err) {
-      console.log(err) 
+      console.log(err)
     }
   },
 
   getUser: (req, res) => {
     const { user } = req.session
-    console.log(user)
+    // console.log(user)
     if (user) {
       res.status(200).send(user)
     } else {
@@ -128,9 +128,9 @@ module.exports = {
         ...session.user,
         ...newGhost
       }
-      
-      console.log(req.session)
-      return res.status(200).send(newGhost)
+
+      // console.log(req.session)
+      return res.status(200).send(session.user)
     } catch (err) {
       return res.status(500).send('Could not create account')
     }
@@ -139,7 +139,7 @@ module.exports = {
   ownerDetails: async (req, res) => {
     const { firstName, lastName, bio, user_id, profilePhoto } = req.body;
     const db = req.app.get('db');
-    console.log(req.body);
+    // console.log(req.body);
 
 
     if (!firstName || !lastName || !bio || !user_id || !profilePhoto) {
@@ -153,8 +153,8 @@ module.exports = {
         ...req.session.user,
         ...newOwner
       }
-      console.log(req.session)
-      return res.status(200).send(newOwner)
+      // console.log(req.session)
+      return res.status(200).send(req.session.user)
     } catch (err) {
       return res.status(500).send('Could Not Create Account')
     }
@@ -164,7 +164,7 @@ module.exports = {
     const { header, description, rooms, remodeled, lat, lng, amenities, amenities: { spiderwebs, basement, grandfatherClock, dolls, electricity, pets } } = req.body
     const db = req.app.get('db')
     const owner = req.session.user.user_id
-    console.log('pree pree', req.session)
+    // console.log('pree pree', req.session)
 
     if (!header || !description || !rooms || !amenities || !lat || !lng) {
       return res.status(400).send('Need All House Info Filled Out')
@@ -182,10 +182,10 @@ module.exports = {
         ...req.session.user,
         ...newHouse
       }
-      console.log( "all data", req.session)
+      // console.log( "all data", req.session)
       return res.status(200).send(req.session.user)
     } catch (err) {
-      console.log('amenities', amenities)
+      // console.log('amenities', amenities)
       return res.status(500).send('Could Not Create House')
     }
   },
