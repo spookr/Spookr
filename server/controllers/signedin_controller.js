@@ -1,11 +1,11 @@
 var geodist = require('geodist')
 module.exports = {
     filteredSwipes: async (req, res) => {
-      console.log('hit filtered swipes')
+    //   console.log('hit filtered swipes')
         const { session } = req;
         const db = req.app.get('db')
-        const { latitude, longitude, user_id } = session.ghost;
-        const userType = session.ghost.ghost
+        const { latitude, longitude, user_id } = session.user;
+        const userType = session.user.ghost
 
         if (userType) {
           // console.log(session.ghost.radius)
@@ -15,10 +15,10 @@ module.exports = {
             const location_filtered = await userHouses.filter(user => {
                 delete user.username
                 delete user.password
-                return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: session.ghost.radius })
+                return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: session.user.radius })
             })
 
-            console.log(location_filtered)
+            // console.log(location_filtered)
 
             return res.status(200).send(location_filtered)
 
@@ -27,11 +27,11 @@ module.exports = {
             }
         }else{
             try{
-                const userGhosts = await db.auth.filtered_ghosts(id)
+                const userGhosts = await db.auth.filtered_ghosts(user_id)
                 const location_filtered = await userGhosts.filter(user => {
                     delete user.username
                     delete user.password
-                    return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.radius), lon: parseFloat(user.radius) }, { exact: true, unit: 'miles', limit: radius })
+                    return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: user.radius })
                 })
 
                 return res.status(200).send(location_filtered)
