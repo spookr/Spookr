@@ -161,7 +161,7 @@ module.exports = {
   },
 
   houseDetails: async (req, res) => {
-    const { header, description, rooms, remodeled, lat, lng, amenities, amenities: {spiderwebs, basement, grandfatherClock, dolls, electricity, pets} } = req.body
+    const { header, description, rooms, remodeled, lat, lng, amenities, amenities: { spiderwebs, basement, grandfatherClock, dolls, electricity, pets } } = req.body
     const db = req.app.get('db')
     const owner = req.session.user.user_id
     console.log('pree pree', req.session)
@@ -185,7 +185,7 @@ module.exports = {
       console.log( "all data", req.session)
       return res.status(200).send(req.session.user)
     } catch (err) {
-      console.log('amenities',amenities)
+      console.log('amenities', amenities)
       return res.status(500).send('Could Not Create House')
     }
   },

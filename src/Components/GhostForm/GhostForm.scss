@@ -1,5 +1,19 @@
 @import '../../index';
 
+#profilePic-dropzone{
+    height: 30%;
+    width: 50%;
+    margin-left: 25%;
+    margin-top: 1%;
+    border-radius: 15px;
+    input{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-content: center;
+    }
+}
 #GhostBackground {
   background: linear-gradient( 135deg, rgba(74, 0, 224, 0.5), rgba(118, 226, 248, 0.5)), url('https://i.kinja-img.com/gawker-media/image/upload/wh5wnfim9ewr7nsrmkpk.jpg');
   background-position: center;

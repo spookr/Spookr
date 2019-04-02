@@ -7,8 +7,9 @@ module.exports = {
         const { latitude, longitude, user_id } = session.user;
         const userType = session.user.ghost
 
+        console.log(session)
+
         if (userType) {
-          // console.log(session.ghost.radius)
 
             try{
             const userHouses = await db.auth.filtered_houses(user_id)
@@ -23,6 +24,7 @@ module.exports = {
             return res.status(200).send(location_filtered)
 
             } catch(err) {
+              // console.log(err)
                 return res.status(400).send('Could not get users from database')
             }
         }else{
@@ -35,7 +37,7 @@ module.exports = {
                 })
 
                 return res.status(200).send(location_filtered)
-            }catch(err){
+            } catch(err){
                 return res.status(400).send('Could not get users from database')
             }
         }

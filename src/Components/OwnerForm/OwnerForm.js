@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import './OwnerForm.scss'
 import '../Questionnaire/Stars.scss'
 
@@ -15,7 +15,7 @@ import HouseForm from '../../Components/HouseForm/HouseForm'
 import Placeholder from './assets/Placeholder.png'
 
 class OwnerForm extends Component {
-  constructor () {
+  constructor() {
     super()
     this.state = {
       firstName: '',
@@ -93,7 +93,7 @@ class OwnerForm extends Component {
       })
   }
 
-  render () {
+  render() {
 
     const {firstName, lastName, bio, toggleOwner, profilePhoto} = this.state
     const {handleInput, submitOwner} = this
@@ -113,7 +113,7 @@ class OwnerForm extends Component {
             <button id="NextButton" onClick={() => submitOwner(firstName, lastName, bio, this.props.match.params.id, profilePhoto)}>Submit</button>
         </div>
       </div>
-     : <HouseForm />
+      : <HouseForm />
 
     return (
       <div className="Questionnaire" id="OwnerBackground">
