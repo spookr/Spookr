@@ -59,7 +59,12 @@ module.exports = {
             } else {
               delete maybeHouse.password
               delete maybeHouse.username
-              session.user = maybeHouse
+
+              session.user = {
+                ...session.user,
+                ...maybeHouse
+              }
+              console.log(session.user)
               return res.status(200).send(maybeHouse)
             }
           }
@@ -69,7 +74,11 @@ module.exports = {
           let ghost = await db.auth.check_for_ghost(username)
           ghost = ghost[0]
           delete ghost.password
-          session.ghost = ghost
+          session.user = {
+            ...session.user,
+            ...ghost
+          }
+          console.log(session.user)
           return res.status(200).send(session.ghost)
         } else {
           //this section doesnt hit when a homeowner logs in, hits starting line 60 instead
@@ -103,6 +112,7 @@ module.exports = {
   ghostDetails: async (req, res) => {
     const { name, bio, type, user_id, profile_pic, lat, lng } = req.body;
     const db = req.app.get('db');
+    const {session} = req
 
     const radius = 50;
 
@@ -114,9 +124,12 @@ module.exports = {
       let newGhost = await db.auth.new_ghost([name, bio, type, user_id, profile_pic, lat, lng, radius])
       // console.log('Hello my dudes', newGhost)
       newGhost = newGhost[0]
-      req.session.ghost = newGhost
-      req.session.ghost.ghost = true
-      // console.log(req.session)
+      session.user = {
+        ...session.user,
+        ...newGhost
+      }
+      
+      console.log(req.session)
       return res.status(200).send(newGhost)
     } catch (err) {
       return res.status(500).send('Could not create account')
@@ -136,8 +149,11 @@ module.exports = {
     try {
       let newOwner = await db.auth.new_owner([firstName, lastName, user_id, profilePhoto, bio])
       newOwner = newOwner[0]
-      req.session.homeowner = newOwner
-      console.log(req.session.homeowner.id)
+      req.session.user = {
+        ...req.session.user,
+        ...newOwner
+      }
+      console.log(req.session)
       return res.status(200).send(newOwner)
     } catch (err) {
       return res.status(500).send('Could Not Create Account')
@@ -147,22 +163,27 @@ module.exports = {
   houseDetails: async (req, res) => {
     const { header, description, rooms, remodeled, lat, lng, amenities, amenities: { spiderwebs, basement, grandfatherClock, dolls, electricity, pets } } = req.body
     const db = req.app.get('db')
-    const owner = req.session.user.id
+    const owner = req.session.user.user_id
+    console.log('pree pree', req.session)
 
     if (!header || !description || !rooms || !amenities || !lat || !lng) {
-      console.log(req.body)
       return res.status(400).send('Need All House Info Filled Out')
     }
 
     try {
       let newHouse = await db.auth.new_house([header, description, rooms, remodeled, owner, lat, lng])
-      console.log('Hello Home Owner', newHouse)
       newHouse = newHouse[0]
-      console.log({ spiderwebs, basement, grandfatherClock, dolls, electricity, pets, house_id: newHouse.id })
+      // console.log({spiderwebs, basement, grandfatherClock, dolls, electricity, pets, house_id: newHouse.id})
       const savedAmenities = await db.auth.amenities([spiderwebs, basement, grandfatherClock, dolls, electricity, pets, newHouse.id])
       newHouse.amenities = savedAmenities[0]
-      console.log(newHouse)
-      return res.status(200).send(newHouse)
+      console.log('this is house info',newHouse)
+      console.log('pre set', req.session)
+      req.session.user = {
+        ...req.session.user,
+        ...newHouse
+      }
+      console.log( "all data", req.session)
+      return res.status(200).send(req.session.user)
     } catch (err) {
       console.log('amenities', amenities)
       return res.status(500).send('Could Not Create House')
