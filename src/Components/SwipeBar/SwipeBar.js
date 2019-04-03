@@ -14,7 +14,7 @@ const SwipeBar = (props) => {
     <div className="SwipeBar">
       <img src={Delete} alt="Delete Button" onClick={() => props.swipeLeft(props.swipedUser)} />
       <img src={Favorite} alt="Favorite Button" />
-      <img src={Heart} alt="Heart Button" onClick={() => props.swipeRight(props.swipedUser)}/>
+      <img src={Heart} alt="Heart Button" onClick={() => props.swipeRight(props.swipedUser, props.swiped)}/>
     </div>
   )
 }

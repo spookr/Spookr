@@ -9,6 +9,8 @@ class Swiper extends Component {
 
   render() {
 
+    // console.log(this.props)
+
     const ghostType = {
       1: 'Poltergeist',
       2: 'Demon',
@@ -20,8 +22,6 @@ class Swiper extends Component {
       8: 'Other'
     }
 
-    // console.log(this.props)
-
     const houseProfile = !this.props.ghost &&
       <div>
         <div className='SwiperHeader'>
@@ -29,7 +29,7 @@ class Swiper extends Component {
         </div>
         <div className='SwiperInfo'>
           <h1> {this.props.header} </h1>
-          <h3> Type </h3>
+          {this.props.ghost ? <h3> Type </h3> : null}
           <h3> Distance </h3>
           <hr />
         </div>
@@ -37,7 +37,7 @@ class Swiper extends Component {
           <p> {this.props.body} </p>
         </div>
         <div className='SwipeBar'>
-          <SwipeBar swipeRight={this.props.swipeRight} swipedUser={this.props.user_id} swipeLeft={this.props.swipeLeft} />
+          <SwipeBar swipeRight={this.props.swipeRight} swipedUser={this.props.user_id} swipeLeft={this.props.swipeLeft} swiped={this.props.swiped} />
         </div>
       </div>
 
@@ -47,8 +47,8 @@ class Swiper extends Component {
             <img src={this.props.profile_pic} alt='ghost' />
           </div>
           <div className='SwiperInfo'>
-            <h1> {this.props.name} </h1>
-            <h3> {ghostType[this.props.type]}</h3>
+            <h1>{this.props.name} </h1>
+            <h3>{ghostType[this.props.type]}</h3>
             <h3> Distance </h3>
             <hr />
           </div>
@@ -56,7 +56,7 @@ class Swiper extends Component {
             <p> {this.props.bio} </p>
           </div>
           <div className='SwipeBar'>
-            <SwipeBar swipeRight={this.props.swipeRight} swipedUser={this.props.user_id} swipeLeft={this.props.swipeLeft} />
+            <SwipeBar swipeRight={this.props.swipeRight} swipedUser={this.props.user_id} swipeLeft={this.props.swipeLeft} swiped={this.props.swiped} />
           </div>
         </div>
 
