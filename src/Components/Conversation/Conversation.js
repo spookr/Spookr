@@ -6,6 +6,7 @@ import io from 'socket.io-client'
 import ProfileIcon from '../ProfileIcon/ProfileIcon'
 import Delete from './assets/delete.svg'
 import ProfileSideBar from '../ProfileSideBar/ProfileSideBar'
+import Message from '../Message/Message'
 
 class Conversation extends Component {
   constructor() {
@@ -49,31 +50,15 @@ class Conversation extends Component {
     this.socket.emit('New Message', body)
   }
 
-
   componentWillUnmount() {
     this.socket.disconnect()
   }
-
-
-
-
 
   inputMessage = (event) => {
     this.setState({
       message: event.target.value
     })
   }
-
-
-
-
-
-
-
-
-
-
-
 
 
   render() {
@@ -88,7 +73,7 @@ class Conversation extends Component {
             <img src={Delete} onClick={this.props.closeConversation} id="CloseButton" alt="Close Conversation" />
           </div>
           <div className="ConversationBody">
-            <h2>Insert messages here!</h2>
+            <Message allMessages={this.state.allMessages}/>
           </div>
           <div className="ConversationFooter">
             <input type="text" placeholder="Type a message..." value={this.state.message} onChange={(e) => this.inputMessage(e)} />
