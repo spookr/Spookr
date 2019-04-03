@@ -49,13 +49,9 @@ app.get('/filterswipes', signedin.filteredSwipes)
 app.post('/swipe', signedin.swipe)
 app.get('/matches', signedin.getMatches)
 app.post('/insertmatch', signedin.insertMatched)
+
+
 app.post('/editprofile', signedin.editProfile)
-
-// EndPoints
-// app.listen(SERVER_PORT, () => {
-//   console.log(`Spooking on Port ${SERVER_PORT} 👻`)
-// });
-
 
 const io = socket(app.listen(SERVER_PORT, () => console.log(`Spooking on Port ${SERVER_PORT} 👻`)));
 
