@@ -7,6 +7,7 @@ import ProfileIcon from '../ProfileIcon/ProfileIcon'
 import Delete from './assets/delete.svg'
 import ProfileSideBar from '../ProfileSideBar/ProfileSideBar'
 import Message from '../Message/Message'
+import {withRouter} from 'react-router-dom'
 
 class Conversation extends Component {
   constructor() {
@@ -61,13 +62,17 @@ class Conversation extends Component {
   }
 
   render() {
+
+    console.log('user id', this.props.selectedUser.swipping_user)
+    console.log('matched user', this.props.selectedUser.matched_user)
+
     return (
       <div className="Conversation">
         <div className="ConversationMessages">
           <div className="ConversationNavigation">
             <div className="ConversationModule">
-              <ProfileIcon />
-              <h1>Conversation with Name</h1>
+              <img src={this.props.selectedUser.profile_pic} />
+              <h1>Conversation with {this.props.selectedUser.ghost ? this.props.selectedUser.name : this.props.selectedUser.first_name}</h1>
             </div>
             <img src={Delete} onClick={this.props.closeConversation} id="CloseButton" alt="Close Conversation" />
           </div>
@@ -80,16 +85,11 @@ class Conversation extends Component {
           </div>
         </div>
         <div className="ConversationProfile">
-          <ProfileSideBar user={{
-            name: 'Savannah',
-            profile_pic: 'https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2017/10/ghost-796x498.jpg',
-            entity: 'demon',
-            bio: " is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-          }} />
+          <ProfileSideBar selectedUser={this.props.selectedUser}/>
         </div>
       </div>
     )
   }
 }
 
-export default Conversation
+export default withRouter(Conversation)

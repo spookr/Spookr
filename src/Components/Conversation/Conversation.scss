@@ -32,8 +32,14 @@
         display: flex;
         align-items: center;
 
+        h1 {
+          font-size: .85rem;
+        }
+
         img {
           border: 2px solid white;
+          border-radius: 50%;
+
         }
       }
 
@@ -58,7 +64,7 @@
       bottom: 0;
       border-top: 1px solid gray;
       padding: .5rem;
-    
+
       input {
         width: 80%;
         background: $accent-three;
