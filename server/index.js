@@ -77,7 +77,4 @@ io.on('connection', socket => {
     // DB call return all messages
     io.to(roomName).emit('Messages', messages)
   })
-
-
-
 })

@@ -64,7 +64,7 @@ class HouseForm extends Component {
             amenities
           }
           axios.post('/house', houseDetails).then(res => {
-            this.props.history.push(`/profile/${this.props.user.id}`)
+            this.props.history.push(`/profile/${res.data.user_id}`)
           })
         },
       ).catch(

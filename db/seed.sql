@@ -66,7 +66,6 @@ create table house (
     body text not null,
     rooms int not null,
     remodeled boolean not null,
-    amenities int references amenities(id),
     owner int references homeowner(id),
     latitude numeric,
     longitude numeric

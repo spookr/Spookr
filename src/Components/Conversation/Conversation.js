@@ -65,21 +65,6 @@ class Conversation extends Component {
     })
   }
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
-
-
-
-
->>>>>>> master
   render() {
     return (
       <div className="Conversation">

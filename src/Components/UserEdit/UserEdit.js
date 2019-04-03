@@ -23,12 +23,7 @@ class UserEdit extends Component {
 
   getuser = () => {
     axios.get(`/api/user`).then(res => {
-<<<<<<< HEAD
-      this.setState({ user: res.data })
-      // console.log(this.state.user, 'The Logged In User.')
-=======
       this.props.getGhost(res.data);
->>>>>>> master
     })
   }
 

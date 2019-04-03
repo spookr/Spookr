@@ -1,3 +1,4 @@
 select * from matches
 inner join ghost on ghost.user_id = matches.matched_user
-where logged_user = $1
+inner join users on users.id = homeowner.user_id
+where swipping_user = $1

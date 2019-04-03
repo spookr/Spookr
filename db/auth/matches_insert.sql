@@ -1,5 +1,5 @@
 insert into matches(
-    logged_user,
+    swipping_user,
     matched_user
 )values(
     $1,
@@ -7,10 +7,9 @@ insert into matches(
 );
 
 insert into matches(
-    logged_user,
+    swipping_user,
     matched_user
 )values(
     $2,
     $1
 );
-

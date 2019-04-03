@@ -50,7 +50,7 @@ module.exports = {
         // console.log(user_id, swipedUser, swiped)
 
         try {
-            const swipedOn = await db.auth.swiped(user_id, swipedUser, swiped)
+            const swipedOn = await db.auth.swiped(swipedUser, user_id, swiped)
             return res.status(200).send('user added to swipe')
         } catch (err) {
             return res.status(500).send('could not process swipe')
@@ -61,10 +61,12 @@ module.exports = {
         const { user_id } = req.session.user;
         const {matchedUser} = req.body
         const db = req.app.get('db')
+
         try {
             const insertMatched = await db.auth.matches_insert(user_id, matchedUser)
             return res.status(200).send('Matched users!')
         } catch(err) {
+          console.log(err)
             res.status(500).send("could not match the users")
         }
     },
@@ -74,11 +76,15 @@ module.exports = {
         const { user_id } = req.session.user;
         const userType = req.session.user.ghost
 
+        console.log('hit get matches')
+        console.log(user_id, userType)
+
         if (userType) {
             try {
                 const getMatches = await db.auth.get_ghost_matches(user_id)
                 res.status(200).send(getMatches)
             } catch(err) {
+              console.log(err)
                 res.status(500).send('could not get matches')
             }
 
