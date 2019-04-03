@@ -7,7 +7,6 @@ import ProfileIcon from '../ProfileIcon/ProfileIcon'
 import Delete from './assets/delete.svg'
 import ProfileSideBar from '../ProfileSideBar/ProfileSideBar'
 
-
 class Conversation extends Component {
   constructor() {
     super()
@@ -25,7 +24,7 @@ class Conversation extends Component {
     this.socket.emit('Join room', {
       roomName,
       senderID: this.props.user_id,
-      receiverID: this.props.receiver_id //not sure what the reciever ID is called will need to check
+      receiverID: this.props.receiver_id
     })
 
     this.socket.on('Messages', messages => {
@@ -55,10 +54,6 @@ class Conversation extends Component {
     this.socket.disconnect()
   }
 
-
-
-
-
   inputMessage = (event) => {
     this.setState({
       message: event.target.value
@@ -66,9 +61,6 @@ class Conversation extends Component {
   }
 
   render() {
-
-    console.log(this.props)
-
     return (
       <div className="Conversation">
         <div className="ConversationMessages">
