@@ -25,7 +25,7 @@ class Main extends Component {
     const displayConversation = this.props.conversation &&  <Conversation closeConversation={this.props.closeConversation} />
     const displayToggle = this.props.conversation ? displayConversation : displayEdit
 
-    console.log(this.props)
+    // console.log(this.props)
 
     return (
       <div className="Main">

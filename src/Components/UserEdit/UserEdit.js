@@ -61,11 +61,11 @@ class UserEdit extends Component {
     this.setState({ [input]: val })
   }
 
-
   render() {
 
     var shown = { display: this.state.shown ? "flex" : "none" };
     var hidden = { display: this.state.shown ? "none" : "flex" }
+
 
     const houseProfile = !this.props.user.ghost &&
       <div>
