@@ -1,7 +1,7 @@
 var geodist = require('geodist')
 module.exports = {
     filteredSwipes: async (req, res) => {
-    //   console.log('hit filtered swipes')
+        //   console.log('hit filtered swipes')
         const { session } = req;
         const db = req.app.get('db')
         const { latitude, longitude, user_id } = session.user;
@@ -12,19 +12,19 @@ module.exports = {
         if (userType) {
 
             try {
-            const userHouses = await db.auth.filtered_houses(user_id)
-            const location_filtered = await userHouses.filter(user => {
-                delete user.username
-                delete user.password
-                return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: session.user.radius })
-            })
+                const userHouses = await db.auth.filtered_houses(user_id)
+                const location_filtered = await userHouses.filter(user => {
+                    delete user.username
+                    delete user.password
+                    return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: session.user.radius })
+                })
 
-            // console.log(location_filtered)
+                // console.log(location_filtered)
 
-            return res.status(200).send(location_filtered)
+                return res.status(200).send(location_filtered)
 
-            } catch(err) {
-              // console.log(err)
+            } catch (err) {
+                // console.log(err)
                 return res.status(400).send('Could not get users from database')
             }
         } else {
@@ -36,7 +36,7 @@ module.exports = {
                     return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: user.radius })
                 })
                 return res.status(200).send(location_filtered)
-            } catch(err) {
+            } catch (err) {
                 return res.status(400).send('Could not get users from database')
             }
         }
@@ -45,7 +45,7 @@ module.exports = {
     swipe: async (req, res) => {
         const { user_id } = req.session.user;
         const db = req.app.get('db')
-        const {swiped, swipedUser} = req.body
+        const { swiped, swipedUser } = req.body
 
         // console.log(user_id, swipedUser, swiped)
 
@@ -57,19 +57,19 @@ module.exports = {
         }
     },
 
-    insertMatched: async (req,res) => {
+    insertMatched: async (req, res) => {
         const { user_id } = req.session.user;
-        const {matchedUser} = req.body
+        const { matchedUser } = req.body
         const db = req.app.get('db')
         try {
             const insertMatched = await db.auth.matches_insert(user_id, matchedUser)
             return res.status(200).send('Matched users!')
-        } catch(err) {
+        } catch (err) {
             res.status(500).send("could not match the users")
         }
     },
 
-    getMatches : async (req,res) => {
+    getMatches: async (req, res) => {
         const db = req.app.get('db')
         const { user_id } = req.session.user;
         const userType = req.session.user.ghost
@@ -87,7 +87,7 @@ module.exports = {
                     }
                 }
                 res.status(200).send(getMatches)
-            } catch(err) {
+            } catch (err) {
                 res.status(500).send('could not get matches')
             }
 
@@ -106,40 +106,54 @@ module.exports = {
                     }
                 }
                 res.status(200).send(getMatches)
-            } catch(err) {
+            } catch (err) {
                 res.status(500).send('could not get matches')
             }
         }
     },
-    editProfile : async (req,res) => {
+
+
+
+    editProfile: async (req, res) => {
         const db = req.app.get('db')
-        const {ghost, user_id} = req.session.user
-        
-    
-        if(ghost){
-            const {name, bio, imageUrl} = req.body
-            if(!name || !bio || !imageUrl){
-                return res.status(500).send('need all info')
+        const { ghost, user_id } = req.session.user
+
+
+        if (ghost) {
+            const { name, bio, imageUrl } = req.body
+            console.log(name, bio, imageUrl)
+            if (!name || !bio || !imageUrl) {
+                return res.status(400).send('need all info')
             }
-            try{
+            try {
                 const editInfo = await db.auth.edit_ghost(user_id, name, bio, imageUrl)
+                req.session.user.bio = bio;
+                req.session.user.name = name;
+                req.session.user.imageUrl = imageUrl;
                 return res.status(200).send('info edited!')
-            }catch(err){
-                return res.status(500).send('could not edit profile')
-          }
-        }else{
-            console.log(req.session.user)
-            const {owner} = req.session.user
-            const{firstName, lastName, bio, imageUrl, body, header} = req.body
-            if(!firstName || !lastName ||  !bio || !imageUrl || !body || !header){
-                return res.status(500).send('need all infoooooo')
+            } catch (err) {
+                return res.status(401).send('could not edit profile')
             }
-            try{
+
+
+        } else {
+            const { owner } = req.session.user
+            const { firstName, lastName, bio, imageUrl, body, header } = req.body
+            if (!firstName || !lastName || !bio || !imageUrl || !body || !header) {
+                return res.status(400).send('need all infoooooo')
+            }
+            try {
                 const editOwner = await db.auth.edit_owner(user_id, firstName, lastName, bio, imageUrl)
+                req.session.user.first_name = firstName;
+                req.session.user.last_name = lastName;
+                req.session.user.bio = bio;
+                req.session.user.imageUrl = imageUrl;
                 const editHouse = await db.auth.edit_house(owner, header, body)
+                req.session.user.header = header;
+                req.session.user.body = body;
                 return res.status(200).send('info edited!')
-            }catch(err){
-                return res.status(500).send('could not edit profile')
+            } catch (err) {
+                return res.status(401).send('could not edit profile')
             }
         }
     },

@@ -52,11 +52,8 @@ app.post('/insertmatch', signedin.insertMatched)
 app.post('/editprofile', signedin.editProfile)
 app.post('/updateradius', signedin.updateRadius)
 
-// EndPoints
-// app.listen(SERVER_PORT, () => {
-//   console.log(`Spooking on Port ${SERVER_PORT} 👻`)
-// });
 
+app.post('/editprofile', signedin.editProfile)
 
 const io = socket(app.listen(SERVER_PORT, () => console.log(`Spooking on Port ${SERVER_PORT} 👻`)));
 
