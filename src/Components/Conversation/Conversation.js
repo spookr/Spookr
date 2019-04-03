@@ -66,6 +66,9 @@ class Conversation extends Component {
   }
 
   render() {
+
+    console.log(this.props)
+
     return (
       <div className="Conversation">
         <div className="ConversationMessages">
@@ -84,8 +87,7 @@ class Conversation extends Component {
             <button>Send</button>
           </div>
         </div>
-        <div classNam
-          e="ConversationProfile">
+        <div className="ConversationProfile">
           <ProfileSideBar user={{
             name: 'Savannah',
             profile_pic: 'https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2017/10/ghost-796x498.jpg',

@@ -17,12 +17,15 @@ class Main extends Component {
       )
     })
 
+    const matchConversation = this.props.matches && this.props.matches.map(user => {
+      return <Conversation {...user} closeConversation={this.props.closeConversation} />
+    })
+
     const displayEdit = this.props.edit ? <UserEdit /> : displaySwipes
-    const displayConversation = this.props.conversation && <Conversation closeConversation={this.props.closeConversation} />
+    const displayConversation = this.props.conversation &&  <Conversation closeConversation={this.props.closeConversation} />
     const displayToggle = this.props.conversation ? displayConversation : displayEdit
 
-    // console.log(this.props)
-
+    console.log(this.props)
 
     return (
       <div className="Main">
