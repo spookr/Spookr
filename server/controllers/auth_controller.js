@@ -101,7 +101,6 @@ module.exports = {
 
   getUser: (req, res) => {
     const { user } = req.session
-    // console.log(user)
     if (user) {
       res.status(200).send(user)
     } else {

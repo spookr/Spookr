@@ -1,17 +1,19 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import './Profile.scss'
 
 // Components
 import Main from '../Main/Main'
 import UserBar from '../UserBar/UserBar'
 import Discovery from '../Discovery/Discovery'
+import { connect } from 'react-redux'
+import { logIn } from '../../redux/reducer'
 
 // Packages
 import axios from 'axios'
 
 class Profile extends Component {
-  constructor () {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       edit: false,
       conversation: false,
@@ -20,15 +22,10 @@ class Profile extends Component {
     }
   }
 
-  // componentDidUpdate (prevState, prevProps) {
-  //   if (prevProps.swipes !== this.state.swipes) {
-  //     this.getFilteredSwipes()
-  //   }
-  // }
-
-  componentDidMount () {
+  componentDidMount() {
     this.getFilteredSwipes()
-    this.getMatches()
+    this.getMatches();
+    this.getUser()
   }
 
   getFilteredSwipes = () => {
@@ -40,11 +37,18 @@ class Profile extends Component {
   }
 
   getMatches = () => {
-    console.log('hit matches')
+    // console.log('hit matches')
     axios.get('/matches').then(res => {
+      console.log(res.data)
       this.setState({
         matches: res.data
       })
+    })
+  }
+
+  getUser = () => {
+    axios.get('/api/user').then(res => {
+      this.props.logIn(res.data)
     })
   }
 
@@ -69,16 +73,25 @@ class Profile extends Component {
     })
   }
 
-  swipeRight = (id) => {
+  swipeRight = (id, swiped) => {
 
     let swipedUser = {
       swipedUser: id,
       swiped: true
     }
 
-    axios.post('/swipe', swipedUser).then(res => {
-      console.log(res.data)
-    })
+    // console.log(swiped)
+
+    if (swiped) {
+      axios.post('/insertmatch', {matchedUser: id}).then(res => {
+        // Dispay Match Card: get
+        console.log(res.data)
+        this.getFilteredSwipes()
+      })} else {
+        axios.post('/swipe', swipedUser).then(res => {
+          this.getFilteredSwipes()
+        })
+      }
   }
 
   swipeLeft = (id) => {
@@ -89,36 +102,45 @@ class Profile extends Component {
     }
 
     axios.post('/swipe', swipedUser).then(res => {
-      console.log(res.data)
+      this.getFilteredSwipes()
     })
   }
 
-  render () {
+  render() {
 
-    const {edit, conversation, swipes, matches} = this.state
-    const {toggleEdit, toggleConversation, closeConversation, swipeRight, swipeLeft} = this
+    const { edit, conversation, swipes, matches } = this.state
+    const { toggleEdit, toggleConversation, closeConversation, swipeRight, swipeLeft } = this
 
     const displayDiscovery = edit ? <Discovery toggleEdit={toggleEdit} /> :
-    <UserBar
-      toggleEdit={toggleEdit}
-      toggleConversation={toggleConversation}
-      matches={matches}
+      <UserBar
+        toggleEdit={toggleEdit}
+        toggleConversation={toggleConversation}
+        matches={matches}
       />
 
     return (
       <div className="Profile">
         {displayDiscovery}
         <Main edit={edit}
-              conversation={conversation}
-              closeConversation={closeConversation}
-              swipes={swipes}
-              swipeRight={swipeRight}
-              swipeLeft={swipeLeft}
-              />
+          conversation={conversation}
+          closeConversation={closeConversation}
+          swipes={swipes}
+          swipeRight={swipeRight}
+          swipeLeft={swipeLeft}
+        />
 
       </div>
     )
   }
 }
 
-export default Profile
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  }
+}
+const mapDispatchToProps = {
+  logIn
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)

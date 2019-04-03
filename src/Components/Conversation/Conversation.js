@@ -25,7 +25,7 @@ class Conversation extends Component {
     this.socket.emit('Join room', {
       roomName,
       senderID: this.props.user_id,
-      receiverID: this.props.receiver_id //not sure what the reciever ID is called will need to check
+      receiverID: this.props.receiver_id
     })
 
     this.socket.on('Messages', messages => {
@@ -59,7 +59,6 @@ class Conversation extends Component {
       message: event.target.value
     })
   }
-
 
   render() {
     return (
