@@ -4,23 +4,21 @@ import './Messages.scss'
 // Components
 import MessageCard from '../MessageCard/MessageCard'
 
-class Messages extends Component {
-  render() {
+const Messages = (props) => {
 
-    // <MessageCard toggleConversation={this.props.toggleConversation} />
+  console.log(props)
 
-    const displayMatches = this.props.matches && this.props.matches.length === 0 ?
-      <h2 style={{ color: 'black' }}>You have no matches. Start swiping!</h2> : null
+  const displayMatches = props.matches &&
+    props.matches.map( (match, index) => {
+        return <MessageCard key={index} toggleConversation={props.toggleConversation} {...match}/>
+      })
 
-    return (
-      <div className="Messages">
-        <h1>Messages</h1>
-        <MessageCard toggleConversation={this.props.toggleConversation} />
-
-        {displayMatches}
-      </div>
-    )
-  }
+  return (
+    <div className="Messages">
+      <h1>Messages</h1>
+      {displayMatches}
+    </div>
+  )
 }
 
 export default Messages

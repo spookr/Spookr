@@ -9,7 +9,7 @@ const ProfileIcon = (props) => {
 
   return (
     <div className="ProfileIcon">
-      <img src={Cat} alt="Chatting User" />
+      <img src={props.photo} alt="Chatting User" />
     </div>
   )
 }

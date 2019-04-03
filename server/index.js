@@ -79,7 +79,4 @@ io.on('connection', socket => {
     const messages = await db.auth.get_messages([messenger, receiver])
     io.to(roomName).emit('Messages', messages)
   })
-
-
-
 })

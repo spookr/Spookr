@@ -35,18 +35,23 @@ class Discovery extends Component {
   }
 
   render () {
+    //
+    // console.log(this.props)
+    const displaySlider = this.props.user.ghost &&
+    <div>
+      <div className="DiscoveryHeader">
+        <h2>Discovery Settings</h2>
+        <h3>{this.state.slider} miles</h3>
+      </div>
+      <Slider defaultValue={this.state.slider} onChange={this.onSliderChange}/>
+    </div>
 
-    // console.log(this.state.slider)
 
     return (
       <div className="Discovery">
         <ProfileTab toggleEdit={this.props.toggleEdit}/>
         <div className="DiscoverySettings">
-          <div className="DiscoveryHeader">
-            <h2>Discovery Settings</h2>
-            <h3>{this.state.slider} miles</h3>
-          </div>
-          <Slider defaultValue={this.state.slider} onChange={this.onSliderChange}/>
+          {displaySlider}
           <div className='NavigationButton'>
             <button id="LogoutButton" onClick={this.logout}>Logout</button>
           </div>

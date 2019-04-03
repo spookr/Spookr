@@ -4,18 +4,20 @@ import './MessageCard.scss'
 // Components
 import ProfileIcon from '../ProfileIcon/ProfileIcon'
 
-class Conversation extends Component {
-  render () {
-    return (
-      <div className="MessageCard" onClick={this.props.toggleConversation}>
-        <ProfileIcon />
-        <div className="RecentMessage">
-          <h2>Name</h2>
-          <p>Most recent message.</p>
-        </div>
-      </div>
-    )
-  }
+const MessageCard = (props) => {
+
+  const houseMatch = !props.ghost &&
+    <div className='RecentMessage'>
+      <h2>{props.first_name} {props.last_name}</h2>
+      <p>Recent Message Here</p>
+    </div>
+
+  return (
+    <div className="MessageCard" onClick={props.toggleConversation}>
+      <ProfileIcon photo={props.profile_pic}/>
+      {houseMatch}
+    </div>
+  )
 }
 
-export default Conversation
+export default MessageCard

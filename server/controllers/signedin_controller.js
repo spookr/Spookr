@@ -50,8 +50,8 @@ module.exports = {
         // console.log(user_id, swipedUser, swiped)
 
         try {
-            const swipedOn = await db.auth.swiped(user_id, swipedUser, swiped)
-            return res.status(200).send('user added to swiped')
+            const swipedOn = await db.auth.swiped(swipedUser, user_id, swiped)
+            return res.status(200).send('user added to swipe')
         } catch (err) {
             return res.status(500).send('could not process swipe')
         }
@@ -61,6 +61,7 @@ module.exports = {
         const { user_id } = req.session.user;
         const { matchedUser } = req.body
         const db = req.app.get('db')
+
         try {
             const insertMatched = await db.auth.matches_insert(user_id, matchedUser)
             return res.status(200).send('Matched users!')
@@ -73,6 +74,9 @@ module.exports = {
         const db = req.app.get('db')
         const { user_id } = req.session.user;
         const userType = req.session.user.ghost
+
+        console.log('hit get matches')
+        console.log(user_id, userType)
 
         if (userType) {
             try {
@@ -116,14 +120,13 @@ module.exports = {
 
     editProfile: async (req, res) => {
         const db = req.app.get('db')
-        const { ghost, user_id } = req.session.user
+        const {ghost, user_id} = req.session.user
 
 
-        if (ghost) {
-            const { name, bio, imageUrl } = req.body
-            console.log(name, bio, imageUrl)
-            if (!name || !bio || !imageUrl) {
-                return res.status(400).send('need all info')
+        if(ghost){
+            const {name, bio, imageUrl} = req.body
+            if(!name || !bio || !imageUrl){
+                return res.status(500).send('need all info')
             }
             try {
                 const editInfo = await db.auth.edit_ghost(user_id, name, bio, imageUrl)

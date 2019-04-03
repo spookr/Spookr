@@ -61,7 +61,6 @@ class UserEdit extends Component {
     this.setState({ [input]: val })
   }
 
-
   render() {
 
     var shown = { display: this.state.shown ? "flex" : "none" };
