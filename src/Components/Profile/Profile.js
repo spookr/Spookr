@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Geocode from "react-geocode";
 import './Profile.scss'
 
 // Components
@@ -30,9 +31,33 @@ class Profile extends Component {
 
   getFilteredSwipes = () => {
     axios.get('/filterswipes').then(res => {
+      const allUsers = res.data
+      allUsers.forEach( async user => {
+        console.log(user.latitude, user.longitude)
+        await Geocode.setApiKey("AIzaSyCdZuqe3hLZO8Tq1wYHOA4WJ8bmPFK1XT4");
+        await Geocode.enableDebug();
+        Geocode.fromLatLng(`${user.latitude}`, `${user.longitude}`).then(
+        response => {
+            const locationObj = response.results[0];
+            for(let i = 0; i < locationObj.address_components.length; i ++){
+                if(locationObj.address_components[i].types.includes('locality')){
+                    user.address = locationObj.address_components[i].long_name
+                }
+                if(locationObj.address_components[i].types.includes('administrative_area_level_1')){
+                    user.state = locationObj.address_components[i].long_name
+                }
+            }
+        },
+        error => {
+            console.error(error);
+        }
+        );
+    })
+
       this.setState({
-        swipes: res.data
+        swipes: allUsers
       })
+      console.log(allUsers)
     })
   }
 

@@ -1,4 +1,5 @@
 var geodist = require('geodist')
+const Geocode = require('react-geocode')
 module.exports = {
     filteredSwipes: async (req, res) => {
         //   console.log('hit filtered swipes')
@@ -18,6 +19,28 @@ module.exports = {
                     delete user.password
                     return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: session.user.radius })
                 })
+
+                // location_filtered.forEach( async user => {
+                //     console.log(user.latitude, user.longitude)
+                //     await Geocode.setApiKey("AIzaSyCdZuqe3hLZO8Tq1wYHOA4WJ8bmPFK1XT4");
+                //     await Geocode.enableDebug();
+                //     Geocode.fromLatLng(`${user.latitude}`, `${user.longitude}`).then(
+                //     response => {
+                //         const locationObj = response.results[0];
+                //         for(let i = 0; i < locationObj.address_components.length; i ++){
+                //             if(locationObj.address_components[i].types.includes('locality')){
+                //                 user.address = locationObj.address_components[i].long_name
+                //             }
+                //             if(locationObj.address_components[i].types.includes('administrative_area_level_1')){
+                //                 user.state = locationObj.address_components[i].long_name
+                //             }
+                //         }
+                //     },
+                //     error => {
+                //         console.error(error);
+                //     }
+                //     );
+                // })
 
                 // console.log(location_filtered)
 
