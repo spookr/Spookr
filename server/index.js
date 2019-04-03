@@ -50,6 +50,7 @@ app.post('/swipe', signedin.swipe)
 app.get('/matches', signedin.getMatches)
 app.post('/insertmatch', signedin.insertMatched)
 app.post('/editprofile', signedin.editProfile)
+app.post('/updateradius', signedin.updateRadius)
 
 // EndPoints
 // app.listen(SERVER_PORT, () => {
@@ -68,13 +69,17 @@ io.on('connection', socket => {
     socket.join(roomName)
     console.log('Apple Bottom Jeans')
     // this is where you make your DB query
-    // const messages = await db.getMessages([user_id, receiver_id])
-    // io.to(roomName).emit('Messages', messages)
+    try{
+      const messages = await db.auth.get_messages([user_id, receiver_id])
+      io.to(roomName).emit('Messages', messages)
+    }catch(err){
+      console.log(err)
+    }
   })
 
   socket.on('New Message', async ({ messenger, receiver, message, roomName }) => {
-    const messages = await db.addMessage([messenger, receiver, message])
-    // DB call return all messages
+    const addMessage = await db.auth.add_message([messenger, receiver, message])
+    const messages = await db.auth.get_messages([messenger, receiver])
     io.to(roomName).emit('Messages', messages)
   })
 
