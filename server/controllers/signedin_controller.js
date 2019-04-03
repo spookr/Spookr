@@ -122,5 +122,21 @@ module.exports = {
                 return res.status(500).send('could not edit profile')
             }
         }
+    },
+
+    updateRadius : async (req,res) => {
+        const db = req.app.get('db')
+        const {ghost, user_id} = req.session.user
+        const {radius} = req.body
+
+        if(ghost){
+            try{
+                const radiusUpdate = await db.auth.update_radius(user_id, radius)
+                req.session.user.radius = radius
+                return res.status(200).send('updated radius')
+            }catch(err){
+                return res.status(500).send('could not send db request')
+            }
+        }
     }
 }
