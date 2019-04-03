@@ -77,6 +77,15 @@ module.exports = {
         if (userType) {
             try {
                 const getMatches = await db.auth.get_ghost_matches(user_id)
+                const getRecents = await db.auth.get_recents(user_id)
+
+                for(let i = 0; i < getMatches.length; i++){
+                    for(let j = 0; j < getRecents.length; j++){
+                        if(getRecents[j].messenger === getMatches[i].user_id || getRecents[j].receiver === getMatches[i].user_id){
+                           getMatches[i].recent = getRecents[j].message
+                        }
+                    }
+                }
                 res.status(200).send(getMatches)
             } catch(err) {
                 res.status(500).send('could not get matches')
@@ -84,7 +93,18 @@ module.exports = {
 
         } else {
             try {
+                console.log('before matches')
                 const getMatches = await db.auth.get_house_matches(user_id)
+                console.log('before recents')
+                const getRecents = await db.auth.get_recents(user_id)
+                
+                for(let i = 0; i < getMatches.length; i++){
+                    for(let j = 0; j < getRecents.length; j++){
+                        if(getRecents[j].messenger === getMatches[i].user_id || getRecents[j].receiver === getMatches[i].user_id){
+                           getMatches[i].recent = getRecents[j].message
+                        }
+                    }
+                }
                 res.status(200).send(getMatches)
             } catch(err) {
                 res.status(500).send('could not get matches')
