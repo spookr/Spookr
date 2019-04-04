@@ -27,7 +27,7 @@ export default function (state = initialState, action) {
   }
 }
 export function logIn (user) {
-  console.log(user, 'HEY IM A USER AS;DJFHLJKASFHLJKASHDFKJH')
+  // console.log(user, 'HEY IM A USER AS;DJFHLJKASFHLJKASHDFKJH')
   return {
     type: LOGGED_IN,
     payload: user

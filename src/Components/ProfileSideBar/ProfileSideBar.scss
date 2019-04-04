@@ -1,1 +1,22 @@
 @import '../../index';
+
+.ProfileSideBar {
+  width: 100%;
+  min-height: 100%;
+
+  img {
+    width: 100%;
+    min-height: 20rem;
+  }
+
+  .SideDetails {
+    padding: .5rem;
+
+    h1 {
+      font-weight: bolder;
+      color: $accent-three;
+    }
+  }
+
+
+}

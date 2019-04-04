@@ -1,16 +1,17 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './Messages.scss'
 
 // Components
 import MessageCard from '../MessageCard/MessageCard'
 
+
 const Messages = (props) => {
 
-  console.log(props)
+  // console.log(props)
 
   const displayMatches = props.matches &&
     props.matches.map( (match, index) => {
-        return <MessageCard key={index} toggleConversation={props.toggleConversation} {...match}/>
+        return <MessageCard key={index} {...match} selectMatch={props.selectMatch}/>
       })
 
   return (
