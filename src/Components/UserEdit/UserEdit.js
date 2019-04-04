@@ -82,7 +82,6 @@ class UserEdit extends Component {
           onChange={(e) => this.handleUpdate('lastName', e.target.value)}
         />
 
-
         <h3> {this.state.bio} </h3>
         <input
           style={hidden}
@@ -90,14 +89,12 @@ class UserEdit extends Component {
           onChange={(e) => this.handleUpdate('bio', e.target.value)}
         />
 
-
         <h3> {this.state.header} </h3>
         <input
           style={hidden}
           value={this.state.header}
           onChange={(e) => this.handleUpdate('header', e.target.value)}
         />
-
 
         <h3> {this.state.body} </h3>
         <input
@@ -108,7 +105,7 @@ class UserEdit extends Component {
       </div>
 
 
-    // Ghost profile edit stuff.
+    // Edit ghost profile.
     const ghostProfile = this.props.user.ghost &&
       <div>
         <h1> {this.state.name} </h1>
@@ -128,33 +125,21 @@ class UserEdit extends Component {
 
     return (
       <div className="UserEdit">
-        <div className='userEdit-picture'>
+        <div className='UserEditPhoto'>
           <img src={this.props.user.profile_pic} alt='profile pic' />
         </div>
-        <div className='userEdit-name'>
+        <div className='UserEditName'>
           {houseProfile}
           {ghostProfile}
-
         </div>
-        <div className='userEdit-bio'>
-
+        <div className='UserEditBio'>
         </div>
-        <div className='userEdit-editButton'>
-          <button
-            style={shown}
-            onClick={() => this.toggleShown()}
-          > Edit Info </button>
-
-
-
-          <button
-            style={hidden}
-            onClick={() => {
+        <div className='UserEditButton'>
+          <button style={shown} onClick={() => this.toggleShown()}> Edit Info </button>
+          <button style={hidden} onClick={() => {
               this.toggleShown()
               this.updateInfo()
-            }}
-
-          > Save Info </button>
+            }}> Save Info </button>
         </div>
       </div>
     )

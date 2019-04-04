@@ -186,8 +186,8 @@ main {
           padding-top: 1rem;
 
           button {
-            border: 1px solid $accent-three;
-            border-radius: 3px;
+            border: none;
+            border-radius: 0;
             font-size: 1.15rem;
             padding: .75rem 6rem;
             text-decoration: none;

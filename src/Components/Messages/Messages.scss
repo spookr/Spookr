@@ -1,7 +1,7 @@
 @import '../../index';
 
 .Messages {
-    background: $accent-three;
+    background: $secondary-color;
     min-height: 90vh;
     padding: 1rem 1.25rem;
     overflow: scroll;
@@ -9,7 +9,7 @@
     h1 {
         font-size: 1.2em;
         padding-bottom: 1rem;
-        color: $secondary-color;
+        color: $accent-three;
         font-weight: bolder;
     }
 }

@@ -3,7 +3,7 @@
 .Conversation {
   min-width: 100%;
   height: 100%;
-  background: $accent-three;
+  background: $primary-color;
   display: grid;
   grid-template-columns: 2fr 1fr;
 
@@ -19,7 +19,8 @@
 
     h1 {
       text-transform: uppercase;
-      color: $primary-color;
+      color: $accent-three;
+      font-weight: bolder;
     }
 
     .ConversationNavigation {
@@ -55,9 +56,8 @@
       width: 100%;
       display: flex;
       flex-direction: column;
-      padding: 1rem;
+      padding: 1rem 1rem 4rem 1rem;
       overflow: scroll;
-
     }
 
     .ConversationFooter {
@@ -66,38 +66,44 @@
       justify-content: space-between;
       position: absolute;
       bottom: 0;
-      border-top: 1px solid gray;
+      border-top: 1px solid $accent-three;
       padding: .5rem;
+      z-index: 1;
+      background: $primary-color;
 
       input {
         width: 80%;
-        background: $accent-three;
+        background: $primary-color;
         border: none;
         padding: .5rem;
-        color: $primary-color;
+        color: $accent-three;
       }
 
       button {
         width: 7rem;
         padding: 0;
-        border: none;
         text-transform: uppercase;
         border: 1px solid $accent-three;
-        background: $primary-color;
-        border: none;
+        background:  none;
+        border: 1px solid $accent-one;
         color: $accent-three;
+      }
+
+      button:hover {
+        background: $accent-one;
+        transition: .5s;
       }
     }
   }
 
 
   .ConversationProfile {
-    background: $accent-three;
+    background: $secondary-color;
     padding: 1rem;
-    border-left: 1px solid gray;
+    border-left: 1px solid $accent-three;
 
     p {
-      color: #1A1A1A;
+      color: $accent-three;
     }
   }
 }

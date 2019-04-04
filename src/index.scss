@@ -1,15 +1,14 @@
 $primary-color: #0A0923;
-$secondary-color: #1E028C;
-$accent-one: #76E2F8;
-$accent-two: #434857;;
+$secondary-color: #1F2742;
+$accent-one: #5ec3eb;
+$accent-two: #1FEFAB;
 $accent-three: #EEF0F2;
 
 $primary-font: 'M PLUS Rounded 1c', sans-serif;
 $secondary-font: 'This Is The Future';
 
 button {
-  border: 1px solid $accent-three;
-  border-radius: 3px;
+  border: none;
   color: $primary-color;
   font-size: 1.15rem;
   padding: .75rem 2rem;

@@ -14,8 +14,8 @@
 
 		p {
 			min-width: 5rem;
-			background: blue;
-			color: white;
+			background: $accent-one;
+			color: $primary-color;
 			padding: 10px 20px;
 			border-radius: 25px;
 		}
@@ -29,8 +29,8 @@
 
 		p {
 			min-width: 5rem;
-			background: #E5E5EA;
-			color: black;
+			background: $accent-two;
+			color: $primary-color;
 			padding: 10px 20px;
 			border-radius: 25px;
 

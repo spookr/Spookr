@@ -19,10 +19,10 @@ nav {
     }
 
     button {
-      border: 1px solid $accent-three;
-      border-radius: 3px;
+      border: none;
+      border-radius: 0;
       font-size: 1.15rem;
-      padding: .75rem 2rem;
+      padding: .55rem 2rem;
       text-decoration: none;
       cursor: pointer;
       background: $accent-one;

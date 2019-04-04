@@ -6,13 +6,9 @@ const Message = (props) => {
 
   console.log(props)
 
-  const conversation = props.messenger.toString() === props.match.params.id ?
-    <div className="SendorMessage"><p>{props.message}</p></div>
-    : <div className="ReceiverMessage"><p>{props.message}</p></div>
-
   return (
     <div className="Message">
-      {conversation}
+      <div className={props.messenger.toString() === props.match.params.id ? "SendorMessage" : "ReceiverMessage"}><p>{props.message}</p></div>
     </div>
   )
 }
