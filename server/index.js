@@ -60,14 +60,16 @@ const io = socket(app.listen(SERVER_PORT, () => console.log(`Spooking on Port ${
 
 io.on('connection', socket => {
   console.log('User connected')
-  // const db = app.get('db')
+  const db = app.get('db')
 
-  socket.on('Join room', async ({ roomName, user_id, receiver_id }) => {
-    socket.join(roomName)
+  socket.on('Join room', async ({ roomName, senderID, receiverID }) => {
+    console.log(roomName, senderID, receiverID)
     console.log('Apple Bottom Jeans')
     // this is where you make your DB query
+    socket.join(roomName)
     try{
-      const messages = await db.auth.get_messages([user_id, receiver_id])
+      const messages = await db.auth.get_messages([senderID, receiverID])
+      console.log(messages)
       io.to(roomName).emit('Messages', messages)
     }catch(err){
       console.log(err)
@@ -75,8 +77,11 @@ io.on('connection', socket => {
   })
 
   socket.on('New Message', async ({ messenger, receiver, message, roomName }) => {
+    const db = app.get('db')
+    console.log(messenger, receiver, message, roomName)
     const addMessage = await db.auth.add_message([messenger, receiver, message])
     const messages = await db.auth.get_messages([messenger, receiver])
+    console.log(messages)
     io.to(roomName).emit('Messages', messages)
   })
 })

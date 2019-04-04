@@ -19,21 +19,23 @@ class Conversation extends Component {
   }
 
   componentDidMount() {
-    this.socket = io("http://localhost:4000/");
+    this.socket = io();
+    console.log(this.props.selectedUser.swipping_user, this.props.selectedUser.matched_user)
 
-    const roomName = this.roomNameBuilder(this.props.user_id, this.props.receiver_id)
+    const roomName = this.roomNameBuilder(this.props.selectedUser.swipping_user, this.props.selectedUser.matched_user)
 
     this.socket.emit('Join room', {
       roomName,
-      senderID: this.props.user_id,
-      receiverID: this.props.receiver_id
+      senderID: this.props.selectedUser.swipping_user,
+      receiverID: this.props.selectedUser.matched_user
     })
 
     this.socket.on('Messages', messages => {
+      console.log('messages are received succesfully')
+      console.log(messages)
       this.setState({ allMessages: messages })
     })
   }
-
 
   roomNameBuilder = (user_id, receiver_id) => {
     const roomName = `${Math.min(user_id, receiver_id)}_${Math.max(user_id, receiver_id)}`
@@ -41,10 +43,10 @@ class Conversation extends Component {
   }
 
   sendMessage = () => {
-    const roomName = this.roomNameBuilder(this.props.user_id, this.props.receiver_id)
+    const roomName = this.roomNameBuilder(this.props.selectedUser.swipping_user, this.props.selectedUser.matched_user)
     const body = {
-      messenger: this.props.user_id,
-      receiver: this.props.receiver_id,
+      messenger: this.props.selectedUser.swipping_user,
+      receiver: this.props.selectedUser.matched_user,
       message: this.state.message,
       roomName
     }
@@ -65,6 +67,7 @@ class Conversation extends Component {
 
     console.log('user id', this.props.selectedUser.swipping_user)
     console.log('matched user', this.props.selectedUser.matched_user)
+    console.log(this.state.allMessages)
 
     return (
       <div className="Conversation">
@@ -81,7 +84,7 @@ class Conversation extends Component {
           </div>
           <div className="ConversationFooter">
             <input type="text" placeholder="Type a message..." value={this.state.message} onChange={(e) => this.inputMessage(e)} />
-            <button>Send</button>
+            <button onClick={this.sendMessage}>Send</button>
           </div>
         </div>
         <div className="ConversationProfile">

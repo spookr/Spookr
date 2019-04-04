@@ -119,7 +119,6 @@ create table matches (
     matched_user int references users(id)
 )
 
-
 -- DATA ON LOCATIONS
 select Round(point(house.latitude, house.longitude)<@>point(ghosts.latitude, ghosts.longitude)) as distance
 FROM house, ghosts

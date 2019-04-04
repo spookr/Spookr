@@ -3,7 +3,7 @@ import './Message.scss'
 
 const Message = (props) => {
 
-  // console.log(this.props.allMessages)
+  console.log(props)
   // const conversation = this.props.allMessages.map(message => {
   //   if (message.userId === myUserID){
   //     return <div className="from-me"><p>{message.content}</p></div>
