@@ -52,20 +52,45 @@ class HouseForm extends Component {
       .then(
         response => {
           const { lat, lng } = response.results[0].geometry.location;
-          console.log({ lat, lng })
-
-          const houseDetails = {
-            header,
-            description,
-            rooms,
-            lat,
-            lng,
-            remodeled,
-            amenities
-          }
-          axios.post('/house', houseDetails).then(res => {
-            this.props.history.push(`/profile/${res.data.user_id}`)
-          })
+          let town = '';
+          let foundState = '';
+          Geocode.setApiKey(googleKey);
+          Geocode.enableDebug();
+          Geocode.fromLatLng(`${lat}`, `${lng}`).then(
+            response => {
+              const locationObj = response.results[0];
+              for(let i = 0; i < locationObj.address_components.length; i ++){
+                if(locationObj.address_components[i].types.includes('locality')){
+                  console.log(locationObj.address_components[i].long_name)
+                  town = locationObj.address_components[i].long_name
+                  console.log(town)
+                }
+                if(locationObj.address_components[i].types.includes('administrative_area_level_1')){
+                  console.log(locationObj.address_components[i].long_name)
+                  foundState = locationObj.address_components[i].long_name
+                }
+              }
+              console.log(locationObj)
+              const houseDetails = {
+                header,
+                description,
+                rooms,
+                lat,
+                lng,
+                remodeled,
+                amenities,
+                town,
+                foundState
+              }
+              axios.post('/house', houseDetails).then(res => {
+                this.props.history.push(`/profile/${res.data.user_id}`)
+              })
+            },
+            error => {
+              console.error(error);
+            }
+          );
+       
         },
       ).catch(
         error => {

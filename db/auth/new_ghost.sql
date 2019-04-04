@@ -6,7 +6,9 @@ insert into ghosts(
     profile_pic,
     latitude, 
     longitude,
-    radius
+    radius,
+    town,
+    state
 )values(
     $1,
     $2,
@@ -15,6 +17,8 @@ insert into ghosts(
     $5,
     $6,
     $7,
-    $8
+    $8,
+    $9,
+    $10
 )
 returning *;

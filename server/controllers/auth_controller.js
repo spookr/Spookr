@@ -109,42 +109,19 @@ module.exports = {
   },
 
   ghostDetails: async (req, res) => {
-    const { name, bio, type, user_id, profile_pic, lat, lng } = req.body;
+    const { name, bio, type, user_id, profile_pic, lat, lng, town, foundState } = req.body;
     const db = req.app.get('db');
     const {session} = req
 
     const radius = 50;
 
-    if (!name || !bio || !type || !user_id || !profile_pic || !lat || !lng ) {
+    if (!name || !bio || !type || !user_id || !profile_pic || !lat || !lng || !town || !foundState ) {
       return res.status(400).send('need all info')
     }
 
     try {
-      Geocode.setApiKey("AIzaSyCdZuqe3hLZO8Tq1wYHOA4WJ8bmPFK1XT4");
-      Geocode.enableDebug();
-      Geocode.fromLatLng("41.766972", "-111.813291").then(
-        response => {
-          const locationObj = response.results[0];
-          for(let i = 0; i < locationObj.address_components.length; i ++){
-            if(locationObj.address_components[i].types.includes('locality')){
-               this.setState({
-                address: locationObj.address_components[i].long_name
-              })
-            }
-            if(locationObj.address_components[i].types.includes('administrative_area_level_1')){
-              this.setState({
-                locatedState: locationObj.address_components[i].long_name
-              })
-            }
-          }
-          console.log(locationObj)
-        },
-        error => {
-          console.error(error);
-        }
-      );
 
-      let newGhost = await db.auth.new_ghost([name, bio, type, user_id, profile_pic, lat, lng, radius])
+      let newGhost = await db.auth.new_ghost([name, bio, type, user_id, profile_pic, lat, lng, radius, town, foundState])
       // console.log('Hello my dudes', newGhost)
       newGhost = newGhost[0]
       session.user = {
@@ -155,6 +132,7 @@ module.exports = {
       // console.log(req.session)
       return res.status(200).send(session.user)
     } catch (err) {
+      console.log('this error happened')
       return res.status(500).send('Could not create account')
     }
   },
@@ -184,17 +162,17 @@ module.exports = {
   },
 
   houseDetails: async (req, res) => {
-    const { header, description, rooms, remodeled, lat, lng, amenities, amenities: { spiderwebs, basement, grandfatherClock, dolls, electricity, pets } } = req.body
+    const { header, description, rooms, remodeled, lat, lng, amenities, town, foundState, amenities: { spiderwebs, basement, grandfatherClock, dolls, electricity, pets } } = req.body
     const db = req.app.get('db')
     const owner = req.session.user.user_id
     // console.log('pree pree', req.session)
 
-    if (!header || !description || !rooms || !amenities || !lat || !lng) {
+    if (!header || !description || !rooms || !amenities || !lat || !lng || ! town || !foundState) {
       return res.status(400).send('Need All House Info Filled Out')
     }
 
     try {
-      let newHouse = await db.auth.new_house([header, description, rooms, remodeled, owner, lat, lng])
+      let newHouse = await db.auth.new_house([header, description, rooms, remodeled, owner, lat, lng, town, foundState])
       newHouse = newHouse[0]
       // console.log({spiderwebs, basement, grandfatherClock, dolls, electricity, pets, house_id: newHouse.id})
       const savedAmenities = await db.auth.amenities([spiderwebs, basement, grandfatherClock, dolls, electricity, pets, newHouse.id])
