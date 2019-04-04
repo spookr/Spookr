@@ -51,7 +51,7 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        padding-bottom: 1rem;
+        padding-bottom: 1.5rem;
         width: 100%;
     }
 
@@ -65,7 +65,7 @@
 
       button:hover {
         background: $accent-one;
-        transition: .5s;
+        transition: .3s;
       }
     }
 }
