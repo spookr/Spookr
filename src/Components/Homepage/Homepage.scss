@@ -28,6 +28,7 @@ main {
         }
 
         p {
+          font-size: .95rem;
           max-width: 31rem;
           text-align: center;
         }
@@ -185,8 +186,8 @@ main {
           padding-top: 1rem;
 
           button {
-            border: 1px solid $accent-three;
-            border-radius: 3px;
+            border: none;
+            border-radius: 0;
             font-size: 1.15rem;
             padding: .75rem 6rem;
             text-decoration: none;
@@ -198,7 +199,6 @@ main {
 
           button:hover {
           	background: #32C4E2;
-            transition: .7s;
           }
 
         }

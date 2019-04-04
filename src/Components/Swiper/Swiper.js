@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './Swiper.scss'
-import Cat03 from '../ProfileIcon/assets/Cat03.jpg'
 
 // Components
 import SwipeBar from '../SwipeBar/SwipeBar'

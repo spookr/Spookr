@@ -99,9 +99,10 @@ module.exports = {
             try {
                 console.log('before matches')
                 const getMatches = await db.auth.get_house_matches(user_id)
+                console.log(getMatches)
                 console.log('before recents')
                 const getRecents = await db.auth.get_recents(user_id)
-                
+
                 for(let i = 0; i < getMatches.length; i++){
                     for(let j = 0; j < getRecents.length; j++){
                         if(getRecents[j].messenger === getMatches[i].user_id || getRecents[j].receiver === getMatches[i].user_id){
@@ -111,6 +112,7 @@ module.exports = {
                 }
                 res.status(200).send(getMatches)
             } catch (err) {
+              console.log(err)
                 res.status(500).send('could not get matches')
             }
         }
