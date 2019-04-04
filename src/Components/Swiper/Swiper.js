@@ -29,7 +29,7 @@ class Swiper extends Component {
         <div className='SwiperInfo'>
           <h1> {this.props.header} </h1>
           {this.props.ghost ? <h3> Type </h3> : null}
-          <h3> Distance </h3>
+          <h3> {this.props.address} , {this.props.state} </h3>
           <hr />
         </div>
         <div className='SwiperBio'>

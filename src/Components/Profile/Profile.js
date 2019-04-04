@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Geocode from "react-geocode";
 import './Profile.scss'
 
 // Components
@@ -31,9 +32,11 @@ class Profile extends Component {
 
   getFilteredSwipes = () => {
     axios.get('/filterswipes').then(res => {
+
       this.setState({
         swipes: res.data
       })
+      console.log(res.data)
     })
   }
 

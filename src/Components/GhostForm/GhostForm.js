@@ -66,22 +66,47 @@ class GhostForm extends Component {
     .then(
       response => {
         const {lat, lng} = response.results[0].geometry.location;
+        let town = '';
+        let foundState = '';
+        Geocode.setApiKey(googleKey);
+        Geocode.enableDebug();
+        Geocode.fromLatLng(`${lat}`, `${lng}`).then(
+          response => {
+            const locationObj = response.results[0];
+            for(let i = 0; i < locationObj.address_components.length; i ++){
+              if(locationObj.address_components[i].types.includes('locality')){
+                console.log(locationObj.address_components[i].long_name)
+                town = locationObj.address_components[i].long_name
+                console.log(town)
+              }
+              if(locationObj.address_components[i].types.includes('administrative_area_level_1')){
+                console.log(locationObj.address_components[i].long_name)
+                foundState = locationObj.address_components[i].long_name
+              }
+            }
+            console.log(locationObj)
+            const ghostDetails = {
+              name,
+              bio,
+              type,
+              user_id,
+              profile_pic,
+              lat,
+              lng,
+              radius,
+              town,
+              foundState
+            }
+            axios.post('/ghost', ghostDetails).then(res => {
+              // this.props.getGhost(res.data)
+              this.props.history.push(`/profile/${res.data.user_id}`)
+            })
+          },
+          error => {
+            console.error(error);
+          }
+        );
 
-        const ghostDetails = {
-          name,
-          bio,
-          type,
-          user_id,
-          profile_pic,
-          lat,
-          lng,
-          radius
-        }
-
-        axios.post('/ghost', ghostDetails).then(res => {
-          // this.props.getGhost(res.data)
-          this.props.history.push(`/profile/${res.data.user_id}`)
-        })
       },
       error => {
         console.error(error);
