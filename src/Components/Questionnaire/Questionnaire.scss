@@ -1,199 +1,208 @@
 @import '../../index';
 
 .Questionnaire {
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
-  overflow: hidden;
-
-  button:hover {
-    background: #32C4E2;
-    transition: .7s;
-  }
-
-  .QuestionnaireSecondary {
-    height: 100%;
-    max-width: 85vw;
+    width: 100vw;
     display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
 
-    .QuestionnaireMain {
-      width: 32rem;
-      height: 30rem;
-      background: rgba(10, 9, 35, .8);
-      display: flex;
-      flex-direction: column;
-      padding: 3rem 2rem 2rem 2rem;
-      justify-content: space-evenly;
-      position: relative;
-      overflow: scroll;
-      z-index: 1;
-
-      #LoginSub {
-        margin-bottom: -.5rem;
-      }
-
-      .QuestionnairePhoto {
-        display: flex;
-        justify-content: center;
-      }
-
-      #ProfilePhoto {
-        width: 10rem;
-        height: 10rem;
-        border-radius: 50%;
-        align-self: center;
-        margin-bottom: 1rem;
-      }
-
-      #Margin {
-        margin-bottom: -1.5rem;
-      }
-
-      .UploadGrid {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-row-gap: 10px;
-        padding-left: 1.5rem;
-        padding-top: 1rem;
-
-        .UploadPhoto {
-          position: relative;
-          width: 8rem;
-
-          #AddPhoto {
-            width: 2.5rem;
-            height: 2.5rem;
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            cursor: pointer;
-          }
-
-          #HousePhoto {
-            width: 8rem;
-            height: 8rem;
-            border-radius: 20%;
-          }
-        }
-      }
-
-      .btn-primary {
-        background: $primary-color;
-        border: 1px solid $accent-three;
-        width: 8rem;
-        margin-bottom: .75rem;
-      }
-
-      .ToggleAmenities {
-
-        h2 {
-          margin: 0;
-        }
-
-      }
-
-      #PhotoButton {
-        width: 12rem;
-        align-self: center;
-      }
-
-      #FirstToggle {
-        justify-content: flex-end;
-      }
-
-      #NextButton {
-        width: 9rem;
-        align-self: center;
-        margin-top: 1rem;
-      }
-
-      h1 {
-        font-size: 1.6rem;
-        align-self: center;
-        padding-bottom: .75rem;
-        font-weight: bolder;
-      }
-
-      #HeaderPadding {
-        padding-top: 5rem;
-      }
-
-      #GhostPadding {
-        padding-top: 11rem;
-      }
-
-      #HousePadding {
-        padding-top: 25rem;
-      }
-
-      h2 {
-        font-weight: bolder;
-        text-transform: uppercase;
-      }
-
-      .QuestionnaireSelection {
-        width: 100%;
-        display: flex;
-        justify-content: space-evenly;
-        margin-bottom: 1.5rem;
-
-        img {
-          width: 3rem;
-          height: 3rem;
-        }
-
-        #GhostIcon {
-          margin-right: 2rem;
-        }
-      }
-
-      h4 {
-        text-align: center;
-        font-size: 1.25rem;
-      }
-
-      #LoginHeader {
-        font-size: 2rem;
-        margin-bottom: -2rem;
-      }
-
-      input {
-        background: rgba(0, 0, 0, .1);
-        border: 1px solid $accent-three;
-        height: 40px;
-        padding: 10px;
-        transition: background-color .15s ease,border .15s ease;
-        border-radius: 3px;
-        color: $accent-three;
-        margin-bottom: .5rem
-      }
-
-      .ToggleNavigation {
-        padding-top: 1rem;
-        display: flex;
-        justify-content: space-between;
-
-        img {
-          width: 3rem;
-          height: 3rem;
-        }
-      }
-
-      #SubmitButton {
-        align-self: center;
-        margin-top: 1rem;
-        width: 18rem;
-
-        button:hover {
-          background: #32C4E2;
-          transition: .7s;
-        }
-      }
+    button:hover {
+        background: #32C4E2;
+        transition: .7s;
     }
-  }
+
+    .QuestionnaireSecondary {
+        height: 100%;
+        max-width: 85vw;
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: center;
+
+        .QuestionnaireMain {
+            width: 32rem;
+            height: 30rem;
+            background: rgba(10, 9, 35, .8);
+            display: flex;
+            flex-direction: column;
+            padding: 3rem 2rem 2rem 2rem;
+            justify-content: space-evenly;
+            position: relative;
+            overflow: scroll;
+            z-index: 1;
+
+
+
+            #LoginSub {
+                margin-bottom: -.5rem;
+            }
+
+            .QuestionnairePhoto {
+                display: flex;
+                justify-content: center;
+            }
+
+            #ProfilePhoto {
+                width: 10rem;
+                height: 10rem;
+                border-radius: 50%;
+                align-self: center;
+                margin-bottom: 1rem;
+            }
+
+            #Margin {
+                margin-bottom: -1.5rem;
+            }
+
+            .UploadGrid {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                grid-row-gap: 10px;
+                padding-left: 1.5rem;
+                padding-top: 1rem;
+
+                .UploadPhoto {
+                    position: relative;
+                    width: 8rem;
+
+                    #AddPhoto {
+                        width: 2.5rem;
+                        height: 2.5rem;
+                        position: absolute;
+                        bottom: 0;
+                        right: 0;
+                        cursor: pointer;
+                    }
+
+                    #HousePhoto {
+                        width: 8rem;
+                        height: 8rem;
+                        border-radius: 20%;
+                    }
+                }
+            }
+
+            .btn-primary {
+                background: $primary-color;
+                border: 1px solid $accent-three;
+                width: 8rem;
+                margin-bottom: .75rem;
+            }
+
+            .ToggleAmenities {
+
+                h2 {
+                    margin: 0;
+                }
+
+            }
+
+            #PhotoButton {
+                width: 12rem;
+                align-self: center;
+            }
+
+            #FirstToggle {
+                justify-content: flex-end;
+            }
+
+            #NextButton {
+                width: 9rem;
+                align-self: center;
+                margin-top: 1rem;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+                align-self: center;
+                padding-bottom: .75rem;
+                font-weight: bolder;
+            }
+
+            #HeaderPadding {
+                padding-top: 5rem;
+            }
+
+            #GhostPadding {
+                padding-top: 11rem;
+            }
+
+            #HousePadding {
+                padding-top: 25rem;
+            }
+
+            h2 {
+                font-weight: bolder;
+                text-transform: uppercase;
+            }
+
+            .QuestionnaireSelection {
+                width: 100%;
+                display: flex;
+                justify-content: space-evenly;
+                margin-bottom: 1.5rem;
+
+                img {
+                    width: 3rem;
+                    height: 3rem;
+                }
+
+                #GhostIcon {
+                    margin-right: 2rem;
+                }
+            }
+
+            h4 {
+                text-align: center;
+                font-size: 1.25rem;
+            }
+
+            #LoginHeader {
+                font-size: 2rem;
+                margin-bottom: -2rem;
+            }
+
+            input {
+                background: rgba(0, 0, 0, .1);
+                border: 1px solid $accent-three;
+                height: 40px;
+                padding: 10px;
+                transition: background-color .15s ease, border .15s ease;
+                border-radius: 3px;
+                color: $accent-three;
+                margin-bottom: .5rem
+            }
+
+            .ToggleNavigation {
+                padding-top: 1rem;
+                display: flex;
+                justify-content: space-between;
+
+                img {
+                    width: 3rem;
+                    height: 3rem;
+                }
+            }
+
+            #SubmitButton {
+                align-self: center;
+                margin-top: 1rem;
+                width: 18rem;
+
+                button:hover {
+                    background: #32C4E2;
+                    transition: .7s;
+                }
+            }
+        }
+    }
+}
+
+.QuestionnaireMain::-webkit-scrollbar {
+    overflow: scroll;
+    width: .5px;
+    height: .5px;
+    background-color: #1f2742;
 }
