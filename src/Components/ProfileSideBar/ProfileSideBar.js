@@ -23,5 +23,4 @@ const ProfileSideBar = (props) => {
     </div>
   )
 }
-
 export default ProfileSideBar

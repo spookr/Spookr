@@ -51,6 +51,7 @@ class Conversation extends Component {
     this.socket.emit('New Message', body)
   }
 
+
   componentWillUnmount() {
     this.socket.disconnect()
   }
@@ -77,7 +78,7 @@ class Conversation extends Component {
             <img src={Delete} onClick={this.props.closeConversation} id="CloseButton" alt="Close Conversation" />
           </div>
           <div className="ConversationBody">
-            <Message allMessages={this.state.allMessages}/>
+            <h2>Insert messages here!</h2>
           </div>
           <div className="ConversationFooter">
             <input type="text" placeholder="Type a message..." value={this.state.message} onChange={(e) => this.inputMessage(e)} />
