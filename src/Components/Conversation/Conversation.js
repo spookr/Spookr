@@ -18,7 +18,7 @@ class Conversation extends Component {
   }
 
   componentDidMount() {
-    this.socket = io();
+    this.socket = io("http://localhost:4000/");
     // console.log(this.props.selectedUser.swipping_user, this.props.selectedUser.matched_user)
 
     const roomName = this.roomNameBuilder(this.props.selectedUser.swipping_user, this.props.selectedUser.matched_user)
@@ -50,6 +50,9 @@ class Conversation extends Component {
       roomName
     }
     this.socket.emit('New Message', body)
+    this.setState({
+      message: ''
+    })
   }
 
   componentWillUnmount() {
@@ -68,6 +71,14 @@ class Conversation extends Component {
     // console.log('matched user', this.props.selectedUser.matched_user)
     // console.log(this.state.allMessages)
 
+    const displayMessages = this.state.allMessages.map( message => {
+      return (
+        <div className="ConversationBody">
+          <Message key={message.id} {...message} />
+        </div>
+      )
+    })
+
     return (
       <div className="Conversation">
         <div className="ConversationMessages">
@@ -78,9 +89,7 @@ class Conversation extends Component {
             </div>
             <img src={Delete} onClick={this.props.closeConversation} id="CloseButton" alt="Close Conversation" />
           </div>
-          <div className="ConversationBody">
-            <Message allMessages={this.state.allMessages}/>
-          </div>
+          {displayMessages}
           <div className="ConversationFooter">
             <input type="text" placeholder="Type a message..." value={this.state.message} onChange={(e) => this.inputMessage(e)} />
             <button onClick={this.sendMessage}>Send</button>
