@@ -4,6 +4,7 @@ import './Messages.scss'
 // Components
 import MessageCard from '../MessageCard/MessageCard'
 
+
 const Messages = (props) => {
 
   // console.log(props)

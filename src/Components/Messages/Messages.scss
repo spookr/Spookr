@@ -12,6 +12,7 @@
         color: $accent-three;
         font-weight: bolder;
     }
+
 }
 
 .Messages::-webkit-scrollbar {
@@ -24,4 +25,13 @@
     overflow: scroll;
     width: 0px;
     height: 0px;
+}
+
+@keyframes ghost {
+  from{
+    transform: translate(0px,0px)
+  }
+  to{
+    transform: translate(0px, -70px);
+  }
 }
