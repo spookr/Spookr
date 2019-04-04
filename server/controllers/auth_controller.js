@@ -120,6 +120,30 @@ module.exports = {
     }
 
     try {
+      Geocode.setApiKey("AIzaSyCdZuqe3hLZO8Tq1wYHOA4WJ8bmPFK1XT4");
+      Geocode.enableDebug();
+      Geocode.fromLatLng("41.766972", "-111.813291").then(
+        response => {
+          const locationObj = response.results[0];
+          for(let i = 0; i < locationObj.address_components.length; i ++){
+            if(locationObj.address_components[i].types.includes('locality')){
+               this.setState({
+                address: locationObj.address_components[i].long_name
+              })
+            }
+            if(locationObj.address_components[i].types.includes('administrative_area_level_1')){
+              this.setState({
+                locatedState: locationObj.address_components[i].long_name
+              })
+            }
+          }
+          console.log(locationObj)
+        },
+        error => {
+          console.error(error);
+        }
+      );
+
       let newGhost = await db.auth.new_ghost([name, bio, type, user_id, profile_pic, lat, lng, radius])
       // console.log('Hello my dudes', newGhost)
       newGhost = newGhost[0]
