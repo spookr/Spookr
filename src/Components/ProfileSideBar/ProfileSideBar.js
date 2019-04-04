@@ -15,6 +15,11 @@ const ProfileSideBar = (props) => {
     :
     <div>
       <img src={props.selectedUser.profile_pic} alt="User"/>
+        <div className="SideDetails">
+          <h1>{props.selectedUser.name}</h1>
+          <h2>{props.selectedUser.town}, {props.selectedUser.state}</h2>
+          <p>{props.selectedUser.bio}</p>
+        </div>
     </div>
 
   return (
