@@ -72,11 +72,7 @@ class Conversation extends Component {
     // console.log(this.state.allMessages)
 
     const displayMessages = this.state.allMessages.map( message => {
-      return (
-        <div className="ConversationBody">
-          <Message key={message.id} {...message} />
-        </div>
-      )
+      return <Message key={message.id} {...message} />
     })
 
     return (
@@ -89,7 +85,9 @@ class Conversation extends Component {
             </div>
             <img src={Delete} onClick={this.props.closeConversation} id="CloseButton" alt="Close Conversation" />
           </div>
-          {displayMessages}
+          <div className="ConversationBody">
+            {displayMessages}
+          </div>
           <div className="ConversationFooter">
             <input type="text" placeholder="Type a message..." value={this.state.message} onChange={(e) => this.inputMessage(e)} />
             <button onClick={this.sendMessage}>Send</button>
