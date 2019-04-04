@@ -169,32 +169,7 @@ class HouseForm extends Component {
                 type="amenities">
               </Checkbox>Pets</h2>
             </form>
-            <div className="UploadGrid">
-              <div className="UploadPhoto">
-                <img id="HousePhoto" src={Placeholder} alt="House Default" />
-                <img id="AddPhoto" src={Add} alt="Add Toggle" />
-              </div>
-              <div className="UploadPhoto">
-                <img id="HousePhoto" src={Placeholder} alt="House Default" />
-                <img id="AddPhoto" src={Add} alt="Add Toggle" />
-              </div>
-              <div className="UploadPhoto">
-                <img id="HousePhoto" src={Placeholder} alt="House Default" />
-                <img id="AddPhoto" src={Add} alt="Add Toggle" />
-              </div>
-              <div className="UploadPhoto">
-                <img id="HousePhoto" src={Placeholder} alt="House Default" />
-                <img id="AddPhoto" src={Add} alt="Add Toggle" />
-              </div>
-              <div className="UploadPhoto">
-                <img id="HousePhoto" src={Placeholder} alt="House Default" />
-                <img id="AddPhoto" src={Add} alt="Add Toggle" />
-              </div>
-              <div className="UploadPhoto">
-                <img id="HousePhoto" src={Placeholder} alt="House Default" />
-                <img id="AddPhoto" src={Add} alt="Add Toggle" />
-              </div>
-            </div>
+        
               <button id="NextButton" onClick={() => submitHouse(header, description, rooms, location, remodeled, amenities)}>Submit</button>
           </div>
         </div>
