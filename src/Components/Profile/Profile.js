@@ -18,7 +18,8 @@ class Profile extends Component {
       edit: false,
       conversation: false,
       swipes: null,
-      matches: null
+      matches: null,
+      selectedUser: {}
     }
   }
 
@@ -39,7 +40,7 @@ class Profile extends Component {
   getMatches = () => {
     // console.log('hit matches')
     axios.get('/matches').then(res => {
-      console.log(res.data)
+      // console.log(res.data)
       this.setState({
         matches: res.data
       })
@@ -59,15 +60,9 @@ class Profile extends Component {
     })
   }
 
-  toggleConversation = () => {
-    this.setState({
-      conversation: true,
-      edit: false
-    })
-  }
-
   closeConversation = () => {
     this.setState({
+      selectedUser: {},
       edit: false,
       conversation: false
     })
@@ -106,16 +101,26 @@ class Profile extends Component {
     })
   }
 
+  selectMatch = (user) => {
+    this.setState({
+      selectedUser: user,
+      conversation: true,
+      edit: false
+    })
+  }
+
   render() {
 
-    const { edit, conversation, swipes, matches } = this.state
-    const { toggleEdit, toggleConversation, closeConversation, swipeRight, swipeLeft } = this
+    // console.log(this.state.selectedUser)
+
+    const { edit, conversation, swipes, matches, selectedUser } = this.state
+    const { toggleEdit, closeConversation, swipeRight, swipeLeft, selectMatch } = this
 
     const displayDiscovery = edit ? <Discovery toggleEdit={toggleEdit} /> :
       <UserBar
         toggleEdit={toggleEdit}
-        toggleConversation={toggleConversation}
         matches={matches}
+        selectMatch={selectMatch}
       />
 
     return (
@@ -127,8 +132,8 @@ class Profile extends Component {
           swipes={swipes}
           swipeRight={swipeRight}
           swipeLeft={swipeLeft}
+          selectedUser={selectedUser}
         />
-
       </div>
     )
   }

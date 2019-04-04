@@ -12,9 +12,9 @@ const SwipeBar = (props) => {
 
   return (
     <div className="SwipeBar">
-      <img src={Delete} alt="Delete Button" onClick={() => props.swipeLeft(props.swipedUser)} />
-      <img src={Favorite} alt="Favorite Button" />
-      <img src={Heart} alt="Heart Button" onClick={() => props.swipeRight(props.swipedUser, props.swiped)}/>
+      <img src={Delete} style={{'cursor': 'pointer'}} alt="Delete Button" onClick={() => props.swipeLeft(props.swipedUser)} />
+      <img src={Favorite} style={{'cursor': 'pointer'}} alt="Favorite Button" />
+      <img src={Heart} style={{'cursor': 'pointer'}} alt="Heart Button" onClick={() => props.swipeRight(props.swipedUser, props.swiped)}/>
     </div>
   )
 }

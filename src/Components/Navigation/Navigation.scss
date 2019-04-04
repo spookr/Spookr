@@ -3,6 +3,8 @@
 nav {
   min-width: 100%;
   padding: 1rem .75rem .75rem .75rem;
+  border-bottom: 1px solid #292C41;
+  margin-bottom: .5rem;
 
   .NavigationSecondary {
     min-height: 8vh;
@@ -19,10 +21,10 @@ nav {
     }
 
     button {
-      border: 1px solid $accent-three;
-      border-radius: 3px;
+      border: none;
+      border-radius: 0;
       font-size: 1.15rem;
-      padding: .75rem 2rem;
+      padding: .55rem 2rem;
       text-decoration: none;
       cursor: pointer;
       background: $accent-one;
@@ -31,7 +33,6 @@ nav {
 
     button:hover {
       background: #32C4E2;
-      transition: .7s;
     }
   }
 }

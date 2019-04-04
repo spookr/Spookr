@@ -1,8 +1,6 @@
 import React from 'react'
 import './ProfileIcon.scss'
 
-import Cat from './assets/Cat03.jpg'
-
 const ProfileIcon = (props) => {
 
   // console.log(props)
