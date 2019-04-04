@@ -55,6 +55,7 @@ class Conversation extends Component {
     })
   }
 
+
   componentWillUnmount() {
     this.socket.disconnect()
   }
