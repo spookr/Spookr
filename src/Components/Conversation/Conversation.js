@@ -3,7 +3,6 @@ import './Conversation.scss'
 import io from 'socket.io-client'
 
 // Components
-import ProfileIcon from '../ProfileIcon/ProfileIcon'
 import Delete from './assets/delete.svg'
 import ProfileSideBar from '../ProfileSideBar/ProfileSideBar'
 import Message from '../Message/Message'
@@ -20,7 +19,7 @@ class Conversation extends Component {
 
   componentDidMount() {
     this.socket = io();
-    console.log(this.props.selectedUser.swipping_user, this.props.selectedUser.matched_user)
+    // console.log(this.props.selectedUser.swipping_user, this.props.selectedUser.matched_user)
 
     const roomName = this.roomNameBuilder(this.props.selectedUser.swipping_user, this.props.selectedUser.matched_user)
 
@@ -31,8 +30,8 @@ class Conversation extends Component {
     })
 
     this.socket.on('Messages', messages => {
-      console.log('messages are received succesfully')
-      console.log(messages)
+      // console.log('messages are received succesfully')
+      // console.log(messages)
       this.setState({ allMessages: messages })
     })
   }
@@ -65,16 +64,16 @@ class Conversation extends Component {
 
   render() {
 
-    console.log('user id', this.props.selectedUser.swipping_user)
-    console.log('matched user', this.props.selectedUser.matched_user)
-    console.log(this.state.allMessages)
+    // console.log('user id', this.props.selectedUser.swipping_user)
+    // console.log('matched user', this.props.selectedUser.matched_user)
+    // console.log(this.state.allMessages)
 
     return (
       <div className="Conversation">
         <div className="ConversationMessages">
           <div className="ConversationNavigation">
             <div className="ConversationModule">
-              <img src={this.props.selectedUser.profile_pic} />
+              <img src={this.props.selectedUser.profile_pic} alt="Matched User"/>
               <h1>Conversation with {this.props.selectedUser.ghost ? this.props.selectedUser.name : this.props.selectedUser.first_name}</h1>
             </div>
             <img src={Delete} onClick={this.props.closeConversation} id="CloseButton" alt="Close Conversation" />

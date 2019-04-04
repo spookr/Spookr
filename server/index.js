@@ -64,14 +64,14 @@ io.on('connection', socket => {
 
   socket.on('Join room', async ({ roomName, senderID, receiverID }) => {
     console.log(roomName, senderID, receiverID)
-    console.log('Apple Bottom Jeans')
+    // console.log('Apple Bottom Jeans')
     // this is where you make your DB query
     socket.join(roomName)
     try{
       const messages = await db.auth.get_messages([senderID, receiverID])
-      console.log(messages)
+      // console.log(messages)
       io.to(roomName).emit('Messages', messages)
-    }catch(err){
+    } catch(err){
       console.log(err)
     }
   })
@@ -81,7 +81,7 @@ io.on('connection', socket => {
     console.log(messenger, receiver, message, roomName)
     const addMessage = await db.auth.add_message([messenger, receiver, message])
     const messages = await db.auth.get_messages([messenger, receiver])
-    console.log(messages)
+    // console.log(messages)
     io.to(roomName).emit('Messages', messages)
   })
 })
