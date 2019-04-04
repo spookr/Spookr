@@ -29,11 +29,13 @@ create table users (
     ghost boolean not null
 )
 
-create table user_photos (
-    id serial primary key,
-    url text not null,
-    user_id int references users(id)
-)
+
+--CURRENTLY NOT IN USE
+-- create table user_photos (
+--     id serial primary key,
+--     url text not null,
+--     user_id int references users(id)
+-- )
 
 create table ghosts (
     id serial primary key,
@@ -43,7 +45,10 @@ create table ghosts (
     user_id int references users(id),
     profile_pic TEXT NOT NULL,
     latitude numeric,
-    longitude numeric
+    longitude numeric,
+    radius integer NOT NULL,
+    town varchar(54) NOT NULL,
+    state varchar(54) NOT NULL
 )
 
 create table ghost_type (
@@ -55,9 +60,10 @@ create table homeowner (
     id serial primary key,
     first_name text not null,
     last_name text not null,
-    bio text not null,
-    user_id int references users(id)
-    profile_pic text not null
+    bio varchar(250) not null,
+    user_id int references users(id),
+    profile_pic text,
+    
 )
 
 create table house (
@@ -94,17 +100,17 @@ create table amenities (
 
 create table swiped (
     id serial primary key,
-    user_id references users(id),
+    swiped_id  references users(id),
     swiped_users references users(id),
-    swiped boolean not null
+    swiped boolean
 )
 
 create table messages (
     id serial primary key,
-    sender int references users(id),
+    messenger int references users(id),
     receiver int references users(id),
-    date text not null,
-    body text not null
+    message text NOT NULL,
+    date timestamp without timezone
 )
 
 -- selects all homeowners, houses, and whether they were swiped on
@@ -119,6 +125,7 @@ create table matches (
     matched_user int references users(id)
 )
 
+
 -- DATA ON LOCATIONS
 select Round(point(house.latitude, house.longitude)<@>point(ghosts.latitude, ghosts.longitude)) as distance
 FROM house, ghosts
@@ -127,3 +134,4 @@ WHERE house.id = id AND ghosts.id = id
 
 -- ONE OF THESE IS MORE ACCURATE THAN THE OTHER. STILL WORKING IT OUT
 select earth_distance(ll_to_earth(34.0522, 118.2437), ll_to_earth(40.7608,111.8910))
+
