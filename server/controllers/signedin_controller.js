@@ -168,11 +168,12 @@ module.exports = {
         const {ghost, user_id} = req.session.user
         const {radius} = req.body
 
-        if(ghost){
+        if (ghost) {
             try{
                 const radiusUpdate = await db.auth.update_radius(user_id, radius)
                 req.session.user.radius = radius
-                return res.status(200).send('updated radius')
+                console.log(radiusUpdate)
+                return res.status(200).send(radiusUpdate)
             }catch(err){
                 return res.status(500).send('could not send db request')
             }

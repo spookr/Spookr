@@ -8,7 +8,8 @@ const LOGGED_IN = 'LOGGED_IN',
       LOGGED_OUT = 'LOGGED_OUT',
       GET_GHOST = 'GET_GHOST',
       GET_HOUSE = 'GET_HOUSE',
-      GET_OWNER = 'GET_OWNER'
+      GET_OWNER = 'GET_OWNER',
+      GET_USER = 'GET_USER'
 
 export default function (state = initialState, action) {
   switch (action.type) {
@@ -20,8 +21,10 @@ export default function (state = initialState, action) {
       return {...state, ghost: action.payload}
     case GET_HOUSE:
       return {...state, house: action.payload}
-      case GET_OWNER:
-        return {...state, owner: action.payload}
+    case GET_OWNER:
+      return {...state, owner: action.payload}
+    case getUser:
+      return {...state, user: action.payload}
     default:
       return { ...state }
   }
@@ -57,5 +60,12 @@ export function getOwner (owner) {
   return {
     type: GET_OWNER,
     payload: owner
+  }
+}
+
+export function getUser (user) {
+  return {
+    type: GET_USER,
+    payload: user
   }
 }

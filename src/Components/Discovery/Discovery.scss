@@ -23,17 +23,20 @@
 
     .NavigationButton {
       display: flex;
-      justify-content: center;
-      align-items: flex-end;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
       min-height: 20vh;
+      padding-top: 1.5rem;
 
-      #LogoutButton {
+      button {
+        width: 14rem;
         background: none;
         border: 1px solid $accent-one;
         color: $accent-three;
       }
 
-      #LogoutButton:hover {
+      button:hover {
         background: $accent-one;
         transition: .3s;
       }
