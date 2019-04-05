@@ -6,7 +6,7 @@ import io from 'socket.io-client'
 import Delete from './assets/delete.svg'
 import ProfileSideBar from '../ProfileSideBar/ProfileSideBar'
 import Message from '../Message/Message'
-import {withRouter} from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class Conversation extends Component {
   constructor() {
@@ -33,6 +33,7 @@ class Conversation extends Component {
       // console.log('messages are received succesfully')
       // console.log(messages)
       this.setState({ allMessages: messages })
+      this.scrollToBottom();
     })
   }
 
@@ -53,8 +54,17 @@ class Conversation extends Component {
     this.setState({
       message: ''
     })
+    this.scrollToBottom();
   }
 
+  scrollToBottom = () => {
+    let objDiv = document.getElementsByClassName("conversation")[0];
+    console.log(objDiv)
+    if (objDiv) {
+      console.log(objDiv.scrollHeight)
+      objDiv.scrollToBottom = objDiv.scrollHeight;
+    }
+  }
 
   componentWillUnmount() {
     this.socket.disconnect()
@@ -72,7 +82,7 @@ class Conversation extends Component {
     // console.log('matched user', this.props.selectedUser.matched_user)
     // console.log(this.state.allMessages)
 
-    const displayMessages = this.state.allMessages.map( message => {
+    const displayMessages = this.state.allMessages.map(message => {
       return <Message key={message.id} {...message} />
     })
 
@@ -81,10 +91,10 @@ class Conversation extends Component {
         <div className="ConversationMessages">
           <div className="ConversationNavigation">
             <div className="ConversationModule">
-              <img src={this.props.selectedUser.profile_pic} alt="Matched User"/>
+              <img src={this.props.selectedUser.profile_pic} alt="Matched User" />
               <h1>Conversation with {this.props.selectedUser.ghost ? this.props.selectedUser.name : this.props.selectedUser.first_name}</h1>
             </div>
-            <img src={Delete} onClick={this.props.closeConversation} id="CloseButton" alt="Close Conversation" />
+            <img src={Delete} style={{ 'cursor': 'pointer' }} onClick={this.props.closeConversation} id="CloseButton" alt="Close Conversation" />
           </div>
           <div className="ConversationBody">
             {displayMessages}
@@ -95,7 +105,7 @@ class Conversation extends Component {
           </div>
         </div>
         <div className="ConversationProfile">
-          <ProfileSideBar selectedUser={this.props.selectedUser}/>
+          <ProfileSideBar selectedUser={this.props.selectedUser} />
         </div>
       </div>
     )

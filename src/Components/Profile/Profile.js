@@ -115,12 +115,12 @@ class Profile extends Component {
 
   render() {
 
-    // console.log(this.state.selectedUser)
+    console.log(this.state.swipes)
 
     const { edit, conversation, swipes, matches, selectedUser } = this.state
     const { toggleEdit, closeConversation, swipeRight, swipeLeft, selectMatch } = this
 
-    const displayDiscovery = edit ? <Discovery toggleEdit={toggleEdit} /> :
+    const displayDiscovery = edit ? <Discovery toggleEdit={toggleEdit} updateUser={this.getUser} /> :
       <UserBar
         toggleEdit={toggleEdit}
         matches={matches}

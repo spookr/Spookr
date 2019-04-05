@@ -41,7 +41,7 @@ class Navigation extends Component {
 
     const displayLogin = this.props.user.id ?
       <div className="NavigationProfile">
-        <Link to={`/profile/${this.props.user.id}`}>My Profile</Link>
+        <Link to={`/profile/${this.props.user.id}`} style={{'paddingRight': '3rem'}}>My Profile</Link>
         <button to='/' onClick={this.logout}>Logout</button>
       </div> : <Link to='/login'><button>Login</button></Link>
 
