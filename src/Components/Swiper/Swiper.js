@@ -8,7 +8,7 @@ class Swiper extends Component {
 
   render() {
 
-    // console.log(this.props)
+    console.log(this.props)
 
     const ghostType = {
       1: 'Poltergeist',
@@ -40,24 +40,24 @@ class Swiper extends Component {
         </div>
       </div>
 
-      const ghostProfile = this.props.ghost &&
-        <div>
-          <div className='SwiperHeader'>
-            <img src={this.props.profile_pic} alt='ghost' />
-          </div>
-          <div className='SwiperInfo'>
-            <h1>{this.props.name} </h1>
-            <h3>{ghostType[this.props.type]}</h3>
-            <h3> Distance </h3>
-            <hr />
-          </div>
-          <div className='SwiperBio'>
-            <p> {this.props.bio} </p>
-          </div>
-          <div className='SwipeBar'>
-            <SwipeBar swipeRight={this.props.swipeRight} swipedUser={this.props.user_id} swipeLeft={this.props.swipeLeft} swiped={this.props.swiped} />
-          </div>
+    const ghostProfile = this.props.ghost &&
+      <div>
+        <div className='SwiperHeader'>
+          <img src={this.props.profile_pic} alt='ghost' />
         </div>
+        <div className='SwiperInfo'>
+          <h1>{this.props.name} </h1>
+          <h3>{ghostType[this.props.type]}</h3>
+          <h3> {`${this.props.town}, ${this.props.state}`} </h3>
+          <hr />  
+        </div>
+        <div className='SwiperBio'>
+          <p> {this.props.bio} </p>
+        </div>
+        <div className='SwipeBar'>
+          <SwipeBar swipeRight={this.props.swipeRight} swipedUser={this.props.user_id} swipeLeft={this.props.swipeLeft} swiped={this.props.swiped} />
+        </div>
+      </div>
 
     return (
       <div className="Swiper">

@@ -50,7 +50,7 @@ module.exports = {
         // console.log(user_id, swipedUser, swiped)
 
         try {
-            const swipedOn = await db.auth.swiped(swipedUser, user_id, swiped)
+            const swipedOn = await db.auth.swiped(user_id, swipedUser, swiped)
             return res.status(200).send('user added to swipe')
         } catch (err) {
             return res.status(500).send('could not process swipe')
@@ -83,10 +83,10 @@ module.exports = {
                 const getMatches = await db.auth.get_ghost_matches(user_id)
                 const getRecents = await db.auth.get_recents(user_id)
 
-                for(let i = 0; i < getMatches.length; i++){
-                    for(let j = 0; j < getRecents.length; j++){
-                        if(getRecents[j].messenger === getMatches[i].user_id || getRecents[j].receiver === getMatches[i].user_id){
-                           getMatches[i].recent = getRecents[j].message
+                for (let i = 0; i < getMatches.length; i++) {
+                    for (let j = 0; j < getRecents.length; j++) {
+                        if (getRecents[j].messenger === getMatches[i].user_id || getRecents[j].receiver === getMatches[i].user_id) {
+                            getMatches[i].recent = getRecents[j].message
                         }
                     }
                 }
@@ -103,16 +103,16 @@ module.exports = {
                 console.log('before recents')
                 const getRecents = await db.auth.get_recents(user_id)
 
-                for(let i = 0; i < getMatches.length; i++){
-                    for(let j = 0; j < getRecents.length; j++){
-                        if(getRecents[j].messenger === getMatches[i].user_id || getRecents[j].receiver === getMatches[i].user_id){
-                           getMatches[i].recent = getRecents[j].message
+                for (let i = 0; i < getMatches.length; i++) {
+                    for (let j = 0; j < getRecents.length; j++) {
+                        if (getRecents[j].messenger === getMatches[i].user_id || getRecents[j].receiver === getMatches[i].user_id) {
+                            getMatches[i].recent = getRecents[j].message
                         }
                     }
                 }
                 res.status(200).send(getMatches)
             } catch (err) {
-              console.log(err)
+                console.log(err)
                 res.status(500).send('could not get matches')
             }
         }
@@ -122,12 +122,12 @@ module.exports = {
 
     editProfile: async (req, res) => {
         const db = req.app.get('db')
-        const {ghost, user_id} = req.session.user
+        const { ghost, user_id } = req.session.user
 
 
-        if(ghost){
-            const {name, bio, imageUrl} = req.body
-            if(!name || !bio || !imageUrl){
+        if (ghost) {
+            const { name, bio, imageUrl } = req.body
+            if (!name || !bio || !imageUrl) {
                 return res.status(500).send('need all info')
             }
             try {
@@ -163,10 +163,10 @@ module.exports = {
         }
     },
 
-    updateRadius : async (req,res) => {
+    updateRadius: async (req, res) => {
         const db = req.app.get('db')
-        const {ghost, user_id} = req.session.user
-        const {radius} = req.body
+        const { ghost, user_id } = req.session.user
+        const { radius } = req.body
 
         if (ghost) {
             try{
