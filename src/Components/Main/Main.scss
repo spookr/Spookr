@@ -5,4 +5,80 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .anim-container{
+    animation: container 0.6s linear infinite;
+    animation-direction: alternate-reverse;
+    width: 70px;
+    margin: 0px auto;
+    .fa-ghost{
+      font-size: 70px;
+      color: #2c19c1;
+    }
+    .lines{
+      width: 50%;
+      margin: 0px 10px;
+      transform: rotate(90deg);
+      position: relative;
+      bottom: 20px;
+      .line{
+        animation: sidelines 1.2s linear infinite;
+        // animation-direction: alternate-reverse;
+        border-bottom: #2c19c1 2px solid;
+        margin: 20px 0px;
+      }
+      .middleline{
+        animation: middleline 1.2s linear infinite;
+        // animation-direction: alternate-reverse;
+        border-bottom: #2c19c1 2px solid;
+        margin: 20px 0px;
+      }
+      .line{
+        animation: sidelines 1.2s linear infinite;
+        // animation-direction: alternate-reverse;
+        border-bottom: #2c19c1 2px solid;
+        margin: 20px 0px;
+      }
+    }
+  }
+
+}
+
+    @keyframes container{
+     from{
+       transform: translate(0px, 0px);
+       opacity: 1;
+     }
+     to{
+       transform: translate(0px, 25px);
+       opacity: 0;
+     }
+}
+@keyframes middleline{
+  0%{
+    width: 0%;
+  }
+  50%{
+    width: 80%;
+  }
+  60%{
+    width: 0%
+  }
+  100%{
+    width: 0%;
+  }
+}
+@keyframes sidelines{
+  0%{
+    width: 0%;
+  }
+  50%{
+    width: 60%;
+  }
+  60%{
+    width: 0%
+  }
+  100%{
+    width: 0%;
+  }
 }

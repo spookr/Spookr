@@ -9,11 +9,22 @@ import MatchModal from '../MatchModal/MatchModal'
 
 const Main = (props) => {
 
-  const displaySwipes = props.swipes && props.swipes.map(swipe => {
+  const displayAnimation = props.swipes && props.swipes.length === 0 &&
+
+    <div className='anim-container'>
+      <i class="fas fa-ghost"></i>
+        <div className='lines'>
+          <div className='line'></div>
+          <div className='middleline'></div>
+          <div className='line'></div>
+        </div>
+      </div>
+
+  const displaySwipes = props.swipes && props.swipes.length !== 0 ? props.swipes.map(swipe => {
     return (
       <Swiper key={swipe.user_id} {...swipe} swipeRight={props.swipeRight} swipeLeft={props.swipeLeft} />
     )
-  })
+  }) : displayAnimation
 
   const displayMatchModal = props.matchModal && <MatchModal />
 
