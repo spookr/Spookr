@@ -6,6 +6,8 @@ import SwipeBar from '../SwipeBar/SwipeBar'
 
 const Swiper = (props) => {
 
+  console.log(props)
+
   const ghostType = {
     1: 'Poltergeist',
     2: 'Demon',
@@ -25,7 +27,7 @@ const Swiper = (props) => {
       <div className='SwiperInfo'>
         <h1> {props.header} </h1>
         {props.ghost ? <h3> Type </h3> : null}
-        <h3> {props.address} , {props.state} </h3>
+        <h3> {props.town} , {props.state} </h3>
         <hr />
       </div>
       <div className='SwiperBio'>

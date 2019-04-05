@@ -3,13 +3,14 @@ import './ProfileSideBar.scss'
 
 const ProfileSideBar = (props) => {
 
-  // console.log(props)
+  console.log(props)
 
   const userCard = !props.selectedUser.ghost ?
     <div>
       <img src={props.selectedUser.profile_pic}alt="User"/>
       <div className="SideDetails">
         <h1>{props.selectedUser.first_name} {props.selectedUser.last_name}</h1>
+        <h2>{props.selectedUser.town}, {props.selectedUser.state}</h2>
         <h2>{props.selectedUser.bio}</h2>
       </div>
     </div>
