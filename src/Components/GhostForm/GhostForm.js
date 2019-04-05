@@ -79,7 +79,7 @@ class GhostForm extends Component {
         }
 
         axios.post('/ghost', ghostDetails).then(res => {
-          // this.props.getGhost(res.data)
+          this.props.getGhost(res.data)
           this.props.history.push(`/profile/${res.data.user_id}`)
         })
       },
