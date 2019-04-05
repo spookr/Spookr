@@ -9,4 +9,8 @@ left join swiped on users.id = swiped.swiped_id
 where users.id not in (
 select swiped_users from swiped
     where swiped_id = $1
+) and users.id not in (
+    select matched_user from matches
+    where swipping_user = $1
 )
+
