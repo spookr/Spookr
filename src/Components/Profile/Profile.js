@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Geocode from "react-geocode";
 import './Profile.scss'
 
 // Components
@@ -31,9 +32,11 @@ class Profile extends Component {
 
   getFilteredSwipes = () => {
     axios.get('/filterswipes').then(res => {
+
       this.setState({
         swipes: res.data
       })
+      console.log(res.data)
     })
   }
 
@@ -78,15 +81,16 @@ class Profile extends Component {
     // console.log(swiped)
 
     if (swiped) {
-      axios.post('/insertmatch', {matchedUser: id}).then(res => {
+      axios.post('/insertmatch', { matchedUser: id }).then(res => {
         // Dispay Match Card: get
         console.log(res.data)
         this.getFilteredSwipes()
-      })} else {
-        axios.post('/swipe', swipedUser).then(res => {
-          this.getFilteredSwipes()
-        })
-      }
+      })
+    } else {
+      axios.post('/swipe', swipedUser).then(res => {
+        this.getFilteredSwipes()
+      })
+    }
   }
 
   swipeLeft = (id) => {

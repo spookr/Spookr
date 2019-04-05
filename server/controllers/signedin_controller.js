@@ -1,4 +1,5 @@
 var geodist = require('geodist')
+const Geocode = require('react-geocode')
 module.exports = {
     filteredSwipes: async (req, res) => {
         //   console.log('hit filtered swipes')
@@ -19,7 +20,6 @@ module.exports = {
                     return geodist({ lat: latitude, lon: longitude }, { lat: parseFloat(user.latitude), lon: parseFloat(user.longitude) }, { exact: true, unit: 'miles', limit: session.user.radius })
                 })
 
-                // console.log(location_filtered)
 
                 return res.status(200).send(location_filtered)
 
