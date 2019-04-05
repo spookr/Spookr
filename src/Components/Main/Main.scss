@@ -13,7 +13,7 @@
     margin: 0px auto;
     .fa-ghost{
       font-size: 70px;
-      color: #2c19c1;
+      color: $accent-two;
     }
     .lines{
       width: 50%;
@@ -24,19 +24,19 @@
       .line{
         animation: sidelines 1.2s linear infinite;
         // animation-direction: alternate-reverse;
-        border-bottom: #2c19c1 2px solid;
+        border-bottom: $accent-two 2px solid;
         margin: 20px 0px;
       }
       .middleline{
         animation: middleline 1.2s linear infinite;
         // animation-direction: alternate-reverse;
-        border-bottom: #2c19c1 2px solid;
+        border-bottom: $accent-two 2px solid;
         margin: 20px 0px;
       }
       .line{
         animation: sidelines 1.2s linear infinite;
         // animation-direction: alternate-reverse;
-        border-bottom: #2c19c1 2px solid;
+        border-bottom: $accent-two 2px solid;
         margin: 20px 0px;
       }
     }

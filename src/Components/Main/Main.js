@@ -26,8 +26,7 @@ const Main = (props) => {
     )
   }) : displayAnimation
 
-  const displayMatchModal = props.matchModal && <MatchModal />
-
+  const displayMatchModal = props.matchModal && <MatchModal closeMatchModal={props.closeMatchModal} matchedInfo={props.matchedInfo}/>
   const displayEdit = props.edit ? <UserEdit /> : displaySwipes
   const displayConversation = props.conversation &&  <Conversation closeConversation={props.closeConversation} selectedUser={props.selectedUser} />
   const displayToggle = props.conversation ? displayConversation : displayEdit

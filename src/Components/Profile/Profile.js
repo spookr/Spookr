@@ -21,7 +21,8 @@ class Profile extends Component {
       swipes: null,
       matches: null,
       selectedUser: {},
-      matchModal: false
+      matchModal: false,
+      matchedInfo: {}
     }
   }
 
@@ -37,7 +38,7 @@ class Profile extends Component {
       this.setState({
         swipes: res.data
       })
-      console.log(res.data)
+      // console.log(res.data)
     })
   }
 
@@ -72,14 +73,19 @@ class Profile extends Component {
     })
   }
 
-  swipeRight = (id, swiped) => {
+  swipeRight = (id, swiped, name, photo) => {
 
     let swipedUser = {
       swipedUser: id,
       swiped: true
     }
 
-    // console.log(swiped)
+    let matchedUser = {
+      name,
+      photo
+    }
+
+    // console.log(matchedUser)
 
     if (swiped) {
       axios.post('/insertmatch', { matchedUser: id }).then(res => {
@@ -88,6 +94,7 @@ class Profile extends Component {
         this.getFilteredSwipes()
         this.getMatches()
         this.setState({
+          matchedInfo: matchedUser,
           matchModal: true
         })
       })
@@ -118,12 +125,19 @@ class Profile extends Component {
     })
   }
 
+  closeMatchModal = () => {
+    this.setState({
+      matchModal: false,
+      matchedInfo: {}
+    })
+  }
+
   render() {
 
-    const { edit, conversation, swipes, matches, selectedUser, matchModal} = this.state
-    const { toggleEdit, closeConversation, swipeRight, swipeLeft, selectMatch } = this
+    const { edit, conversation, swipes, matches, selectedUser, matchModal, matchedInfo} = this.state
+    const { toggleEdit, closeConversation, swipeRight, swipeLeft, selectMatch, getUser, getFilteredSwipes, closeMatchModal } = this
 
-    const displayDiscovery = edit ? <Discovery toggleEdit={toggleEdit} updateUser={this.getUser} /> :
+    const displayDiscovery = edit ? <Discovery toggleEdit={toggleEdit} updateUser={getUser} getFilteredSwipes={getFilteredSwipes}/> :
       <UserBar
         toggleEdit={toggleEdit}
         matches={matches}
@@ -141,6 +155,8 @@ class Profile extends Component {
           swipeLeft={swipeLeft}
           selectedUser={selectedUser}
           matchModal={matchModal}
+          closeMatchModal={closeMatchModal}
+          matchedInfo={matchedInfo}
         />
       </div>
     )

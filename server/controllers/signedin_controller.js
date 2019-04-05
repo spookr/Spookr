@@ -64,8 +64,9 @@ module.exports = {
 
         try {
             const insertMatched = await db.auth.matches_insert(user_id, matchedUser)
-            return res.status(200).send('Matched users!')
+            return res.status(200).send('User matched!')
         } catch (err) {
+          console.log(err)
             res.status(500).send("could not match the users")
         }
     },
