@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './Register.scss'
 import '../Questionnaire/Stars.scss'
-import {usernameValidate, passwordValidate, ghostValidate} from './RegisterLogic'
+// import {usernameValidate, passwordValidate, ghostValidate} from './RegisterLogic'
 
 // Packages
 import axios from 'axios'
@@ -46,18 +46,18 @@ class Register extends Component {
       ghost
     }
 
-    const usernameValidated = usernameValidate()
-    const passwordValidated = passwordValidate()
-    const ghostValidated =  ghostValidate()
+    // const usernameValidated = usernameValidate()
+    // const passwordValidated = passwordValidate()
+    // const ghostValidated =  ghostValidate()
 
     // console.log('User submits register', submitInfo)
-    if(usernameValidated && passwordValidated && ghostValidated){
+    // if(usernameValidated && passwordValidated && ghostValidated){
       axios.post('/register', submitInfo).then(res => {
         // console.log(res.data)
         this.props.logIn(res.data)
         this.props.history.push(`/questionnaire/${res.data.id}`)
       })
-    }
+    // }
     }
 
   render() {

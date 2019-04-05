@@ -74,19 +74,22 @@ create table house (
     remodeled boolean not null,
     owner int references homeowner(id),
     latitude numeric,
-    longitude numeric
+    longitude numeric,
+    town varchar(50) not null,
+    state varchar(50) NOT NULL
 )
+-- NOT CURRENTLY IN USE
+-- create table house_photos (
+--     id serial primary key,
+--     url text not null,
+--     house_id int references house(id)
+-- )
 
-create table house_photos (
-    id serial primary key,
-    url text not null,
-    house_id int references house(id)
-)
-
-create table year_built (
-    id serial primary key,
-    year text not null
-)
+-- NOT CURRENTLY IN USE
+-- create table year_built (
+--     id serial primary key,
+--     year text not null
+-- )
 
 create table amenities (
     id serial primary key,
@@ -95,7 +98,8 @@ create table amenities (
     grandfather_clock boolean not null,
     dolls boolean not null,
     electricity boolean not null,
-    house_id integer
+    house_id inT references house(id),
+    pets boolean not null
 )
 
 create table swiped (
@@ -134,4 +138,3 @@ WHERE house.id = id AND ghosts.id = id
 
 -- ONE OF THESE IS MORE ACCURATE THAN THE OTHER. STILL WORKING IT OUT
 select earth_distance(ll_to_earth(34.0522, 118.2437), ll_to_earth(40.7608,111.8910))
-
