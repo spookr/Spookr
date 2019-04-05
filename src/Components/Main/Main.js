@@ -15,9 +15,7 @@ const Main = (props) => {
     )
   })
 
-  // const matchConversation = props.matches && props.matches.map(user => {
-  //   return <Conversation {...user} closeConversation={props.closeConversation} />
-  // })
+  const displayMatchModal = props.matchModal && <MatchModal />
 
   const displayEdit = props.edit ? <UserEdit /> : displaySwipes
   const displayConversation = props.conversation &&  <Conversation closeConversation={props.closeConversation} selectedUser={props.selectedUser} />
@@ -26,7 +24,7 @@ const Main = (props) => {
   return (
     <div className="Main">
       {displayToggle}
-      <MatchModal />
+      {displayMatchModal}
     </div>
   )
 }

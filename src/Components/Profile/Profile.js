@@ -20,7 +20,8 @@ class Profile extends Component {
       conversation: false,
       swipes: null,
       matches: null,
-      selectedUser: {}
+      selectedUser: {},
+      matchModal: false
     }
   }
 
@@ -85,6 +86,10 @@ class Profile extends Component {
         // Dispay Match Card: get
         console.log(res.data)
         this.getFilteredSwipes()
+        this.getMatches()
+        this.setState({
+          matchModal: true
+        })
       })
     } else {
       axios.post('/swipe', swipedUser).then(res => {
@@ -115,9 +120,7 @@ class Profile extends Component {
 
   render() {
 
-    console.log(this.state.swipes)
-
-    const { edit, conversation, swipes, matches, selectedUser } = this.state
+    const { edit, conversation, swipes, matches, selectedUser, matchModal} = this.state
     const { toggleEdit, closeConversation, swipeRight, swipeLeft, selectMatch } = this
 
     const displayDiscovery = edit ? <Discovery toggleEdit={toggleEdit} updateUser={this.getUser} /> :
@@ -137,6 +140,7 @@ class Profile extends Component {
           swipeRight={swipeRight}
           swipeLeft={swipeLeft}
           selectedUser={selectedUser}
+          matchModal={matchModal}
         />
       </div>
     )
