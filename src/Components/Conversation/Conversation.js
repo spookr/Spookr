@@ -54,15 +54,14 @@ class Conversation extends Component {
     this.setState({
       message: ''
     })
-    this.scrollToBottom();
+    // this.scrollToBottom();
   }
 
   scrollToBottom = () => {
-    let objDiv = document.getElementsByClassName("conversation")[0];
+    let objDiv = document.getElementsByClassName("ConversationBody")[0];
     console.log(objDiv)
     if (objDiv) {
-      console.log(objDiv.scrollHeight)
-      objDiv.scrollToBottom = objDiv.scrollHeight;
+      objDiv.scrollTop = objDiv.scrollHeight;
     }
   }
 
