@@ -44,6 +44,7 @@ class Discovery extends Component {
     axios.put('/updateradius', {radius}).then(res => {
       this.props.getUser(res.data)
     })
+    this.props.getFilteredSwipes()
   }
 
   render () {

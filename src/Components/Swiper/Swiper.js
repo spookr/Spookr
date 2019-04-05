@@ -4,68 +4,76 @@ import './Swiper.scss'
 // Components
 import SwipeBar from '../SwipeBar/SwipeBar'
 
-class Swiper extends Component {
+const Swiper = (props) => {
 
-  render() {
+  console.log(props)
 
-    console.log(this.props)
+  const ghostType = {
+    1: 'Poltergeist',
+    2: 'Demon',
+    3: 'Ectoplasm',
+    4: 'Interactive',
+    5: 'Orb',
+    6: 'Sheet',
+    7: 'Specter',
+    8: 'Other'
+  }
 
-    const ghostType = {
-      1: 'Poltergeist',
-      2: 'Demon',
-      3: 'Ectoplasm',
-      4: 'Interactive',
-      5: 'Orb',
-      6: 'Sheet',
-      7: 'Specter',
-      8: 'Other'
-    }
+  const houseProfile = !props.ghost &&
+    <div>
+      <div className='SwiperHeader'>
+        <img src={props.profile_pic} alt='home owner' />
+      </div>
+      <div className='SwiperInfo'>
+        <h1> {props.header} </h1>
+        {props.ghost ? <h3> Type </h3> : null}
+        <h3> {props.town} , {props.state} </h3>
+        <hr />
+      </div>
+      <div className='SwiperBio'>
+        <p> {props.body} </p>
+      </div>
+      <div className='SwipeBar'>
+        <SwipeBar swipeRight={props.swipeRight}
+                  swipedUser={props.user_id}
+                  swipeLeft={props.swipeLeft}
+                  swiped={props.swiped}
+                  name={!props.ghost ? props.first_name : props.name}
+                  photo={props.profile_pic} />
+      </div>
+    </div>
 
-    const houseProfile = !this.props.ghost &&
+    const ghostProfile = props.ghost &&
       <div>
         <div className='SwiperHeader'>
-          <img src={this.props.profile_pic} alt='home owner' />
+          <img src={props.profile_pic} alt='ghost' />
         </div>
         <div className='SwiperInfo'>
-          <h1> {this.props.header} </h1>
-          {this.props.ghost ? <h3> Type </h3> : null}
-          <h3> {this.props.address} , {this.props.state} </h3>
+          <h1>{props.name} </h1>
+          <h3>{ghostType[props.type]}</h3>
+          <h3> {`${props.town}, ${props.state}`} </h3>
           <hr />
         </div>
         <div className='SwiperBio'>
-          <p> {this.props.body} </p>
+          <p> {props.bio} </p>
         </div>
         <div className='SwipeBar'>
-          <SwipeBar swipeRight={this.props.swipeRight} swipedUser={this.props.user_id} swipeLeft={this.props.swipeLeft} swiped={this.props.swiped} />
+          <SwipeBar swipeRight={props.swipeRight}
+                    swipedUser={props.user_id}
+                    swipeLeft={props.swipeLeft}
+                    swiped={props.swiped}
+                    name={!props.ghost ? props.first_name : props.name}
+                    photo={props.profile_pic} />
         </div>
       </div>
 
-    const ghostProfile = this.props.ghost &&
-      <div>
-        <div className='SwiperHeader'>
-          <img src={this.props.profile_pic} alt='ghost' />
-        </div>
-        <div className='SwiperInfo'>
-          <h1>{this.props.name} </h1>
-          <h3>{ghostType[this.props.type]}</h3>
-          <h3> {`${this.props.town}, ${this.props.state}`} </h3>
-          <hr />  
-        </div>
-        <div className='SwiperBio'>
-          <p> {this.props.bio} </p>
-        </div>
-        <div className='SwipeBar'>
-          <SwipeBar swipeRight={this.props.swipeRight} swipedUser={this.props.user_id} swipeLeft={this.props.swipeLeft} swiped={this.props.swiped} />
-        </div>
-      </div>
-
-    return (
-      <div className="Swiper">
-        {houseProfile}
-        {ghostProfile}
-      </div>
-    )
-  }
+  return (
+    <div className="Swiper">
+      {houseProfile}
+      {ghostProfile}
+    </div>
+  )
 }
+
 
 export default Swiper

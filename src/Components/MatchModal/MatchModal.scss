@@ -1,17 +1,17 @@
 @import '../../index';
 
 .MatchModal {
-  width: 21rem;
-  height: 32rem;
-  background: #1A1A1A;
+  width: 60vw;
+  height: 80vh;
+  background: $primary-color;
   position: absolute;
-  top: 16%;
+  top: 8%;
   border-radius: 10px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   padding: 1.5rem;
-  display: none;
 
   .MatchModalHeader {
     display: flex;
@@ -22,7 +22,7 @@
     h1 {
       font-family: $secondary-font;
       font-size: 2rem;
-      padding: 4rem 0 1rem 0;
+      padding: 0 0 1rem 0;
     }
 
     h2 {
@@ -33,13 +33,14 @@
   .MatchModalBody {
     display: flex;
     justify-content: space-evenly;
-    width: 100%;
+    width: 20rem;
     padding-top: 2rem;
 
     img {
       width: 7rem;
       height: 7rem;
       border: 2px solid white;
+      border-radius: 50%;
     }
   }
 
@@ -50,18 +51,15 @@
     height: 10rem;
     padding-top: 2rem;
 
-    #SendMessage {
-      background-image: linear-gradient(to top, #4D32E2 0%, #1cb5e0 100%);
-      border-radius: 30px;
-      color: $accent-three;
-      border: none;
-    }
-
     #SwipeButton {
       background: none;
-      border-radius: 30px;
       color: $accent-three;
-      border: 1px solid linear-gradient(to top, #4D32E2 0%, #1cb5e0 100%)
+      border: 1px solid $accent-one;
+    }
+
+    #SwipeButton:hover {
+      background: $accent-one;
+      transition: .3s;
     }
 
 

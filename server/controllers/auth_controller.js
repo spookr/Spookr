@@ -115,6 +115,8 @@ module.exports = {
 
     const radius = 50;
 
+    console.log(req.body)
+
     if (!name || !bio || !type || !user_id || !profile_pic || !lat || !lng || !town || !foundState ) {
       return res.status(400).send('need all info')
     }
@@ -132,7 +134,7 @@ module.exports = {
       // console.log(req.session)
       return res.status(200).send(session.user)
     } catch (err) {
-      console.log('this error happened')
+      console.log(err)
       return res.status(500).send('Could not create account')
     }
   },
