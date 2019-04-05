@@ -55,7 +55,6 @@ class Conversation extends Component {
     })
   }
 
-
   componentWillUnmount() {
     this.socket.disconnect()
   }
@@ -84,7 +83,7 @@ class Conversation extends Component {
               <img src={this.props.selectedUser.profile_pic} alt="Matched User"/>
               <h1>Conversation with {this.props.selectedUser.ghost ? this.props.selectedUser.name : this.props.selectedUser.first_name}</h1>
             </div>
-            <img src={Delete} onClick={this.props.closeConversation} id="CloseButton" alt="Close Conversation" />
+            <img src={Delete} style={{'cursor': 'pointer'}} onClick={this.props.closeConversation} id="CloseButton" alt="Close Conversation" />
           </div>
           <div className="ConversationBody">
             {displayMessages}

@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom'
 
 const Message = (props) => {
 
-  console.log(props)
+  // console.log(props)
 
   return (
     <div className="Message">

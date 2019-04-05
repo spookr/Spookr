@@ -7,15 +7,21 @@ import ProfileTab from '../ProfileTab/ProfileTab'
 // Packages
 import { Slider } from 'antd';
 import axios from 'axios'
-import {logOut} from '../../redux/reducer'
+import {logOut, getUser} from '../../redux/reducer'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 
 class Discovery extends Component {
-  constructor () {
-    super()
+  constructor (props) {
+    super(props)
     this.state = {
-      slider: 50
+      slider: this.props.user.radius
+    }
+  }
+
+  componentDidUpdate (prevProps, prevState) {
+    if(prevProps.user.radius !== this.state.slider) {
+      this.props.updateUser()
     }
   }
 
@@ -34,9 +40,15 @@ class Discovery extends Component {
     })
   }
 
+  submitDistance = (radius) => {
+    axios.put('/updateradius', {radius}).then(res => {
+      this.props.getUser(res.data)
+    })
+  }
+
   render () {
-    //
-    // console.log(this.props)
+
+    console.log(this.props)
     const displaySlider = this.props.user.ghost &&
     <div>
       <div className="DiscoveryHeader">
@@ -46,13 +58,13 @@ class Discovery extends Component {
       <Slider defaultValue={this.state.slider} onChange={this.onSliderChange}/>
     </div>
 
-
     return (
       <div className="Discovery">
         <ProfileTab toggleEdit={this.props.toggleEdit}/>
         <div className="DiscoverySettings">
           {displaySlider}
           <div className='NavigationButton'>
+            {this.props.user.ghost && <button onClick={() => this.submitDistance(this.state.slider)}>Submit Changes</button>}
             <button id="LogoutButton" onClick={this.logout}>Logout</button>
           </div>
         </div>
@@ -68,7 +80,8 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = {
-  logOut
+  logOut,
+  getUser
 }
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Discovery))

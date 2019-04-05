@@ -50,9 +50,7 @@ app.post('/swipe', signedin.swipe)
 app.get('/matches', signedin.getMatches)
 app.post('/insertmatch', signedin.insertMatched)
 app.post('/editprofile', signedin.editProfile)
-app.post('/updateradius', signedin.updateRadius)
-
-
+app.put('/updateradius', signedin.updateRadius)
 app.post('/editprofile', signedin.editProfile)
 
 const io = socket(app.listen(SERVER_PORT, () => console.log(`Spooking on Port ${SERVER_PORT} 👻`)));
