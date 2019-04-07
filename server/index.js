@@ -27,6 +27,8 @@ app.use(
     saveUninitialized: false
   }))
 
+app.use( express.static( `${__dirname}/../build` ) );
+
 massive(CONNECTION_STRING).then(db => {
   app.set('db', db);
   console.log('Database is spookin')
@@ -52,6 +54,11 @@ app.post('/insertmatch', signedin.insertMatched)
 app.post('/editprofile', signedin.editProfile)
 app.put('/updateradius', signedin.updateRadius)
 app.post('/editprofile', signedin.editProfile)
+
+
+app.get('*', (req, res)=>{
+    res.sendFile(path.join(__dirname, '../build/index.html'));
+});
 
 const io = socket(app.listen(SERVER_PORT, () => console.log(`Spooking on Port ${SERVER_PORT} 👻`)));
 
